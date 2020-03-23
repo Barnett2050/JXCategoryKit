@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		613FCBA32428DDCB004ACC9D /* CLLocation+JXCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCB9F2428DDCB004ACC9D /* CLLocation+JXCalculation.m */; };
+		613FCBA42428DDCB004ACC9D /* CLLocation+JXConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCBA12428DDCB004ACC9D /* CLLocation+JXConverter.m */; };
+		613FCBA62428DE57004ACC9D /* JXCategoryKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 613FCBA52428DE57004ACC9D /* JXCategoryKit.podspec */; };
 		617A338C2427B4F20098EF1A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A338B2427B4F20098EF1A /* AppDelegate.m */; };
 		617A338F2427B4F20098EF1A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A338E2427B4F20098EF1A /* SceneDelegate.m */; };
 		617A33922427B4F20098EF1A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A33912427B4F20098EF1A /* ViewController.m */; };
@@ -17,6 +20,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		613FCB9F2428DDCB004ACC9D /* CLLocation+JXCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+JXCalculation.m"; sourceTree = "<group>"; };
+		613FCBA02428DDCB004ACC9D /* CLLocation+JXConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+JXConverter.h"; sourceTree = "<group>"; };
+		613FCBA12428DDCB004ACC9D /* CLLocation+JXConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+JXConverter.m"; sourceTree = "<group>"; };
+		613FCBA22428DDCB004ACC9D /* CLLocation+JXCalculation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+JXCalculation.h"; sourceTree = "<group>"; };
+		613FCBA52428DE57004ACC9D /* JXCategoryKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JXCategoryKit.podspec; sourceTree = "<group>"; };
+		613FCBA72428DFD5004ACC9D /* JXCategoryKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXCategoryKit.h; sourceTree = "<group>"; };
 		617A33872427B4F20098EF1A /* JXCategoryKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JXCategoryKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		617A338A2427B4F20098EF1A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		617A338B2427B4F20098EF1A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -42,9 +51,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		613FCB9E2428DD8F004ACC9D /* CoreLocation */ = {
+			isa = PBXGroup;
+			children = (
+				613FCBA02428DDCB004ACC9D /* CLLocation+JXConverter.h */,
+				613FCBA12428DDCB004ACC9D /* CLLocation+JXConverter.m */,
+				613FCBA22428DDCB004ACC9D /* CLLocation+JXCalculation.h */,
+				613FCB9F2428DDCB004ACC9D /* CLLocation+JXCalculation.m */,
+			);
+			path = CoreLocation;
+			sourceTree = "<group>";
+		};
 		617A337E2427B4F20098EF1A = {
 			isa = PBXGroup;
 			children = (
+				613FCBA52428DE57004ACC9D /* JXCategoryKit.podspec */,
 				617A33892427B4F20098EF1A /* JXCategoryKit */,
 				617A33882427B4F20098EF1A /* Products */,
 			);
@@ -61,6 +82,8 @@
 		617A33892427B4F20098EF1A /* JXCategoryKit */ = {
 			isa = PBXGroup;
 			children = (
+				613FCBA72428DFD5004ACC9D /* JXCategoryKit.h */,
+				613FCB9E2428DD8F004ACC9D /* CoreLocation */,
 				617A338A2427B4F20098EF1A /* AppDelegate.h */,
 				617A338B2427B4F20098EF1A /* AppDelegate.m */,
 				617A338D2427B4F20098EF1A /* SceneDelegate.h */,
@@ -134,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				617A339A2427B4F30098EF1A /* LaunchScreen.storyboard in Resources */,
+				613FCBA62428DE57004ACC9D /* JXCategoryKit.podspec in Resources */,
 				617A33972427B4F30098EF1A /* Assets.xcassets in Resources */,
 				617A33952427B4F20098EF1A /* Main.storyboard in Resources */,
 			);
@@ -148,8 +172,10 @@
 			files = (
 				617A33922427B4F20098EF1A /* ViewController.m in Sources */,
 				617A338C2427B4F20098EF1A /* AppDelegate.m in Sources */,
+				613FCBA42428DDCB004ACC9D /* CLLocation+JXConverter.m in Sources */,
 				617A339D2427B4F30098EF1A /* main.m in Sources */,
 				617A338F2427B4F20098EF1A /* SceneDelegate.m in Sources */,
+				613FCBA32428DDCB004ACC9D /* CLLocation+JXCalculation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,13 +318,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9ACE2C9PJG;
 				INFOPLIST_FILE = JXCategoryKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qwbcg.JXCategoryKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -309,13 +336,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9ACE2C9PJG;
 				INFOPLIST_FILE = JXCategoryKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.qwbcg.JXCategoryKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
