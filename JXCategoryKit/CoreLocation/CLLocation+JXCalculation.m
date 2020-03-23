@@ -10,7 +10,7 @@
 
 @implementation CLLocation (JXCalculation)
 
-+ (double)getKMDistance:(double)latOne withLng1:(double)lngOne withLat2:(double)latAnother withLng2:(double)lngAnother
++ (double)jx_getKMDistance:(double)latOne withLng1:(double)lngOne withLat2:(double)latAnother withLng2:(double)lngAnother
 {
     CLLocation *orig = [[CLLocation alloc] initWithLatitude:latOne longitude:lngOne];
     CLLocation *dist = [[CLLocation alloc] initWithLatitude:latAnother longitude:lngAnother];
@@ -18,7 +18,7 @@
     return kilometers;
 }
 
-+ (double)getKMDistance:(CLLocationCoordinate2D)oneLocation withAnotherLocation:(CLLocationCoordinate2D)anotherLocation
++ (double)jx_getKMDistance:(CLLocationCoordinate2D)oneLocation withAnotherLocation:(CLLocationCoordinate2D)anotherLocation
 {
     CLLocation *orig = [[CLLocation alloc] initWithLatitude:oneLocation.latitude longitude:oneLocation.longitude];
     CLLocation *dist = [[CLLocation alloc] initWithLatitude:anotherLocation.latitude longitude:anotherLocation.longitude];
