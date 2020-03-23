@@ -10,6 +10,8 @@
 		613FCBA32428DDCB004ACC9D /* CLLocation+JXCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCB9F2428DDCB004ACC9D /* CLLocation+JXCalculation.m */; };
 		613FCBA42428DDCB004ACC9D /* CLLocation+JXConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCBA12428DDCB004ACC9D /* CLLocation+JXConverter.m */; };
 		613FCBA62428DE57004ACC9D /* JXCategoryKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 613FCBA52428DE57004ACC9D /* JXCategoryKit.podspec */; };
+		613FCBAA2428E56F004ACC9D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613FCBA92428E56F004ACC9D /* UIKit.framework */; };
+		613FCBAC2428E57D004ACC9D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613FCBAB2428E57D004ACC9D /* CoreLocation.framework */; };
 		617A338C2427B4F20098EF1A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A338B2427B4F20098EF1A /* AppDelegate.m */; };
 		617A338F2427B4F20098EF1A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A338E2427B4F20098EF1A /* SceneDelegate.m */; };
 		617A33922427B4F20098EF1A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A33912427B4F20098EF1A /* ViewController.m */; };
@@ -26,6 +28,8 @@
 		613FCBA22428DDCB004ACC9D /* CLLocation+JXCalculation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+JXCalculation.h"; sourceTree = "<group>"; };
 		613FCBA52428DE57004ACC9D /* JXCategoryKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JXCategoryKit.podspec; sourceTree = "<group>"; };
 		613FCBA72428DFD5004ACC9D /* JXCategoryKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXCategoryKit.h; sourceTree = "<group>"; };
+		613FCBA92428E56F004ACC9D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		613FCBAB2428E57D004ACC9D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		617A33872427B4F20098EF1A /* JXCategoryKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JXCategoryKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		617A338A2427B4F20098EF1A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		617A338B2427B4F20098EF1A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -45,6 +49,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				613FCBAC2428E57D004ACC9D /* CoreLocation.framework in Frameworks */,
+				613FCBAA2428E56F004ACC9D /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +68,22 @@
 			path = CoreLocation;
 			sourceTree = "<group>";
 		};
+		613FCBA82428E56F004ACC9D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				613FCBAB2428E57D004ACC9D /* CoreLocation.framework */,
+				613FCBA92428E56F004ACC9D /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		617A337E2427B4F20098EF1A = {
 			isa = PBXGroup;
 			children = (
 				613FCBA52428DE57004ACC9D /* JXCategoryKit.podspec */,
 				617A33892427B4F20098EF1A /* JXCategoryKit */,
 				617A33882427B4F20098EF1A /* Products */,
+				613FCBA82428E56F004ACC9D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

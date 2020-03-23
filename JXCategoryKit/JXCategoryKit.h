@@ -9,5 +9,8 @@
 #ifndef JXCategoryKit_h
 #define JXCategoryKit_h
 
+#import "CLLocation+JXConverter.h"
+#import "CLLocation+JXCalculation.h"
+
 
 #endif /* JXCategoryKit_h */
