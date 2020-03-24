@@ -14,6 +14,7 @@
 
 #import "CALayer+JXAnimation.h"
 
+#pragma mark - UIKit
 #import "UIApplication+JXNotification.h"
 #import "UITabBarController+JXAnimation.h"
 #import "UIButton+JXShow.h"
@@ -42,5 +43,33 @@
 #import "UIViewController+JXGeneral.h"
 
 #import "UIWindow+JXGeneral.h"
+
+#pragma mark - Foundation
+
+#import "NSTimer+JXGeneral.h"
+#import "NSObject+JXRuntime.h"
+#import "NSNull+JXSafe.h"
+
+#import "NSFileManager+JXData.h"
+#import "NSFileManager+JXFilePath.h"
+#import "NSFileManager+JXVerification.h"
+
+#import "NSString+JXAttribute.h"
+#import "NSString+JXVerification.h"
+#import "NSString+JXSize.h"
+#import "NSString+JXFormat.h"
+#import "NSString+JXGeneral.h"
+#import "NSMutableAttributedString+JXGeneral.h"
+#import "NSString+Encrypt.h"
+
+#import "NSDictionary+JXSafe.h"
+
+#import "NSError+JXGeneral.h"
+
+#import "NSBundle+JXGeneral.h"
+#import "NSBundle+JXPod.h"
+
+#import "NSArray+JXSafe.h"
+#import "NSMutableArray+JXSafe.h"
 
 #endif /* JXCategoryKit_h */

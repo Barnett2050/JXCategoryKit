@@ -14,14 +14,8 @@
 + (BOOL)jx_userNotificationIsEnable
 {
     BOOL isEnable = NO;
-    if (@available(iOS 8.0,*)) {
-        UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        isEnable = (UIUserNotificationTypeNone == setting.types) ? NO : YES;
-    }else
-    {
-        UIRemoteNotificationType type = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-        isEnable = (UIRemoteNotificationTypeNone == type) ? NO : YES;
-    }
+    UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
+    isEnable = (UIUserNotificationTypeNone == setting.types) ? NO : YES;
     return isEnable;
 }
 

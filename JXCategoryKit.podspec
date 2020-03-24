@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JXCategoryKit'
-  s.version          = '0.1.2'
+  s.version          = '0.1.3'
   s.summary          = '基础类扩展'
   s.homepage         = 'https://github.com/Barnett2050/JXCategoryKit'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -72,6 +72,45 @@ Pod::Spec.new do |s|
     end
   end
   
-  s.frameworks = 'UIKit', 'CoreLocation','Accelerate','UserNotifications','AdSupport'
+  s.subspec 'Foundation' do |ss|
+    ss.subspec 'NSTimer' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSTimer/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSTimer/*.h'
+    end
+    ss.subspec 'NSObject' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSObject/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSObject/*.h'
+    end
+    ss.subspec 'NSNull' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSNull/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSNull/*.h'
+    end
+    ss.subspec 'NSFileManager' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSFileManager/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSFileManager/*.h'
+    end
+    ss.subspec 'NSString' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSString/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSString/*.h'
+    end
+    ss.subspec 'NSDictionary' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSDictionary/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSDictionary/*.h'
+    end
+    ss.subspec 'NSError' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSError/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSError/*.h'
+    end
+    ss.subspec 'NSBundle' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSBundle/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSBundle/*.h'
+    end
+    ss.subspec 'NSArray' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSArray/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSArray/*.h'
+    end
+  end
+  
+  s.frameworks = 'UIKit', 'CoreLocation','Accelerate','UserNotifications','AdSupport','CoreText'
   
 end
