@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UITextField (JXGeneral)
 
 /**
- 输入是否高亮 true 高亮 false 无高亮
+ 当前输入是否高亮 true 高亮 false 无高亮
  */
 - (BOOL)jx_isTextPosition;
 

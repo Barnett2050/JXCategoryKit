@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 通知是否启用
 + (BOOL)jx_userNotificationIsEnable;
 
-/// 跳转app系统设置
+/// 跳转App系统通知设置
 + (void)jx_goToAppSystemSetting;
 
 /// 注册通知

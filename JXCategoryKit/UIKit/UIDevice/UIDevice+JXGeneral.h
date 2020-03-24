@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 获取UUID
 + (NSString *)jx_getUUID;
-/// 设备名称
+/// 获取设备名称，例：iPhone 11 Pro Max
 + (NSString *)jx_deviceName;
 /**
  获取当前设备可用系统内存(单位：MB）

@@ -13,15 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UITableViewCell (JXAnimation)
 
 /**
- 缩放效果
+ 显示缩放效果
  */
 - (void)jx_showScaleAnimation;
 /**
- 缩进效果
+ 显示缩进效果
  */
 - (void)jx_showIndentAnimationWithCell;
 /**
- 旋转效果
+ 显示旋转效果
  */
 - (void)jx_showRoatationAnimation;
 
