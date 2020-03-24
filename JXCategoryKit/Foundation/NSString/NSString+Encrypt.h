@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)jx_hexStringFromStringWithLower:(BOOL)isOutputLower;
 
 /**
- 十六进制转换为普通字符串的
+ 十六进制转换为普通字符串
  */
 - (NSString *)jx_stringFromHexString;
 

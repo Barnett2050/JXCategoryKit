@@ -9,14 +9,14 @@
 #import "NSString+JXVerification.h"
 
 @implementation NSString (JXVerification)
-- (BOOL)jx_isValidateAccountNumber
+- (BOOL)jx_isValidateAccountNumberWith:(NSInteger)min max:(NSInteger)max
 {
-    NSString *userNameRegex = @"^[A-Za-z0-9]{4,20}+$";
+    NSString *userNameRegex = [NSString stringWithFormat:@"^[A-Za-z0-9]{%ld,%ld}+$",min,max];
     return [self jx_isValidateWith:userNameRegex];
 }
-- (BOOL)jx_isValidateAccountPassword
+- (BOOL)jx_isValidateAccountPasswordWith:(NSInteger)min max:(NSInteger)max
 {
-    NSString *passWordRegex = @"^[a-zA-Z0-9]{6,20}+$";
+    NSString *passWordRegex = [NSString stringWithFormat:@"^[a-zA-Z0-9]{%ld,%ld}+$",min,max];
     // 密码强度
 //    NSString *passWordRegex = @"^(?=.*\\d.*)(?=.*[a-zA-Z].*).{6,20}$";
     return [self jx_isValidateWith:passWordRegex];

@@ -11,13 +11,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (JXVerification)
 /**
- 有效账号验证,最小4位，最大20位，数字和字母
+ 有效账号验证,数字和字母
  */
-- (BOOL)jx_isValidateAccountNumber;
+- (BOOL)jx_isValidateAccountNumberWith:(NSInteger)min max:(NSInteger)max;
 /**
- 有效密码验证，最小6位，最大20位，数字和字母
+ 有效密码验证，数字和字母
  */
-- (BOOL)jx_isValidateAccountPassword;
+- (BOOL)jx_isValidateAccountPasswordWith:(NSInteger)min max:(NSInteger)max;
 /**
  有效验证码验证
  */

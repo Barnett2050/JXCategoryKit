@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSObject (JXRuntime)
 
 /**
- swizzle类方法
+ swizzle交换类方法
 
  @param oriSel 原有方法
  @param swiSel 替换方法
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)jx_swizzleClassMethodOriginSel:(SEL)oriSel swizzledSel:(SEL)swiSel;
 
 /**
- swizzle类实例方法
+ swizzle交换类实例方法
 
  @param oriSel 原有方法
  @param swiSel 替换方法

@@ -12,24 +12,24 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSTimer (JXGeneral)
 
 /**
- scheduled方法创建timer
+ scheduled方法快速创建timer
  */
-+ (NSTimer *)bk_scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval repeats:(BOOL)inRepeats block:(void (^)(NSTimer *timer))inBlock;
++ (NSTimer *)jx_scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval repeats:(BOOL)inRepeats block:(void (^)(NSTimer *timer))inBlock;
 
 /**
- timer方法创建timer
+ timer方法快速创建timer
  */
-+ (NSTimer *)bk_timerWithTimeInterval:(NSTimeInterval)inTimeInterval repeats:(BOOL)inRepeats block:(void (^)(NSTimer *timer))inBlock;
++ (NSTimer *)jx_timerWithTimeInterval:(NSTimeInterval)inTimeInterval repeats:(BOOL)inRepeats block:(void (^)(NSTimer *timer))inBlock;
 
-/// 暂停
-- (void)pauseTimer;
+/// 暂停Timer
+- (void)jx_pauseTimer;
 
-/// 恢复
-- (void)resumeTimer;
+/// 恢复Timer
+- (void)jx_resumeTimer;
 
-/// 过一段时间继续
+/// 过一段时间继续Timer
 /// @param interval 时间间隔
-- (void)resumeTimerAfterTimeInterval:(NSTimeInterval)interval;
+- (void)jx_resumeTimerAfterTimeInterval:(NSTimeInterval)interval;
 
 @end
 

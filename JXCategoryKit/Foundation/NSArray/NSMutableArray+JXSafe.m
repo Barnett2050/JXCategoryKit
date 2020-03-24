@@ -10,7 +10,8 @@
 
 @implementation NSMutableArray (JXSafe)
 
-- (void)jx_addObject:(id)anObject withKey:(NSString *)key {
+- (void)jx_addObject:(id)anObject withKey:(NSString *)key
+{
     if (self.count < 1) {
         [self addObject:anObject];
     } else {
