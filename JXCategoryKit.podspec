@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JXCategoryKit'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = '基础类扩展'
   s.homepage         = 'https://github.com/Barnett2050/JXCategoryKit'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -108,6 +108,10 @@ Pod::Spec.new do |s|
     ss.subspec 'NSArray' do |sss|
       sss.source_files = 'JXCategoryKit/Foundation/NSArray/*.{h,m}'
       sss.public_header_files = 'JXCategoryKit/Foundation/NSArray/*.h'
+    end
+    ss.subspec 'NSDate' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSDate/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSDate/*.h'
     end
   end
   

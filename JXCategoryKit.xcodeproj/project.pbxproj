@@ -56,6 +56,10 @@
 		613FCC65242A4B2D004ACC9D /* NSObject+JXRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC64242A4B2D004ACC9D /* NSObject+JXRuntime.m */; };
 		613FCC69242A4C99004ACC9D /* NSTimer+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC68242A4C99004ACC9D /* NSTimer+JXGeneral.m */; };
 		613FCC6B242A54E7004ACC9D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 613FCC6A242A54E7004ACC9D /* README.md */; };
+		6163676E242C6CD4009BC274 /* UIButton+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 6163676C242C6CD3009BC274 /* UIButton+JXGeneral.m */; };
+		6163677A242C7A8F009BC274 /* NSDate+JXConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 61636776242C7A8F009BC274 /* NSDate+JXConversion.m */; };
+		6163677B242C7A8F009BC274 /* NSDate+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61636777242C7A8F009BC274 /* NSDate+JXGeneral.m */; };
+		6163677C242C7A8F009BC274 /* NSDate+JXVertification.m in Sources */ = {isa = PBXBuildFile; fileRef = 61636779242C7A8F009BC274 /* NSDate+JXVertification.m */; };
 		617A338C2427B4F20098EF1A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A338B2427B4F20098EF1A /* AppDelegate.m */; };
 		617A338F2427B4F20098EF1A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A338E2427B4F20098EF1A /* SceneDelegate.m */; };
 		617A33922427B4F20098EF1A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A33912427B4F20098EF1A /* ViewController.m */; };
@@ -160,6 +164,14 @@
 		613FCC67242A4C99004ACC9D /* NSTimer+JXGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+JXGeneral.h"; sourceTree = "<group>"; };
 		613FCC68242A4C99004ACC9D /* NSTimer+JXGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+JXGeneral.m"; sourceTree = "<group>"; };
 		613FCC6A242A54E7004ACC9D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6163676C242C6CD3009BC274 /* UIButton+JXGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+JXGeneral.m"; sourceTree = "<group>"; };
+		6163676D242C6CD3009BC274 /* UIButton+JXGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+JXGeneral.h"; sourceTree = "<group>"; };
+		61636774242C7A8F009BC274 /* NSDate+JXConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JXConversion.h"; sourceTree = "<group>"; };
+		61636775242C7A8F009BC274 /* NSDate+JXGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JXGeneral.h"; sourceTree = "<group>"; };
+		61636776242C7A8F009BC274 /* NSDate+JXConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JXConversion.m"; sourceTree = "<group>"; };
+		61636777242C7A8F009BC274 /* NSDate+JXGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JXGeneral.m"; sourceTree = "<group>"; };
+		61636778242C7A8F009BC274 /* NSDate+JXVertification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JXVertification.h"; sourceTree = "<group>"; };
+		61636779242C7A8F009BC274 /* NSDate+JXVertification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JXVertification.m"; sourceTree = "<group>"; };
 		617A33872427B4F20098EF1A /* JXCategoryKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JXCategoryKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		617A338A2427B4F20098EF1A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		617A338B2427B4F20098EF1A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -261,6 +273,8 @@
 		613FCBBD2428F46B004ACC9D /* UIButton */ = {
 			isa = PBXGroup;
 			children = (
+				6163676D242C6CD3009BC274 /* UIButton+JXGeneral.h */,
+				6163676C242C6CD3009BC274 /* UIButton+JXGeneral.m */,
 				613FCBBE2428F47E004ACC9D /* UIButton+JXShow.h */,
 				613FCBBF2428F47E004ACC9D /* UIButton+JXShow.m */,
 			);
@@ -360,6 +374,7 @@
 		613FCC27242A1CB7004ACC9D /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				61636773242C7A80009BC274 /* NSDate */,
 				613FCC66242A4C87004ACC9D /* NSTimer */,
 				613FCC62242A4B24004ACC9D /* NSObject */,
 				613FCC5E242A4B11004ACC9D /* NSNull */,
@@ -472,6 +487,19 @@
 				613FCC68242A4C99004ACC9D /* NSTimer+JXGeneral.m */,
 			);
 			path = NSTimer;
+			sourceTree = "<group>";
+		};
+		61636773242C7A80009BC274 /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				61636774242C7A8F009BC274 /* NSDate+JXConversion.h */,
+				61636776242C7A8F009BC274 /* NSDate+JXConversion.m */,
+				61636775242C7A8F009BC274 /* NSDate+JXGeneral.h */,
+				61636777242C7A8F009BC274 /* NSDate+JXGeneral.m */,
+				61636778242C7A8F009BC274 /* NSDate+JXVertification.h */,
+				61636779242C7A8F009BC274 /* NSDate+JXVertification.m */,
+			);
+			path = NSDate;
 			sourceTree = "<group>";
 		};
 		617A337E2427B4F20098EF1A = {
@@ -604,6 +632,7 @@
 				613FCBA42428DDCB004ACC9D /* CLLocation+JXConverter.m in Sources */,
 				617A339D2427B4F30098EF1A /* main.m in Sources */,
 				613FCC5D242A4B06004ACC9D /* NSFileManager+JXData.m in Sources */,
+				6163676E242C6CD4009BC274 /* UIButton+JXGeneral.m in Sources */,
 				613FCC4A242A4A9D004ACC9D /* NSString+JXFormat.m in Sources */,
 				613FCBC02428F47E004ACC9D /* UIButton+JXShow.m in Sources */,
 				617A338F2427B4F20098EF1A /* SceneDelegate.m in Sources */,
@@ -617,10 +646,12 @@
 				613FCC1E2429167A004ACC9D /* UITabBarController+JXGeneral.m in Sources */,
 				613FCC35242A2137004ACC9D /* NSBundle+JXPod.m in Sources */,
 				613FCBE524290C56004ACC9D /* UIImage+JXGeneral.m in Sources */,
+				6163677C242C7A8F009BC274 /* NSDate+JXVertification.m in Sources */,
 				613FCBB82428F373004ACC9D /* UIApplication+JXNotification.m in Sources */,
 				613FCC34242A2137004ACC9D /* NSBundle+JXGeneral.m in Sources */,
 				613FCC53242A4ADE004ACC9D /* NSString+Encrypt.m in Sources */,
 				613FCBE424290C56004ACC9D /* UIImage+JXGenerate.m in Sources */,
+				6163677A242C7A8F009BC274 /* NSDate+JXConversion.m in Sources */,
 				613FCC062429149F004ACC9D /* UIView+JXFrame.m in Sources */,
 				613FCBE324290C56004ACC9D /* UIImage+QRCode.m in Sources */,
 				613FCC2B242A1F4D004ACC9D /* NSArray+JXSafe.m in Sources */,
@@ -630,6 +661,7 @@
 				613FCBC42428F4AD004ACC9D /* UIColor+JXGeneral.m in Sources */,
 				613FCC4D242A4AB8004ACC9D /* NSString+JXGeneral.m in Sources */,
 				613FCC082429149F004ACC9D /* UIView+JXGeneral.m in Sources */,
+				6163677B242C7A8F009BC274 /* NSDate+JXGeneral.m in Sources */,
 				613FCBF924291311004ACC9D /* UITableViewCell+JXAnimation.m in Sources */,
 				613FCC69242A4C99004ACC9D /* NSTimer+JXGeneral.m in Sources */,
 				613FCC3D242A2D9F004ACC9D /* NSDictionary+JXSafe.m in Sources */,
