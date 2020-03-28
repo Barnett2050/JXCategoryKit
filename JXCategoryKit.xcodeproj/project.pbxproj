@@ -36,8 +36,6 @@
 		613FCC1F2429167A004ACC9D /* UINavigationController+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC1B24291679004ACC9D /* UINavigationController+JXGeneral.m */; };
 		613FCC202429167A004ACC9D /* UIViewController+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC1D2429167A004ACC9D /* UIViewController+JXGeneral.m */; };
 		613FCC2324291787004ACC9D /* UIViewController+JXAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC2224291787004ACC9D /* UIViewController+JXAlert.m */; };
-		613FCC2B242A1F4D004ACC9D /* NSArray+JXSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC2A242A1F4D004ACC9D /* NSArray+JXSafe.m */; };
-		613FCC2E242A1FD3004ACC9D /* NSMutableArray+JXSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC2D242A1FD3004ACC9D /* NSMutableArray+JXSafe.m */; };
 		613FCC34242A2137004ACC9D /* NSBundle+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC30242A2137004ACC9D /* NSBundle+JXGeneral.m */; };
 		613FCC35242A2137004ACC9D /* NSBundle+JXPod.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC31242A2137004ACC9D /* NSBundle+JXPod.m */; };
 		613FCC39242A29A5004ACC9D /* NSError+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCC38242A29A5004ACC9D /* NSError+JXGeneral.m */; };
@@ -60,6 +58,11 @@
 		6163677A242C7A8F009BC274 /* NSDate+JXConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 61636776242C7A8F009BC274 /* NSDate+JXConversion.m */; };
 		6163677B242C7A8F009BC274 /* NSDate+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61636777242C7A8F009BC274 /* NSDate+JXGeneral.m */; };
 		6163677C242C7A8F009BC274 /* NSDate+JXVertification.m in Sources */ = {isa = PBXBuildFile; fileRef = 61636779242C7A8F009BC274 /* NSDate+JXVertification.m */; };
+		616367E3242F2276009BC274 /* NSArray+JXSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 616367E0242F2276009BC274 /* NSArray+JXSafe.m */; };
+		616367E4242F2276009BC274 /* NSMutableArray+JXSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 616367E2242F2276009BC274 /* NSMutableArray+JXSafe.m */; };
+		616367E7242F2298009BC274 /* NSMutableDictionary+JXSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 616367E6242F2298009BC274 /* NSMutableDictionary+JXSafe.m */; };
+		616367EC242F22BA009BC274 /* NSMutableString+JXSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 616367E8242F22BA009BC274 /* NSMutableString+JXSafe.m */; };
+		616367ED242F22BA009BC274 /* NSString+JXSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 616367EB242F22BA009BC274 /* NSString+JXSafe.m */; };
 		617A338C2427B4F20098EF1A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A338B2427B4F20098EF1A /* AppDelegate.m */; };
 		617A338F2427B4F20098EF1A /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A338E2427B4F20098EF1A /* SceneDelegate.m */; };
 		617A33922427B4F20098EF1A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A33912427B4F20098EF1A /* ViewController.m */; };
@@ -125,10 +128,6 @@
 		613FCC1D2429167A004ACC9D /* UIViewController+JXGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JXGeneral.m"; sourceTree = "<group>"; };
 		613FCC2124291787004ACC9D /* UIViewController+JXAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JXAlert.h"; sourceTree = "<group>"; };
 		613FCC2224291787004ACC9D /* UIViewController+JXAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JXAlert.m"; sourceTree = "<group>"; };
-		613FCC29242A1F4D004ACC9D /* NSArray+JXSafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+JXSafe.h"; sourceTree = "<group>"; };
-		613FCC2A242A1F4D004ACC9D /* NSArray+JXSafe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JXSafe.m"; sourceTree = "<group>"; };
-		613FCC2C242A1FD3004ACC9D /* NSMutableArray+JXSafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+JXSafe.h"; sourceTree = "<group>"; };
-		613FCC2D242A1FD3004ACC9D /* NSMutableArray+JXSafe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+JXSafe.m"; sourceTree = "<group>"; };
 		613FCC30242A2137004ACC9D /* NSBundle+JXGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+JXGeneral.m"; sourceTree = "<group>"; };
 		613FCC31242A2137004ACC9D /* NSBundle+JXPod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+JXPod.m"; sourceTree = "<group>"; };
 		613FCC32242A2137004ACC9D /* NSBundle+JXGeneral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+JXGeneral.h"; sourceTree = "<group>"; };
@@ -172,6 +171,16 @@
 		61636777242C7A8F009BC274 /* NSDate+JXGeneral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JXGeneral.m"; sourceTree = "<group>"; };
 		61636778242C7A8F009BC274 /* NSDate+JXVertification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JXVertification.h"; sourceTree = "<group>"; };
 		61636779242C7A8F009BC274 /* NSDate+JXVertification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JXVertification.m"; sourceTree = "<group>"; };
+		616367DF242F2276009BC274 /* NSMutableArray+JXSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+JXSafe.h"; sourceTree = "<group>"; };
+		616367E0242F2276009BC274 /* NSArray+JXSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JXSafe.m"; sourceTree = "<group>"; };
+		616367E1242F2276009BC274 /* NSArray+JXSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+JXSafe.h"; sourceTree = "<group>"; };
+		616367E2242F2276009BC274 /* NSMutableArray+JXSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+JXSafe.m"; sourceTree = "<group>"; };
+		616367E5242F2298009BC274 /* NSMutableDictionary+JXSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+JXSafe.h"; sourceTree = "<group>"; };
+		616367E6242F2298009BC274 /* NSMutableDictionary+JXSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+JXSafe.m"; sourceTree = "<group>"; };
+		616367E8242F22BA009BC274 /* NSMutableString+JXSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+JXSafe.m"; sourceTree = "<group>"; };
+		616367E9242F22BA009BC274 /* NSMutableString+JXSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+JXSafe.h"; sourceTree = "<group>"; };
+		616367EA242F22BA009BC274 /* NSString+JXSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JXSafe.h"; sourceTree = "<group>"; };
+		616367EB242F22BA009BC274 /* NSString+JXSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JXSafe.m"; sourceTree = "<group>"; };
 		617A33872427B4F20098EF1A /* JXCategoryKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JXCategoryKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		617A338A2427B4F20098EF1A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		617A338B2427B4F20098EF1A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -391,10 +400,10 @@
 		613FCC28242A1EFC004ACC9D /* NSArray */ = {
 			isa = PBXGroup;
 			children = (
-				613FCC29242A1F4D004ACC9D /* NSArray+JXSafe.h */,
-				613FCC2A242A1F4D004ACC9D /* NSArray+JXSafe.m */,
-				613FCC2C242A1FD3004ACC9D /* NSMutableArray+JXSafe.h */,
-				613FCC2D242A1FD3004ACC9D /* NSMutableArray+JXSafe.m */,
+				616367E1242F2276009BC274 /* NSArray+JXSafe.h */,
+				616367E0242F2276009BC274 /* NSArray+JXSafe.m */,
+				616367DF242F2276009BC274 /* NSMutableArray+JXSafe.h */,
+				616367E2242F2276009BC274 /* NSMutableArray+JXSafe.m */,
 			);
 			path = NSArray;
 			sourceTree = "<group>";
@@ -422,6 +431,8 @@
 		613FCC3A242A2D8C004ACC9D /* NSDictionary */ = {
 			isa = PBXGroup;
 			children = (
+				616367E5242F2298009BC274 /* NSMutableDictionary+JXSafe.h */,
+				616367E6242F2298009BC274 /* NSMutableDictionary+JXSafe.m */,
 				613FCC3B242A2D9F004ACC9D /* NSDictionary+JXSafe.h */,
 				613FCC3C242A2D9F004ACC9D /* NSDictionary+JXSafe.m */,
 			);
@@ -431,6 +442,10 @@
 		613FCC3E242A4A67004ACC9D /* NSString */ = {
 			isa = PBXGroup;
 			children = (
+				616367E9242F22BA009BC274 /* NSMutableString+JXSafe.h */,
+				616367E8242F22BA009BC274 /* NSMutableString+JXSafe.m */,
+				616367EA242F22BA009BC274 /* NSString+JXSafe.h */,
+				616367EB242F22BA009BC274 /* NSString+JXSafe.m */,
 				613FCC3F242A4A76004ACC9D /* NSString+JXAttribute.h */,
 				613FCC40242A4A76004ACC9D /* NSString+JXAttribute.m */,
 				613FCC43242A4A86004ACC9D /* NSString+JXVerification.h */,
@@ -624,10 +639,12 @@
 				613FCC65242A4B2D004ACC9D /* NSObject+JXRuntime.m in Sources */,
 				613FCC44242A4A86004ACC9D /* NSString+JXVerification.m in Sources */,
 				613FCBB32428F2BD004ACC9D /* CALayer+JXAnimation.m in Sources */,
-				613FCC2E242A1FD3004ACC9D /* NSMutableArray+JXSafe.m in Sources */,
 				613FCC17242915FD004ACC9D /* UIWindow+JXGeneral.m in Sources */,
 				617A338C2427B4F20098EF1A /* AppDelegate.m in Sources */,
+				616367E7242F2298009BC274 /* NSMutableDictionary+JXSafe.m in Sources */,
 				613FCC61242A4B1C004ACC9D /* NSNull+JXSafe.m in Sources */,
+				616367ED242F22BA009BC274 /* NSString+JXSafe.m in Sources */,
+				616367E3242F2276009BC274 /* NSArray+JXSafe.m in Sources */,
 				613FCC47242A4A8F004ACC9D /* NSString+JXSize.m in Sources */,
 				613FCBA42428DDCB004ACC9D /* CLLocation+JXConverter.m in Sources */,
 				617A339D2427B4F30098EF1A /* main.m in Sources */,
@@ -652,9 +669,9 @@
 				613FCC53242A4ADE004ACC9D /* NSString+Encrypt.m in Sources */,
 				613FCBE424290C56004ACC9D /* UIImage+JXGenerate.m in Sources */,
 				6163677A242C7A8F009BC274 /* NSDate+JXConversion.m in Sources */,
+				616367E4242F2276009BC274 /* NSMutableArray+JXSafe.m in Sources */,
 				613FCC062429149F004ACC9D /* UIView+JXFrame.m in Sources */,
 				613FCBE324290C56004ACC9D /* UIImage+QRCode.m in Sources */,
-				613FCC2B242A1F4D004ACC9D /* NSArray+JXSafe.m in Sources */,
 				613FCC50242A4AD2004ACC9D /* NSMutableAttributedString+JXGeneral.m in Sources */,
 				613FCBF824291311004ACC9D /* UITableViewCell+JXGeneral.m in Sources */,
 				613FCC39242A29A5004ACC9D /* NSError+JXGeneral.m in Sources */,
@@ -664,6 +681,7 @@
 				6163677B242C7A8F009BC274 /* NSDate+JXGeneral.m in Sources */,
 				613FCBF924291311004ACC9D /* UITableViewCell+JXAnimation.m in Sources */,
 				613FCC69242A4C99004ACC9D /* NSTimer+JXGeneral.m in Sources */,
+				616367EC242F22BA009BC274 /* NSMutableString+JXSafe.m in Sources */,
 				613FCC3D242A2D9F004ACC9D /* NSDictionary+JXSafe.m in Sources */,
 				613FCC5B242A4B06004ACC9D /* NSFileManager+JXFilePath.m in Sources */,
 				613FCC072429149F004ACC9D /* UIView+JXDraw.m in Sources */,

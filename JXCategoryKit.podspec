@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JXCategoryKit'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = '基础类扩展'
   s.homepage         = 'https://github.com/Barnett2050/JXCategoryKit'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -92,10 +92,14 @@ Pod::Spec.new do |s|
     ss.subspec 'NSString' do |sss|
       sss.source_files = 'JXCategoryKit/Foundation/NSString/*.{h,m}'
       sss.public_header_files = 'JXCategoryKit/Foundation/NSString/*.h'
+      
+      sss.dependency 'JXCategoryKit/Foundation/NSObject'
     end
     ss.subspec 'NSDictionary' do |sss|
       sss.source_files = 'JXCategoryKit/Foundation/NSDictionary/*.{h,m}'
       sss.public_header_files = 'JXCategoryKit/Foundation/NSDictionary/*.h'
+      
+      sss.dependency 'JXCategoryKit/Foundation/NSObject'
     end
     ss.subspec 'NSError' do |sss|
       sss.source_files = 'JXCategoryKit/Foundation/NSError/*.{h,m}'
@@ -108,6 +112,8 @@ Pod::Spec.new do |s|
     ss.subspec 'NSArray' do |sss|
       sss.source_files = 'JXCategoryKit/Foundation/NSArray/*.{h,m}'
       sss.public_header_files = 'JXCategoryKit/Foundation/NSArray/*.h'
+      
+      sss.dependency 'JXCategoryKit/Foundation/NSObject'
     end
     ss.subspec 'NSDate' do |sss|
       sss.source_files = 'JXCategoryKit/Foundation/NSDate/*.{h,m}'
