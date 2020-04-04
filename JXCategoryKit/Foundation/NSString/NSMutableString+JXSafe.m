@@ -13,9 +13,8 @@
 #define NSCFString "__NSCFString"
 
 @implementation NSMutableString (JXSafe)
-
-+ (void)load {
-    [super load];
++ (void)initialize
+{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(substringFromIndex:) swizzleSel:@selector(CFConstantString_substringFromIndex:)];

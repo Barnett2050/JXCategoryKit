@@ -14,8 +14,8 @@
 
 @implementation NSMutableDictionary (JXSafe)
 
-+ (void)load {
-    [super load];
++ (void)initialize
+{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         

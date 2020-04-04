@@ -37,21 +37,24 @@
     objc_setAssociatedObject(self, @selector(eventTimeInterval), @(eventTimeInterval), OBJC_ASSOCIATION_ASSIGN);
 }
 
-
-+ (void)load
++ (void)initialize
 {
-    Class cls = object_getClass(self);
-    SEL oriSel = @selector(sendAction:to:forEvent:);
-    SEL swiSel = @selector(wxd_sendAction:to:forEvent:);
-    Method originClassMethod = class_getClassMethod(cls, oriSel);
-    Method swizzleClassMethod = class_getClassMethod(cls, swiSel);
-    BOOL didAddMethod = class_addMethod(cls, oriSel, method_getImplementation(swizzleClassMethod), method_getTypeEncoding(swizzleClassMethod));
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Class cls = object_getClass(self);
+        SEL oriSel = @selector(sendAction:to:forEvent:);
+        SEL swiSel = @selector(wxd_sendAction:to:forEvent:);
+        Method originClassMethod = class_getClassMethod(cls, oriSel);
+        Method swizzleClassMethod = class_getClassMethod(cls, swiSel);
+        BOOL didAddMethod = class_addMethod(cls, oriSel, method_getImplementation(swizzleClassMethod), method_getTypeEncoding(swizzleClassMethod));
 
-    if (didAddMethod) {
-        class_replaceMethod(cls, oriSel, method_getImplementation(originClassMethod), method_getTypeEncoding(originClassMethod));
-    } else {
-        method_exchangeImplementations(originClassMethod, swizzleClassMethod);
-    }
+        if (didAddMethod) {
+            class_replaceMethod(cls, oriSel, method_getImplementation(originClassMethod), method_getTypeEncoding(originClassMethod));
+        } else {
+            method_exchangeImplementations(originClassMethod, swizzleClassMethod);
+        }
+    });
+
 }
 
 - (void)wxd_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event

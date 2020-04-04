@@ -61,8 +61,8 @@
 }
 
 #pragma mark - load runtime
-+ (void)load {
-    [super load];
++ (void)initialize
+{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         [NSMutableArray swizzleNSArrayMMethod];
