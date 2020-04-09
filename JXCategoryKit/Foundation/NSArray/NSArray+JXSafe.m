@@ -16,9 +16,9 @@
  __NSArrayI : 含有多个元素的数组
  */
 
-#define NSArray0 "__NSArray0"
-#define NSSingleObjectArrayI "__NSSingleObjectArrayI"
-#define NSArrayI "__NSArrayI"
+static const char *NSArray0 = "__NSArray0";
+static const char *NSSingleObjectArrayI = "__NSSingleObjectArrayI";
+static const char *NSArrayI = "__NSArrayI";
 
 @implementation NSArray (JXSafe)
 

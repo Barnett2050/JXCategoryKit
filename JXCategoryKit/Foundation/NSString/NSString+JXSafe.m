@@ -10,7 +10,7 @@
 #import "NSObject+JXRuntime.h"
 #import <objc/runtime.h>
 
-#define NSCFConstantString "__NSCFConstantString"
+static const char *NSCFConstantString = "__NSCFConstantString";
 
 @implementation NSString (JXSafe)
 + (void)initialize

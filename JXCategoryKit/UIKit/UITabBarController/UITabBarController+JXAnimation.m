@@ -8,7 +8,7 @@
 
 #import "UITabBarController+JXAnimation.h"
 
-#define TABBAR_HEIGHT (49)
+static const int TABBAR_HEIGHT = 49;
 
 @implementation UITabBarController (JXAnimation)
 

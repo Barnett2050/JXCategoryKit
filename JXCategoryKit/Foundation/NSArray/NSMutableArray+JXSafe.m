@@ -10,7 +10,7 @@
 #import "NSObject+JXRuntime.h"
 #import <objc/runtime.h>
 
-#define NSArrayM "__NSArrayM"
+static const char *NSArrayM = "__NSArrayM";
 
 @implementation NSMutableArray (JXSafe)
 

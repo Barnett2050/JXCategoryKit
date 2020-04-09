@@ -18,13 +18,13 @@
 #define LON_OFFSET_2 (20.0 * sin(x * M_PI) + 40.0 * sin(x / 3.0 * M_PI)) * 2.0 / 3.0
 #define LON_OFFSET_3 (150.0 * sin(x / 12.0 * M_PI) + 300.0 * sin(x / 30.0 * M_PI)) * 2.0 / 3.0
 
-#define RANGE_LON_MAX 137.8347
-#define RANGE_LON_MIN 72.004
-#define RANGE_LAT_MAX 55.8271
-#define RANGE_LAT_MIN 0.8293
+static const float RANGE_LON_MAX = 137.8347;
+static const float RANGE_LON_MIN = 72.004;
+static const float RANGE_LAT_MAX = 55.8271;
+static const float RANGE_LAT_MIN = 0.8293;
 
-#define jzA 6378245.0
-#define jzEE 0.00669342162296594323
+static const float jzA = 6378245.0;
+static const float jzEE = 0.00669342162296594323;
 
 @implementation CLLocation (JXConverter)
 

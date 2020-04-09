@@ -10,7 +10,7 @@
 #import "NSObject+JXRuntime.h"
 #import <objc/runtime.h>
 
-#define NSDictionaryM "__NSDictionaryM"
+static const char *NSDictionaryM = "__NSDictionaryM";
 
 @implementation NSMutableDictionary (JXSafe)
 
