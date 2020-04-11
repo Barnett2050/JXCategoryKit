@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 设置左右边距为0
 - (void)jx_setCellBottomLineZeroSpace;
 
+/// 隐藏分割线
+- (void)hiddenCellBottomLine;
+
 @end
 
 NS_ASSUME_NONNULL_END

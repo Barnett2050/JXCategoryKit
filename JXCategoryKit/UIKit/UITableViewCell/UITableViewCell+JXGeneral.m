@@ -29,4 +29,11 @@
     [self jx_setCellBottomLineLeftSpace:0 rightSpace:0];
 }
 
+/// 隐藏分割线
+- (void)hiddenCellBottomLine
+{
+    self.layoutMargins = UIEdgeInsetsMake(0, CGRectGetWidth([UIScreen mainScreen].bounds), 0, 0);
+    self.separatorInset = UIEdgeInsetsMake(0, CGRectGetWidth([UIScreen mainScreen].bounds), 0, 0);
+}
+
 @end
