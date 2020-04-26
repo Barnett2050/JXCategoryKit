@@ -14,19 +14,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  添加圆角，适用于自动布局，传入设置frame
 
- @param viewBounds 目标view的frame
- @param rectCorner 圆角位置
+ @param rect 目标view的frame
+ @param corner 圆角位置
  @param radius 圆角大小
  */
-- (void)jx_addRectCornerWith:(CGRect)viewBounds corner:(UIRectCorner)rectCorner cornerRadius:(CGFloat)radius;
+- (void)jx_addRectCornerWithViewBounds:(CGRect)rect corner:(UIRectCorner)corner radius:(CGFloat)radius;
 
 /**
  添加圆角,适用于已知frame，即非自动布局
 
- @param rectCorner 圆角位置
+ @param corner 圆角位置
  @param radius 圆角大小
  */
-- (void)jx_addRectCornerWith:(UIRectCorner)rectCorner cornerRadius:(CGFloat)radius;
+- (void)jx_addRectCornerWith:(UIRectCorner)corner radius:(CGFloat)radius;
 
 /**
  添加圆角，适用于已知frame，即非自动布局，圆角位置为UIRectCornerAllCorners
@@ -38,10 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  添加圆角，适用于自动布局，传入设置frame，圆角位置为UIRectCornerAllCorners
 
- @param viewBounds 目标view的frame
+ @param rect 目标view的frame
  @param radius 圆角大小
  */
-- (void)jx_addAllCornerWith:(CGRect)viewBounds radius:(CGFloat)radius;
+- (void)jx_addAllCornerWithViewBounds:(CGRect)rect radius:(CGFloat)radius;
 
 /**
  绘制虚线

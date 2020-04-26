@@ -12,13 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (JXFormat)
 
 /**
- URL编码解码
- */
-- (NSString *)jx_encode;
-
-- (NSString *)jx_decode;
-
-/**
  数字转为金额 例：1000000.00 -> 1,000,000.00
  */
 - (NSString *)jx_changeNumberToMoneyFormat;
@@ -56,6 +49,20 @@ NS_ASSUME_NONNULL_BEGIN
  json转换
  */
 - (id)jx_jsonStringToJson;
+
+#pragma mark - HEX 转换
+
+/**
+ 转为16进制字符串
+ 
+ @param isOutputLower 是否小写 true 小写 false 大写
+ */
+- (NSString *)jx_hexStringFromStringWithLower:(BOOL)isOutputLower;
+
+/**
+ 十六进制转换为普通字符串
+ */
+- (NSString *)jx_stringFromHexString;
 
 @end
 

@@ -12,14 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITableViewCell (JXGeneral)
 
-/**
- 设置分割线左边距,右边距
- */
+/// 设置分割线左边距,右边距
 - (void)jx_setCellBottomLineLeftSpace:(CGFloat)leftSpace rightSpace:(CGFloat)rightSpace;
-/**
- 设置分割线左边距
- */
+
+/// 设置分割线左边距
 - (void)jx_setCellBottomLineLeftSpace:(CGFloat)leftSpace;
+
 /// 设置左右边距为0
 - (void)jx_setCellBottomLineZeroSpace;
 

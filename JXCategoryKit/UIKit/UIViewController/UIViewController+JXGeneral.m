@@ -10,7 +10,7 @@
 
 @implementation UIViewController (JXGeneral)
 
-- (void)jx_setNavigationBarTitleColor:(nullable UIColor *)color titleFont:(nullable UIFont *)titleFont
+- (void)jx_setNavigationBarTitleColor:(nullable UIColor *)color font:(nullable UIFont *)font
 {
     if (self.navigationController == nil) {
         return;
@@ -19,8 +19,8 @@
     if (color != nil) {
         [dic setValue:color forKey:NSForegroundColorAttributeName];
     }
-    if (titleFont != nil) {
-        [dic setValue:titleFont forKey:NSFontAttributeName];
+    if (font != nil) {
+        [dic setValue:font forKey:NSFontAttributeName];
     }
     [self.navigationController.navigationBar setTitleTextAttributes:dic];
 }

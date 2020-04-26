@@ -13,7 +13,7 @@
 static const char *NSCFConstantString = "__NSCFConstantString";
 
 @implementation NSString (JXSafe)
-+ (void)initialize
++ (void)load
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -33,14 +33,14 @@ static const char *NSCFConstantString = "__NSCFConstantString";
 #pragma mark - NSCFConstantString
 - (NSString *)CFConstantString_substringFromIndex:(NSUInteger)from
 {
-    if (index >= 0 && from < self.length) {
+    if (from >= 0 && from < self.length) {
        return [self CFConstantString_substringFromIndex:from];
     }
     return @"";
 }
 - (NSString *)CFConstantString_substringToIndex:(NSUInteger)to
 {
-    if (index >= 0 && to < self.length) {
+    if (to >= 0 && to < self.length) {
        return [self CFConstantString_substringToIndex:to];
     }
     return @"";

@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JXCategoryKit'
-  s.version          = '0.1.8'
+  s.version          = '0.1.9'
   s.summary          = '基础类扩展'
   s.homepage         = 'https://github.com/Barnett2050/JXCategoryKit'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -24,6 +24,23 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'UIKit' do |ss|
+  
+    ss.subspec 'UITableView' do |sss|
+      sss.source_files = 'JXCategoryKit/UIKit/UITableView/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/UIKit/UITableView/*.h'
+    end
+    ss.subspec 'UIScrollView' do |sss|
+      sss.source_files = 'JXCategoryKit/UIKit/UIScrollView/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/UIKit/UIScrollView/*.h'
+    end
+    ss.subspec 'UIGestureRecognizer' do |sss|
+      sss.source_files = 'JXCategoryKit/UIKit/UIGestureRecognizer/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/UIKit/UIGestureRecognizer/*.h'
+    end
+    ss.subspec 'UIControl' do |sss|
+      sss.source_files = 'JXCategoryKit/UIKit/UIControl/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/UIKit/UIControl/*.h'
+    end
     ss.subspec 'UIWindow' do |sss|
       sss.source_files = 'JXCategoryKit/UIKit/UIWindow/*.{h,m}'
       sss.public_header_files = 'JXCategoryKit/UIKit/UIWindow/*.h'
@@ -73,6 +90,22 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'Foundation' do |ss|
+    ss.subspec 'NSNotificationCenter' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSNotificationCenter/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSNotificationCenter/*.h'
+    end
+    ss.subspec 'NSData' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSData/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSData/*.h'
+    end
+    ss.subspec 'NSFileManager' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSFileManager/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSFileManager/*.h'
+    end
+    ss.subspec 'NSDate' do |sss|
+      sss.source_files = 'JXCategoryKit/Foundation/NSDate/*.{h,m}'
+      sss.public_header_files = 'JXCategoryKit/Foundation/NSDate/*.h'
+    end
     ss.subspec 'NSTimer' do |sss|
       sss.source_files = 'JXCategoryKit/Foundation/NSTimer/*.{h,m}'
       sss.public_header_files = 'JXCategoryKit/Foundation/NSTimer/*.h'
@@ -85,15 +118,12 @@ Pod::Spec.new do |s|
       sss.source_files = 'JXCategoryKit/Foundation/NSNull/*.{h,m}'
       sss.public_header_files = 'JXCategoryKit/Foundation/NSNull/*.h'
     end
-    ss.subspec 'NSFileManager' do |sss|
-      sss.source_files = 'JXCategoryKit/Foundation/NSFileManager/*.{h,m}'
-      sss.public_header_files = 'JXCategoryKit/Foundation/NSFileManager/*.h'
-    end
     ss.subspec 'NSString' do |sss|
       sss.source_files = 'JXCategoryKit/Foundation/NSString/*.{h,m}'
       sss.public_header_files = 'JXCategoryKit/Foundation/NSString/*.h'
       
       sss.dependency 'JXCategoryKit/Foundation/NSObject'
+      sss.dependency 'JXCategoryKit/Foundation/NSData'
     end
     ss.subspec 'NSDictionary' do |sss|
       sss.source_files = 'JXCategoryKit/Foundation/NSDictionary/*.{h,m}'
@@ -114,10 +144,6 @@ Pod::Spec.new do |s|
       sss.public_header_files = 'JXCategoryKit/Foundation/NSArray/*.h'
       
       sss.dependency 'JXCategoryKit/Foundation/NSObject'
-    end
-    ss.subspec 'NSDate' do |sss|
-      sss.source_files = 'JXCategoryKit/Foundation/NSDate/*.{h,m}'
-      sss.public_header_files = 'JXCategoryKit/Foundation/NSDate/*.h'
     end
   end
   

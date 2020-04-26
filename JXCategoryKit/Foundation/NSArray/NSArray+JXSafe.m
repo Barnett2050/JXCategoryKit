@@ -110,7 +110,7 @@ static const char *NSArrayI = "__NSArrayI";
 
 #pragma mark - load runtime
 
-+ (void)initialize
++ (void)load
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

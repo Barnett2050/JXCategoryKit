@@ -10,7 +10,6 @@
 
 @implementation UITableViewCell (JXAnimation)
 
-#pragma mark - 缩放效果
 - (void)jx_showScaleAnimation
 {
     CATransform3D transform = CATransform3DMakeScale(0.68, 0.68, 1.0);
@@ -24,7 +23,7 @@
     [UIView commitAnimations];
     
 }
-#pragma mark - 缩进
+
 - (void)jx_showIndentAnimationWithCell
 {
     CGRect originalRect = self.frame;
@@ -38,7 +37,6 @@
     }];
 }
 
-#pragma mark - 旋转
 - (void)jx_showRoatationAnimation
 {
     CATransform3D rotation;

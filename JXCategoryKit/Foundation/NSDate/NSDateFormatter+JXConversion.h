@@ -35,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param timestamp 时间戳
 - (NSString *)jx_getBeforeTimeFromTimestamp:(NSString *)timestamp;
 
+/// 时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)
+- (NSString *)jx_getVariableFormatDateStringFromTimestamp:(NSString *)timestamp;
+
 @end
 
 NS_ASSUME_NONNULL_END

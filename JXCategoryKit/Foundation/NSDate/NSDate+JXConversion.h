@@ -46,11 +46,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)jx_getHHMMSSFromSS:(NSInteger)totalSecond format:(nullable NSString *)format;
 
 /**  时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)*/
-+ (NSString *)getVariableFormatDateStringFromTimestamp:(NSString *)timestamp;
++ (NSString *)jx_getVariableFormatDateStringFromTimestamp:(NSString *)timestamp;
 
 /// 根据日期格式Date转时间字符串
 /// @param format 格式
-- (NSString *)getDateTimeStringWithformat:(NSString *)format;
+- (NSString *)jx_getDateTimeStringWithformat:(NSString *)format;
 
 #pragma mark - NSCalendar
 /// 时间戳UTC转换为本地时间，例：几分钟前，几小时前，几天前，几月前，几年前

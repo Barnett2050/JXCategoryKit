@@ -10,92 +10,26 @@
 
 @implementation UIColor (JXGeneral)
 
-+ (UIColor *)jx_colorFromRed:(CGFloat)R Green:(CGFloat)G Blue:(CGFloat)B Alpha:(CGFloat)A
-{
-    return [UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:A/255.0f];
+- (CGFloat)red {
+    CGFloat r = 0, g, b, a;
+    [self getRed:&r green:&g blue:&b alpha:&a];
+    return r;
 }
 
-+ (UIColor *)jx_colorFromRGBA:(int)RGBA
-{
-    CGFloat r= (RGBA & 0x00FF0000) >> 16 ;
-    CGFloat g= (RGBA & 0x0000FF00) >> 8  ;
-    CGFloat b= (RGBA & 0x000000FF) >> 0  ;
-    CGFloat a= (RGBA & 0xFF000000) >> 24 ;
-    
-    return [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a/255.0f];
+- (CGFloat)green {
+    CGFloat r, g = 0, b, a;
+    [self getRed:&r green:&g blue:&b alpha:&a];
+    return g;
 }
 
-+ (UIColor *)jx_hexColorWithString:(NSString *)string
-{
-    return [UIColor jx_hexColorWithString:string alpha:1.0f];
+- (CGFloat)blue {
+    CGFloat r, g, b = 0, a;
+    [self getRed:&r green:&g blue:&b alpha:&a];
+    return b;
 }
 
-+ (UIColor *)jx_hexColorWithString:(NSString *)string alpha:(float) alpha
-{
-    if ([string hasPrefix:@"#"]) {
-        string = [string substringFromIndex:1];
-    }
-    
-    NSString *pureHexString = [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-    
-    if ([pureHexString length] != 6) {
-        return [UIColor whiteColor];
-    }
-    
-    NSRange range;
-    range.location = 0;
-    range.length = 2;
-    NSString *rString = [pureHexString substringWithRange:range];
-    
-    range.location += range.length ;
-    NSString *gString = [pureHexString substringWithRange:range];
-    
-    range.location += range.length ;
-    NSString *bString = [pureHexString substringWithRange:range];
-    
-    unsigned int r, g, b;
-    [[NSScanner scannerWithString:rString] scanHexInt:&r];
-    [[NSScanner scannerWithString:gString] scanHexInt:&g];
-    [[NSScanner scannerWithString:bString] scanHexInt:&b];
-    
-    return [UIColor colorWithRed:((float) r / 255.0f)
-                           green:((float) g / 255.0f)
-                            blue:((float) b / 255.0f)
-                           alpha:alpha];
-}
-
-- (uint)jx_hex
-{
-    CGFloat red, green, blue, alpha;
-    if (![self getRed:&red green:&green blue:&blue alpha:&alpha])
-    {
-        [self getWhite:&red alpha:&alpha];
-        green = red;
-        blue = red;
-    }
-    
-    red = roundf(red * 255.f);
-    green = roundf(green * 255.f);
-    blue = roundf(blue * 255.f);
-    alpha = roundf(alpha * 255.f);
-    
-    return ((uint)alpha << 24) | ((uint)red << 16) | ((uint)green << 8) | ((uint)blue);
-}
-
-- (NSString*)jx_hexString
-{
-    return [NSString stringWithFormat:@"0x%08x", [self jx_hex]];
-}
-
-- (NSString*)jx_cssString
-{
-    uint hex = [self jx_hex];
-    if ((hex & 0xFF000000) == 0xFF000000)
-    {
-        return [NSString stringWithFormat:@"#%06x", hex & 0xFFFFFF];
-    }
-    
-    return [NSString stringWithFormat:@"#%08x", hex];
+- (CGFloat)alpha {
+    return CGColorGetAlpha(self.CGColor);
 }
 
 + (UIColor *)jx_colorWithLight:(UIColor *)lightColor darkColor:(UIColor *)darkColor
@@ -118,5 +52,162 @@
         return lightColor;
     }
 }
+
++ (UIColor *)jx_colorFromRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b alpha:(CGFloat)a
+{
+    return [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a/255.0f];
+}
+
++ (UIColor *)jx_colorFromRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b
+{
+    return [UIColor jx_colorFromRed:r green:g blue:b alpha:1.0];
+}
+
++ (UIColor *)jx_colorFromRGBA:(uint32_t)rgbaValue
+{
+    CGFloat r= (rgbaValue & 0xFF000000) >> 24;
+    CGFloat g= (rgbaValue & 0xFF0000) >> 16 ;
+    CGFloat b= (rgbaValue & 0xFF00) >> 8;
+    CGFloat a= (rgbaValue & 0xFF);
+    
+    return [UIColor jx_colorFromRed:r green:g blue:b alpha:a];
+}
+
++ (UIColor *)jx_colorFromRGB:(uint32_t)rgbValue
+{
+    CGFloat r= (rgbValue & 0xFF0000) >> 16;
+    CGFloat g= (rgbValue & 0xFF00) >> 8;
+    CGFloat b= (rgbValue & 0xFF);
+    return [UIColor jx_colorFromRed:r green:g blue:b];
+}
+
++ (UIColor *)jx_colorFromRGB:(uint32_t)rgbValue alpha:(CGFloat)alpha
+{
+    CGFloat r= (rgbValue & 0xFF0000) >> 16;
+    CGFloat g= (rgbValue & 0xFF00) >> 8;
+    CGFloat b= (rgbValue & 0xFF);
+    return [UIColor jx_colorFromRed:r green:g blue:b alpha:alpha];
+}
+
++ (UIColor *)jx_colorFromHexString:(NSString *)hexStr alpha:(float)alpha
+{
+    CGFloat r, g, b, a;
+    if ([UIColor p_hexStrToRGBA:hexStr red:&r green:&g blue:&b alpha:&a]) {
+        if (alpha == -1) {
+            return [UIColor colorWithRed:r green:g blue:b alpha:a];
+        }
+        return [UIColor colorWithRed:r green:g blue:b alpha:alpha];
+    }
+    return nil;
+}
+
++ (UIColor *)jx_colorFromHexString:(NSString *)hexStr
+{
+    return [UIColor jx_colorFromHexString:hexStr alpha:1];
+}
+
+- (uint32_t)jx_rgbValue
+{
+    CGFloat r = 0, g = 0, b = 0, a = 0;
+    [self getRed:&r green:&g blue:&b alpha:&a];
+    int8_t red = r * 255;
+    uint8_t green = g * 255;
+    uint8_t blue = b * 255;
+    return (red << 16) + (green << 8) + blue;
+}
+
+- (uint32_t)jx_rgbaValue
+{
+    CGFloat r = 0, g = 0, b = 0, a = 0;
+    [self getRed:&r green:&g blue:&b alpha:&a];
+    int8_t red = r * 255;
+    uint8_t green = g * 255;
+    uint8_t blue = b * 255;
+    uint8_t alpha = a * 255;
+    return (red << 24) + (green << 16) + (blue << 8) + alpha;
+}
+
+- (NSString*)jx_rgbaHexString
+{
+    return [self p_hexStringWithAlpha:true];
+}
+
+- (NSString*)jx_rgbHexString
+{
+    return [self p_hexStringWithAlpha:false];
+}
+
+#pragma mark - private
+
+- (NSString *)p_hexStringWithAlpha:(BOOL)withAlpha {
+    CGColorRef color = self.CGColor;
+    size_t count = CGColorGetNumberOfComponents(color);
+    const CGFloat *components = CGColorGetComponents(color);
+    static NSString *stringFormat = @"%02x%02x%02x";
+    NSString *hex = nil;
+    if (count == 2) {
+        NSUInteger white = (NSUInteger)(components[0] * 255.0f);
+        hex = [NSString stringWithFormat:stringFormat, white, white, white];
+    } else if (count == 4) {
+        hex = [NSString stringWithFormat:stringFormat,
+               (NSUInteger)(components[0] * 255.0f),
+               (NSUInteger)(components[1] * 255.0f),
+               (NSUInteger)(components[2] * 255.0f)];
+    }
+    
+    if (hex && withAlpha) {
+        hex = [hex stringByAppendingFormat:@"%02lx",
+               (unsigned long)(CGColorGetAlpha(self.CGColor) * 255.0 + 0.5)];
+    }
+    return hex;
+}
+
++ (BOOL)p_hexStrToRGBA:(NSString *)rgbaValue red:(CGFloat *)r green:(CGFloat *)g blue:(CGFloat *)b alpha:(CGFloat *)a
+{
+    NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *rgbaString = [[rgbaValue stringByTrimmingCharactersInSet:set] uppercaseString];
+    
+    if ([rgbaString hasPrefix:@"#"]) {
+        rgbaString = [rgbaString substringFromIndex:1];
+    }else if ([rgbaString hasPrefix:@"0X"]){
+        rgbaString = [rgbaString substringFromIndex:2];
+    }
+    
+    NSInteger length = rgbaString.length;
+    if (length != 3 && length != 4 && length != 6 && length != 8) {
+        return false;
+    }
+    if (length < 5) {
+        *r = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(0, 1)]] / 255.0f;
+        *g = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(1, 1)]] / 255.0f;
+        *b = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(2, 1)]] / 255.0f;
+        if (length == 4) {
+            *a = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(3, 1)]] / 255.0f;
+        }else
+        {
+            *a = 1.0;
+        }
+    }else
+    {
+        *r = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(0, 2)]] / 255.0f;
+        *g = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(2, 2)]] / 255.0f;
+        *b = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(4, 2)]] / 255.0f;
+        if (length == 8) {
+            *a = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(6, 2)]] / 255.0f;
+        }else
+        {
+            *a = 1.0;
+        }
+    }
+    return true;
+}
+
++ (NSUInteger)p_hexStringToInt:(NSString *)string
+{
+    unsigned int result = 0;
+    [[NSScanner scannerWithString:string] scanHexInt:&result];
+    return result;
+}
+
 
 @end

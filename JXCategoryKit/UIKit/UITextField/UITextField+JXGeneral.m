@@ -18,4 +18,19 @@
     return flag;
 }
 
+- (void)jx_selectAllText
+{
+    UITextRange *range = [self textRangeFromPosition:self.beginningOfDocument toPosition:self.endOfDocument];
+    [self setSelectedTextRange:range];
+}
+
+- (void)jx_setSelectedRange:(NSRange)range
+{
+    UITextPosition *beginning = self.beginningOfDocument;
+    UITextPosition *startPosition = [self positionFromPosition:beginning offset:range.location];
+    UITextPosition *endPosition = [self positionFromPosition:beginning offset:NSMaxRange(range)];
+    UITextRange *selectionRange = [self textRangeFromPosition:startPosition toPosition:endPosition];
+    [self setSelectedTextRange:selectionRange];
+}
+
 @end

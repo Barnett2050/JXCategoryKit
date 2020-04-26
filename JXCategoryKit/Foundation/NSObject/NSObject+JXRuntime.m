@@ -16,7 +16,7 @@
     Method originClassMethod = class_getClassMethod(cls, oriSel);
     Method swizzleClassMethod = class_getClassMethod(cls, swiSel);
     
-    [self jx_swizzleMethodWithOriginSel:oriSel oriMethod:originClassMethod swizzledSel:swiSel swizzledMethod:swizzleClassMethod class:cls];
+    [self p_swizzleMethodWithOriginSel:oriSel oriMethod:originClassMethod swizzledSel:swiSel swizzledMethod:swizzleClassMethod class:cls];
 }
 
 + (void)jx_swizzleClassInstanceMethodWithOriginSel:(SEL)oriSel swizzleSel:(SEL)swiSel
@@ -24,21 +24,7 @@
     Method originClassMethod = class_getInstanceMethod(self, oriSel);
     Method swizzleClassMethod = class_getInstanceMethod(self, swiSel);
     
-    [self jx_swizzleMethodWithOriginSel:oriSel oriMethod:originClassMethod swizzledSel:swiSel swizzledMethod:swizzleClassMethod class:self];
-}
-
-+ (void)jx_swizzleMethodWithOriginSel:(SEL)oriSel
-                         oriMethod:(Method)oriMethod
-                       swizzledSel:(SEL)swizzledSel
-                    swizzledMethod:(Method)swizzledMethod
-                             class:(Class)cls {
-    BOOL didAddMethod = class_addMethod(cls, oriSel, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
-
-    if (didAddMethod) {
-        class_replaceMethod(cls, swizzledSel, method_getImplementation(oriMethod), method_getTypeEncoding(oriMethod));
-    } else {
-        method_exchangeImplementations(oriMethod, swizzledMethod);
-    }
+    [self p_swizzleMethodWithOriginSel:oriSel oriMethod:originClassMethod swizzledSel:swiSel swizzledMethod:swizzleClassMethod class:self];
 }
 
 - (BOOL)jx_isMethodOverride:(Class)cls selector:(SEL)sel {
@@ -46,6 +32,22 @@
     IMP superClsIMP = class_getMethodImplementation([cls superclass], sel);
     
     return clsIMP != superClsIMP;
+}
+
+- (void)jx_setAssociateValue:(id)value withKey:(void *)key {
+    objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)jx_setAssociateWeakValue:(id)value withKey:(void *)key {
+    objc_setAssociatedObject(self, key, value, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (id)jx_getAssociatedValueForKey:(void *)key {
+    return objc_getAssociatedObject(self, key);
+}
+
+- (void)jx_removeAssociatedValues {
+    objc_removeAssociatedObjects(self);
 }
 
 + (BOOL)jx_isMainBundleClass:(Class)cls {
@@ -102,6 +104,22 @@
     }
     free(properties);
     return props;
+}
+
+
+#pragma mark - private
++ (void)p_swizzleMethodWithOriginSel:(SEL)oriSel
+                         oriMethod:(Method)oriMethod
+                       swizzledSel:(SEL)swizzledSel
+                    swizzledMethod:(Method)swizzledMethod
+                             class:(Class)cls {
+    BOOL didAddMethod = class_addMethod(cls, oriSel, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod));
+
+    if (didAddMethod) {
+        class_replaceMethod(cls, swizzledSel, method_getImplementation(oriMethod), method_getTypeEncoding(oriMethod));
+    } else {
+        method_exchangeImplementations(oriMethod, swizzledMethod);
+    }
 }
 
 @end

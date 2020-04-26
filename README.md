@@ -34,12 +34,35 @@ NSMutableString：Hook了系统方法，安全取值，插入，删除。
       * 百度地理坐标（BD-09) 转换成 世界标准地理坐标（WGS-84）
       * 两个坐标间的距离 
 * UIKit
+    * UITableView
+      * tableView更新block，例如insert, delete, 或者 select
+      * 取消tableView所有行的选中 
+    * UIScrollView
+      * 滚动到顶部
+      * 滚动到底部
+      * 滚动到左 
+      * 滚动到右 
+    * UIGestureRecognizer
+      * block初始化手势
+      * block添加到手势识别器
+      * 移除所有的手势block
+    * UIControl
+      * 从内部调度表中删除所有目标和操作。
+      * 将特定事件（或多个事件）的目标和操作 添加或替换 到内部调度表中。
+      * 将一个或多个特定事件的块添加到内部调度表中。
+      * 将特定事件（或多个事件）的块添加或替换到内部调度表中。
+      * 从内部调度表中删除特定事件（或多个事件）的所有block。
     * UIWindow
       * 获取主窗体 UIWindow
-      * 获取当前主控制器 UIViewController
+      * 导航栈的栈顶视图控制器
+      * 获取当前显示的控制器
     * UIViewController
       * Alert系统提示
       * AlertSheet系统提示
+      * 设置系统标题颜色和字体
+      * 设置系统状态栏背景颜色
+      * 返回按钮点击事件
+      * 隐藏返回按钮
     * UIView
       * 添加圆角，适用于自动布局，传入设置frame
       * 添加圆角,适用于已知frame，即非自动布局
@@ -47,29 +70,40 @@ NSMutableString：Hook了系统方法，安全取值，插入，删除。
       * 添加圆角，适用于自动布局，传入设置frame，圆角位置为UIRectCornerAllCorners
       * 绘制虚线
       * x，y，width，height，centerX，centerY，size，origin，maxX，maxY
+      * 屏幕快照
+      * 屏幕快照生成pdf
+      * 截取 view 上某个位置的图像
+      * 毛玻璃效果
+      * 添加Tap，Pan，LongPress手势
     * UITextField
       * 当前输入是否高亮 true 高亮 false 无高亮
+      * 选中所有文本
+      * 设定选中文本
     * UITableViewCell
       * 显示缩放效果
       * 显示缩进效果
       * 显示旋转效果
       * 设置分割线左边距,右边距
     * UIImage
-      * 裁剪为有边界的圆形图片
       * 裁剪图片中的一块区域
+      * 图片裁剪，圆角，边框等
       * 拉伸图片
       * 改变图片尺寸
-      * 裁剪图片圆角
-      * 图片模糊
+      * 图片模糊处理，高亮，自定义等
       * 更新图片的方向，直立显示
       * 转换图片为png格式的base64编码
       * 拼接长图
       * 根据图片url获取网络图片尺寸
       * 压缩图片
+      * GIF数据图
+      * PDF文件返回第一张图
+      * 返回一个旋转图像
       * 生成带圆角的颜色图片
       * 生成矩形的颜色图片
       * 生成渐变色的UIImage
       * 生成三角图片
+      * 从苹果表情符号创建图像
+      * 图像绘制block
       * 生成二维码
       * 获取二维码内内容
     * UIDevice
@@ -80,21 +114,23 @@ NSMutableString：Hook了系统方法，安全取值，插入，删除。
       * 获取设备电量
       * 获取手机本地语言 zh-Hans-CN/en
       * 获取 WiFi 信号强度，只有在WiFi显示时才能获取到
+      * 获取设备名称，例：iPhone 11 Pro Max
       * 获取IDFA
       * 获取IDFV
       * 获取UUID
-      * 获取设备名称，例：iPhone 11 Pro Max
-      * 获取当前设备可用系统内存(单位：MB）
       * 获取当前设备磁盘总容量(单位：MB）
       * 获取当前设备磁盘剩余容量(单位：MB）
+      * 获取当前设备磁盘使用容量(单位：MB）
+      * 获取当前设备全部系统内存(单位：MB）
+      * 获取当前设备使用系统内存(单位：MB）
+      * 获取当前设备剩余系统内存(单位：MB）
+      * 当前线程占用内存（字节为单位）,（发生错误时为-1）
     * UIColor
-      * 传入十进制颜色生成UIColor
-      * 传入十六进制颜色生成UIColor
-      * 传入十六进制字符串色值生成UIColor
-      * UIColor转16进制
-      * UIColor转换为颜色字符串，例：0xffff0000
-      * UIColor转换为颜色字符串，例：#ff0000
       * iOS 13.0 亮暗颜色设置
+      * 传入十进制颜色生成UIColor
+      * 十六进制字符串和颜色互相转换
+      * HSL颜色转换
+      * CMYK颜色转换
     * UIButton
       * 设置自定义图片文字位置按钮
       * 开始加载菊花动画
@@ -109,21 +145,17 @@ NSMutableString：Hook了系统方法，安全取值，插入，删除。
       * 注册通知
 
 * Foundation
-    * NSTimer
-      * 快速创建timer
-      * 暂停Timer
-      * 恢复Timer
-      * 过一段时间继续Timer
-    * NSObject
-      * swizzle交换类方法
-      * swizzle交换类实例方法
-      * 判断方法是否在子类里override了
-      * 判断当前类是否在主bundle里
-      * 输出类方法
-      * 输出类属性
-      * 返回类属性字典
-    * NSNull
-      * nil空对象方法调用时安全处理
+    * NSNotificationCenter
+      * 在主线程上向接收者发送给定的通知。如果当前线程是主线程，则通知被同步发送；否则，被异步发送。
+      * 在主线程上将通知发送给接收者。
+      * 创建具有给定名称和发送方的通知，并将其发布到主线程上的接收方。 如果当前线程是主线程，则通知被同步发布； 否则，将被异步发布。
+      * 创建具有给定名称和发送方的通知，并将其发布到主线程上的接收方。 如果当前线程是主线程，则通知被同步发布； 否则，将被异步发布。
+      * 创建具有给定名称和发送方的通知，并将其发布到主线程上的接收方。 如果当前线程是主线程，则通知被同步发布； 否则，将被异步发布。
+    * NSData
+      * hash加密，包括MD2,MD5,shaX,HMAC-xxxx等
+      * AES 加密，base64处理
+      * gzip压缩和解压缩
+      * zlib压缩和解压缩
     * NSFileManager
       * 获取单个文件的大小
       * 向itunes共享文件夹中写入文件，即NSDocumentDirectory
@@ -141,6 +173,34 @@ NSMutableString：Hook了系统方法，安全取值，插入，删除。
       * 根据音频文件二进制流判断是否是amr格式音频
       * 路径是否是文件类型，true 文件类型 false 文件夹类型
       * 移动文件
+    * NSDate
+      * 根据日期格式获取系统时间
+      * 根据日期格式时间字符串转NSDate
+      * 根据日期格式转化时间戳(UTC)
+      * 根据日期格式转化时间戳字符串(UTC)
+      * 根据日期格式转化时间字符串为时间戳(UTC)
+      * 时间戳转n小时、分钟、秒前 或者yyyy-MM-dd HH:mm:ss
+      * 将秒根据格式转换，限于时分秒
+      * 时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)
+      * 根据日期格式Date转时间字符串
+      * 时间戳UTC转换为本地时间，例：几分钟前，几小时前，几天前，几月前，几年前
+      * 日期时间对比，今天，昨天，年月日时分秒，
+    * NSTimer
+      * 快速创建timer
+      * 暂停Timer
+      * 恢复Timer
+      * 过一段时间继续Timer
+    * NSObject
+      * swizzle交换类方法
+      * swizzle交换类实例方法
+      * 判断方法是否在子类里override了
+      * 判断当前类是否在主bundle里
+      * 输出类方法
+      * 输出类属性
+      * 返回类属性字典
+      * kvo使用block实现
+    * NSNull
+      * nil空对象方法调用时安全处理
     * NSString
       * 一段字符串添加关键字属性
       * 有效账号验证,数字和字母
@@ -207,6 +267,7 @@ NSMutableString：Hook了系统方法，安全取值，插入，删除。
       * 转成可变型数据，包括里面的字典、数组
       * 替换字典中的NSNull为空字符串
       * 合并两个字典
+      * 字典与plist数据转换
     * NSError
       * 生成自定义错误
     * NSBundle
@@ -220,3 +281,5 @@ NSMutableString：Hook了系统方法，安全取值，插入，删除。
       * 主键去重复，如果元素是字符串key可不传；如果元素是字典，则传主键
       * 替换数组中的NSNull为空字符串
       * 转成可变型数据，包括里面的字典、数组
+      * 数组的安全取值
+      * 数组与plist数据转换，数组反转，

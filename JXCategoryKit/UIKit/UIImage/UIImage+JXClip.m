@@ -10,47 +10,6 @@
 
 @implementation UIImage (JXClip)
 
-- (UIImage *)jx_clipImageWithBorderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor
-{
-    UIColor *bColor = borderColor;
-    if (bColor == nil) {
-        bColor = [UIColor clearColor];
-    }
-    // 图片的宽度和高度
-    CGFloat imageWH = self.size.width > self.size.height ? self.size.height : self.size.width;
-    // 设置圆环的宽度
-    CGFloat border = borderWidth;
-    // 圆形的宽度和高度
-    CGFloat ovalWH = imageWH + 2 * border;
-    // 1.开启上下文
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(ovalWH, ovalWH), NO, 0);
-    // 2.画大圆
-    UIBezierPath *path = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, ovalWH, ovalWH)];
-    
-    [bColor set];
-    
-    [path fill];
-    
-    // 3.设置裁剪区域
-    UIBezierPath *clipPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(border, border, imageWH, imageWH)];
-    [clipPath addClip];
-    
-    // 4.绘制图片
-    [self drawAtPoint:CGPointMake(border, border)];
-    
-    // 5.获取图片
-    UIImage *clipImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    // 6.关闭上下文
-    UIGraphicsEndImageContext();
-    
-    return clipImage;
-}
-/**
- 裁剪图片中的一块区域
- 
- @param clipRect 裁剪区域
- */
 - (UIImage *)jx_imageClipRect:(CGRect)clipRect
 {
     CGSize imageSize = self.size;
@@ -66,10 +25,77 @@
     UIImage *newImage = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([self CGImage], clipRect)];
     return newImage;
 }
-/**
- 拉伸图片
- @param edgeInsets 不进行拉伸的区域
- */
+
+- (UIImage *)jx_imageByRoundCornerRadius:(CGFloat)radius corners:(UIRectCorner)corners borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor borderLineJoin:(CGLineJoin)borderLineJoin
+{
+    if (corners != UIRectCornerAllCorners) {
+        UIRectCorner tmp = 0;
+        if (corners & UIRectCornerTopLeft) tmp |= UIRectCornerBottomLeft;
+        if (corners & UIRectCornerTopRight) tmp |= UIRectCornerBottomRight;
+        if (corners & UIRectCornerBottomLeft) tmp |= UIRectCornerTopLeft;
+        if (corners & UIRectCornerBottomRight) tmp |= UIRectCornerTopRight;
+        corners = tmp;
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    CGContextScaleCTM(context, 1, -1);
+    CGContextTranslateCTM(context, 0, -rect.size.height);
+    
+    CGFloat minSize = MIN(self.size.width, self.size.height);
+    if (borderWidth < minSize / 2) {
+        // 先绘制图片
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(rect, borderWidth/2, borderWidth/2) byRoundingCorners:corners cornerRadii:CGSizeMake(radius, borderWidth)];
+        [path closePath];
+        
+        CGContextSaveGState(context);
+        [path addClip];
+        CGContextDrawImage(context, rect, self.CGImage);
+        CGContextRestoreGState(context);
+    }
+    
+    if (borderColor && borderWidth < minSize / 2 && borderWidth > 0) {
+        // 再绘制边框
+        CGFloat strokeInset = (floor(borderWidth * self.scale) + 0.5) / self.scale/2;
+        CGRect strokeRect = CGRectInset(rect, strokeInset, strokeInset);
+        CGFloat strokeRadius = radius > self.scale / 2 ? radius - self.scale / 2 : 0;
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:strokeRect byRoundingCorners:corners cornerRadii:CGSizeMake(strokeRadius, borderWidth)];
+        [path closePath];
+        
+        path.lineWidth = borderWidth;
+        path.lineJoinStyle = borderLineJoin;
+        [borderColor setStroke];
+        [path stroke];
+    }
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+- (UIImage *)jx_imageByRoundCornerRadius:(CGFloat)radius borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor
+{
+    return [self jx_imageByRoundCornerRadius:radius
+                                     corners:UIRectCornerAllCorners
+                                 borderWidth:borderWidth
+                                 borderColor:borderColor
+                              borderLineJoin:kCGLineJoinMiter];
+}
+
+- (nullable UIImage *)jx_circleImageByBorderWidth:(CGFloat)borderWidth borderColor:(nullable UIColor *)borderColor
+{
+    if (self.size.width == self.size.height) {
+        return [self jx_imageByRoundCornerRadius:self.size.width/2 borderWidth:borderWidth borderColor:borderColor];
+    }else
+    {
+        CGFloat min = MIN(self.size.width, self.size.height);
+        CGFloat pointX = (self.size.width - min) / 2;
+        CGFloat pointY = (self.size.height - min) / 2;
+        UIImage *newImage = [self jx_imageClipRect:CGRectMake(pointX, pointY, min, min)];
+        return [newImage jx_imageByRoundCornerRadius:min/2 borderWidth:borderWidth borderColor:borderColor];
+    }
+}
+
 - (UIImage *)jx_resizableImage:(UIEdgeInsets)edgeInsets resizingMode:(UIImageResizingMode)resizingMode
 {
     //    edgeInsets.top < 1 ? edgeInsets.top = 12 : 0;
@@ -80,22 +106,16 @@
      UIImageResizingModeTile  -  平铺
      UIImageResizingModeStretch  -  拉伸
      */
-    UIImage *image = [self resizableImageWithCapInsets:edgeInsets resizingMode:UIImageResizingModeTile];
+    UIImage *image = [self resizableImageWithCapInsets:edgeInsets resizingMode:resizingMode];
     return image;
 }
-/*
- 创建一个内容可拉伸，而边角不拉伸的图片，需要两个参数，第一个是左边不拉伸区域的宽度，第二个参数是上面不拉伸的高度。那么接下来的一个像素会被拉伸。例如，leftCapHeight为6，topCapHeight为8。那么，图片左边的6个像素，上边的8个像素。不会被拉伸，而左边的第7个像素，上边的第9个像素这一块区域将会被拉伸。剩余的部分也不会被拉伸。
- ***这个方法只能拉伸1x1的区域***
- */
+
 - (UIImage *)jx_stretchableImage:(NSInteger)left top:(NSInteger)top
 {
     UIImage *image = [self stretchableImageWithLeftCapWidth:left topCapHeight:top];
     return image;
 }
 
-/**
- 将一张图片转换成新的尺寸
- */
 - (UIImage *)jx_imageChangeSize:(CGSize)newSize isScale:(BOOL)isScale
 {
     UIImage *newImage;
@@ -142,67 +162,6 @@
         UIGraphicsEndImageContext();//关闭当前环境
     }
     return newImage;
-}
-
-- (UIImage *)jx_clipToSize:(CGSize)targetSize
-           cornerRadius:(CGFloat)cornerRadius
-                corners:(UIRectCorner)corners
-        backgroundColor:(UIColor *)backgroundColor
-           isEqualScale:(BOOL)isEqualScale
-{
-    if (targetSize.width < 0 || targetSize.height < 0) {
-        return self;
-    }
-    UIGraphicsBeginImageContextWithOptions(targetSize, YES, [UIScreen mainScreen].scale);
-    
-    CGSize imgSize = self.size;
-    
-    CGSize resultSize = targetSize;
-    if (isEqualScale) {
-        CGFloat x = MAX(targetSize.width / imgSize.width, targetSize.height / imgSize.height);
-        resultSize = CGSizeMake(x * imgSize.width, x * imgSize.height);
-    }
-    
-    CGRect targetRect = (CGRect){0, 0, resultSize.width, resultSize.height};
-    
-    
-    if (backgroundColor) {
-        [backgroundColor setFill];
-        CGContextFillRect(UIGraphicsGetCurrentContext(), targetRect);
-    }
-    
-    if (cornerRadius > 0) {
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:targetRect
-                                                   byRoundingCorners:corners
-                                                         cornerRadii:CGSizeMake(cornerRadius, cornerRadius)];
-        CGContextAddPath(UIGraphicsGetCurrentContext(), path.CGPath);
-        CGContextClip(UIGraphicsGetCurrentContext());
-    }
-    
-    [self drawInRect:targetRect];
-    
-    UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    //  NSLog(@"time:%f  originalImageSize: %@, targetSize: %@",
-    //        CFAbsoluteTimeGetCurrent() - timerval,
-    //        NSStringFromCGSize(imgSize),
-    //        NSStringFromCGSize(targetSize));
-    
-    return finalImage;
-}
-
-/**
- 裁剪为全圆角图片
- */
-- (UIImage *)jx_clipToCornerImageWithCornerRadius:(CGFloat)cornerRadius
-{
-    return [self jx_clipToSize:self.size cornerRadius:cornerRadius corners:UIRectCornerAllCorners backgroundColor:[UIColor whiteColor] isEqualScale:true];
-}
-
-- (UIImage *)jx_clipToCornerImageWithCornerRadius:(CGFloat)cornerRadius corners:(UIRectCorner)corners
-{
-    return [self jx_clipToSize:self.size cornerRadius:cornerRadius corners:corners backgroundColor:[UIColor whiteColor] isEqualScale:true];
 }
 
 @end

@@ -56,7 +56,7 @@
 {
     if (timeStr.length < 1 || !timeStr) return 0;
     
-    NSDate *date = [NSDate dateFromString:timeStr format:format];
+    NSDate *date = [NSDate p_dateFromString:timeStr format:format];
     UInt64 time;
     if (isMilliSecond) {
         time = [date timeIntervalSince1970]*1000;
@@ -162,7 +162,7 @@
 }
 
 /**  时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)*/
-+ (NSString *)getVariableFormatDateStringFromTimestamp:(NSString *)timestamp
++ (NSString *)jx_getVariableFormatDateStringFromTimestamp:(NSString *)timestamp
 {
     if (timestamp.length < 1 || !timestamp) return @"";
     BOOL isMilliSecond = [timestamp doubleValue] > 140000000000;
@@ -174,15 +174,15 @@
         date = [NSDate dateWithTimeIntervalSince1970:[timestamp longLongValue]];
     }
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    if ([NSDate isToday:date]) {
+    if ([NSDate p_isToday:date]) {
         // 同一天
         [formatter setDateFormat:@"HH:mm"];
         return [formatter stringFromDate:date];
-    } else if ([NSDate isYesterday:date]) {
+    } else if ([NSDate p_isYesterday:date]) {
         // 昨天
         [formatter setDateFormat:@"昨天 HH:mm"];
         return [formatter stringFromDate:date];
-    } else if ([NSDate isSameYear:[NSDate date] date2:date]) {
+    } else if ([NSDate p_isSameYear:[NSDate date] date2:date]) {
         // 同一年
         [formatter setDateFormat:@"M月dd日 HH:mm"];
         return [formatter stringFromDate:date];
@@ -193,7 +193,7 @@
     }
 }
 
-- (NSString *)getDateTimeStringWithformat:(NSString *)format
+- (NSString *)jx_getDateTimeStringWithformat:(NSString *)format
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:format];
@@ -257,7 +257,7 @@
 }
 
 #pragma mark - private
-+ (NSDate *)dateFromString:(NSString *)timeStr
++ (NSDate *)p_dateFromString:(NSString *)timeStr
                     format:(NSString *)format
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
@@ -265,20 +265,20 @@
     NSDate *date = [dateFormatter dateFromString:timeStr];
     return date;
 }
-+ (BOOL)isToday:(NSDate*)date {
++ (BOOL)p_isToday:(NSDate*)date {
     if (fabs(date.timeIntervalSinceNow) >= 60 * 60 * 24) return NO;
     NSInteger day = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date] day];
     NSInteger nowDay = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:[NSDate new]] day];
     return nowDay == day;
 }
 
-+ (BOOL)isYesterday:(NSDate*)date {
++ (BOOL)p_isYesterday:(NSDate*)date {
     NSTimeInterval aTimeInterval = [date timeIntervalSinceReferenceDate] + 86400 * 1;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
-    return [NSDate isToday:newDate];
+    return [NSDate p_isToday:newDate];
 }
 
-+ (BOOL)isSameYear:(NSDate *)date1 date2:(NSDate*)date2 {
++ (BOOL)p_isSameYear:(NSDate *)date1 date2:(NSDate*)date2 {
     NSInteger year1 = [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:date1] year];
     NSInteger year2 = [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:date2] year];
     if (year1 != year2) {

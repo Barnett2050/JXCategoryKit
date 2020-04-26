@@ -12,13 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDate (JXVertification)
 
 /// 当前日期是否为今天
-- (BOOL)isToday;
+- (BOOL)jx_isToday;
 
 /// 当前日期是否为昨天
-- (BOOL)isYesterday;
+- (BOOL)jx_isYesterday;
 
 /// 两个日期是否为相同一天
-+ (BOOL)isSameDayWithDate:(NSDate*)firstDate andDate:(NSDate*)secondDate;
++ (BOOL)jx_isSameDayWithDate:(NSDate*)firstDate andDate:(NSDate*)secondDate;
 
 /**
  时间的早晚比较
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param dateFormat 时间类型
  @return (-1 oneTime小于anotherTime)(0 oneTime等于anotherTime)(1 oneTime大于anotherTime)
  */
-+ (NSInteger)compareTwoTimesOneTime:(NSString *)oneTime AnotherTime:(NSString *)anotherTime TimeDateFormat:(NSString *)dateFormat;
++ (NSInteger)jx_compareTwoTimesOneTime:(NSString *)oneTime AnotherTime:(NSString *)anotherTime TimeDateFormat:(NSString *)dateFormat;
 @end
 
 NS_ASSUME_NONNULL_END

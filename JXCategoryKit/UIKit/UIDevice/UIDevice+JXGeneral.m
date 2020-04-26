@@ -18,28 +18,24 @@
 
 @implementation UIDevice (JXGeneral)
 
-#pragma mark - 获取通用 - 关于本机 - 名称
 + (NSString *)jx_getDeviceUserName
 {
     UIDevice *dev = [self currentDevice];
     return dev.name;
 }
 
-#pragma mark - 获取设备类型
 + (NSString *)jx_getDeviceModel
 {
     UIDevice *dev = [self currentDevice];
     return dev.model;
 }
 
-#pragma mark - 获取系统名称
 + (NSString *)jx_getDeviceSystemName
 {
     UIDevice *dev = [self currentDevice];
     return dev.systemName;
 }
 
-#pragma mark - 获取设备版本号
 + (NSString *)jx_getDeviceSystemVersion
 {
     UIDevice *dev = [self currentDevice];
@@ -47,7 +43,6 @@
     return dev.systemVersion;
 }
 
-#pragma mark - 获取设备电量
 + (CGFloat)jx_getDeviceBattery
 {
     // 默认为NO.为NO的时候无法获取电池状态,也无法获取电池状态改变的回调.
@@ -56,7 +51,6 @@
     return batteryLevel;
 }
 
-#pragma mark - 获取手机本地语言
 + (NSString *)jx_getCurrentLocalLanguage
 {
     NSArray *languages = [NSLocale preferredLanguages];
@@ -64,7 +58,6 @@
     return currentLanguage;
 }
 
-#pragma mark - 获取WiFi信号强度
 + (NSInteger)jx_getSignalStrength{
     UIApplication *app = [UIApplication sharedApplication];
     NSArray *subviews = [[[app valueForKey:@"statusBar"] valueForKey:@"foregroundView"] subviews];
@@ -81,82 +74,6 @@
     
     return signalStrength;
 }
-
-/**
- 获取IDFA
- */
-+ (NSString *)jx_getIDFA
-{
-    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-}
-
-/**
- 获取IDFV
- */
-+ (NSString *)jx_getIDFV
-{
-    return [[UIDevice currentDevice].identifierForVendor UUIDString];
-}
-
-/**
- 获取UUID
- */
-+ (NSString *)jx_getUUID
-{
-    return [[NSUUID UUID] UUIDString];
-}
-
-
-/**
- 获取当前设备可用内存(单位：MB）
- */
-+ (double)jx_getAvailableMemory
-{
-    vm_statistics_data_t vmStats;
-    mach_msg_type_number_t infoCount = HOST_VM_INFO_COUNT;
-    kern_return_t kernReturn = host_statistics(mach_host_self(),
-                                               HOST_VM_INFO,
-                                               (host_info_t)&vmStats,
-                                               &infoCount);
-    if (kernReturn != KERN_SUCCESS) {
-        return NSNotFound;
-    }
-    return ((vm_page_size *vmStats.free_count) / 1024.0) / 1024.0;
-}
-
-+ (double)jx_getDiskTotalSpace
-{
-    uint64_t totalSpace = 0;
-    __autoreleasing NSError *error = nil;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
-    if (dictionary) {
-        NSNumber *fileSystemSizeInBytes = [dictionary objectForKey: NSFileSystemSize];
-        totalSpace = [fileSystemSizeInBytes unsignedLongLongValue];
-        totalSpace = ((totalSpace/1024)/1024);
-    }else {
-        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
-    }
-    return totalSpace;
-}
-
-+ (double)jx_getDiskFreeSpace
-{
-    uint64_t totalFreeSpace = 0;
-    __autoreleasing NSError *error = nil;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
-    if (dictionary) {
-        NSNumber *freeFileSystemSizeInBytes = [dictionary objectForKey:NSFileSystemFreeSize];
-        totalFreeSpace = [freeFileSystemSizeInBytes unsignedLongLongValue];
-        totalFreeSpace = ((totalFreeSpace/1024)/1024);
-    }else{
-        NSLog(@"Error Obtaining System Memory Info: Domain = %@, Code = %ld", [error domain], (long)[error code]);
-        
-    }
-    return totalFreeSpace;
-}
-
 
 + (NSString *)jx_deviceName
 {
@@ -279,5 +196,216 @@
     
     return nil;
 }
+
+
++ (NSString *)jx_getIDFA
+{
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+}
+
++ (NSString *)jx_getIDFV
+{
+    return [[UIDevice currentDevice].identifierForVendor UUIDString];
+}
+
++ (NSString *)jx_getUUID
+{
+    return [[NSUUID UUID] UUIDString];
+}
+
++ (double)jx_getDiskSpaceTotal
+{    
+    NSError *error = nil;
+    NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:&error];
+    if (error) return -1;
+    int64_t space =  [[attrs objectForKey:NSFileSystemSize] longLongValue];
+    if (space < 0) space = -1;
+    return space/1024/1024;
+}
+
++ (double)jx_getDiskSpaceFree
+{
+    NSError *error = nil;
+    NSDictionary *attrs = [[NSFileManager defaultManager] attributesOfFileSystemForPath:NSHomeDirectory() error:&error];
+    if (error) return -1;
+    int64_t space =  [[attrs objectForKey:NSFileSystemFreeSize] longLongValue];
+    if (space < 0) space = -1;
+    return space/1024/1024;
+}
+
++ (double)jx_getDiskSpaceUsed
+{
+    double total = [self jx_getDiskSpaceTotal];
+    double free = [self jx_getDiskSpaceFree];
+    if (total < 0 || free < 0) return -1;
+    double used = total - free;
+    if (used < 0) used = -1;
+    return used;
+}
+
++ (double)jx_memoryTotal
+{
+    int64_t mem = [[NSProcessInfo processInfo] physicalMemory];
+    if (mem < -1) mem = -1;
+    return mem/1024/1024;
+}
+
++ (double)jx_memoryUsed
+{
+    mach_port_t host_port = mach_host_self();
+    mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
+    vm_size_t page_size;
+    vm_statistics_data_t vm_stat;
+    kern_return_t kern;
+    
+    kern = host_page_size(host_port, &page_size);
+    if (kern != KERN_SUCCESS) return -1;
+    kern = host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size);
+    if (kern != KERN_SUCCESS) return -1;
+    double used = page_size * (vm_stat.active_count + vm_stat.inactive_count + vm_stat.wire_count);
+    return used/1024/1024;
+}
+
++ (double)jx_memoryFree
+{
+    mach_port_t host_port = mach_host_self();
+    mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
+    vm_size_t page_size;
+    vm_statistics_data_t vm_stat;
+    kern_return_t kern;
+    
+    kern = host_page_size(host_port, &page_size);
+    if (kern != KERN_SUCCESS) return -1;
+    kern = host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size);
+    if (kern != KERN_SUCCESS) return -1;
+    double free = vm_stat.free_count * page_size;
+    return free/1024/1024;
+}
+
++ (int64_t)jx_currentThreadMemoryUsage
+{
+    struct task_basic_info info;
+    mach_msg_type_number_t size = sizeof(info);
+    kern_return_t kern = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&info, &size);
+    if (kern != KERN_SUCCESS) return -1;
+    return info.resident_size;
+}
+
++ (NSUInteger)jx_cpuCount
+{
+    return [NSProcessInfo processInfo].activeProcessorCount;
+}
+
++ (float)jx_currentThreadCpuUsage
+{
+    kern_return_t kr;
+    task_info_data_t tinfo;
+    mach_msg_type_number_t task_info_count;
+    
+    task_info_count = TASK_INFO_MAX;
+    kr = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)tinfo, &task_info_count);
+    if (kr != KERN_SUCCESS) {
+        return -1;
+    }
+    
+    thread_array_t thread_list;
+    mach_msg_type_number_t thread_count;
+    
+    thread_info_data_t thinfo;
+    mach_msg_type_number_t thread_info_count;
+    
+    thread_basic_info_t basic_info_th;
+    
+    kr = task_threads(mach_task_self(), &thread_list, &thread_count);
+    if (kr != KERN_SUCCESS) {
+        return -1;
+    }
+    
+    long tot_sec = 0;
+    long tot_usec = 0;
+    float tot_cpu = 0;
+    int j;
+    
+    for (j = 0; j < thread_count; j++) {
+        thread_info_count = THREAD_INFO_MAX;
+        kr = thread_info(thread_list[j], THREAD_BASIC_INFO,
+                         (thread_info_t)thinfo, &thread_info_count);
+        if (kr != KERN_SUCCESS) {
+            return -1;
+        }
+        
+        basic_info_th = (thread_basic_info_t)thinfo;
+        
+        if (!(basic_info_th->flags & TH_FLAGS_IDLE)) {
+            tot_sec = tot_sec + basic_info_th->user_time.seconds + basic_info_th->system_time.seconds;
+            tot_usec = tot_usec + basic_info_th->system_time.microseconds + basic_info_th->system_time.microseconds;
+            tot_cpu = tot_cpu + basic_info_th->cpu_usage / (float)TH_USAGE_SCALE;
+        }
+    }
+    
+    kr = vm_deallocate(mach_task_self(), (vm_offset_t)thread_list, thread_count * sizeof(thread_t));
+    assert(kr == KERN_SUCCESS);
+    
+    return tot_cpu;
+}
++ (NSArray <NSNumber *> *)jx_cpuUsagePerProcessor
+{
+    processor_info_array_t _cpuInfo, _prevCPUInfo = nil;
+    mach_msg_type_number_t _numCPUInfo, _numPrevCPUInfo = 0;
+    unsigned _numCPUs;
+    NSLock *_cpuUsageLock;
+    
+    int _mib[2U] = { CTL_HW, HW_NCPU };
+    size_t _sizeOfNumCPUs = sizeof(_numCPUs);
+    int _status = sysctl(_mib, 2U, &_numCPUs, &_sizeOfNumCPUs, NULL, 0U);
+    if (_status)
+        _numCPUs = 1;
+    
+    _cpuUsageLock = [[NSLock alloc] init];
+    
+    natural_t _numCPUsU = 0U;
+    kern_return_t err = host_processor_info(mach_host_self(), PROCESSOR_CPU_LOAD_INFO, &_numCPUsU, &_cpuInfo, &_numCPUInfo);
+    if (err == KERN_SUCCESS) {
+        [_cpuUsageLock lock];
+        
+        NSMutableArray *cpus = [NSMutableArray new];
+        for (unsigned i = 0U; i < _numCPUs; ++i) {
+            Float32 _inUse, _total;
+            if (_prevCPUInfo) {
+                _inUse = (
+                          (_cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER]   - _prevCPUInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER])
+                          + (_cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] - _prevCPUInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM])
+                          + (_cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE]   - _prevCPUInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE])
+                          );
+                _total = _inUse + (_cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE] - _prevCPUInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE]);
+            } else {
+                _inUse = _cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_USER] + _cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_SYSTEM] + _cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_NICE];
+                _total = _inUse + _cpuInfo[(CPU_STATE_MAX * i) + CPU_STATE_IDLE];
+            }
+            [cpus addObject:@(_inUse / _total)];
+        }
+        
+        [_cpuUsageLock unlock];
+        if (_prevCPUInfo) {
+            size_t prevCpuInfoSize = sizeof(integer_t) * _numPrevCPUInfo;
+            vm_deallocate(mach_task_self(), (vm_address_t)_prevCPUInfo, prevCpuInfoSize);
+        }
+        return cpus;
+    } else {
+        return nil;
+    }
+}
+/// cpu使用率
++ (float)jx_cpuUsage
+{
+    float cpu = 0;
+    NSArray *cpus = [UIDevice jx_cpuUsagePerProcessor];
+    if (cpus.count == 0) return -1;
+    for (NSNumber *n in cpus) {
+        cpu += n.floatValue;
+    }
+    return cpu;
+}
+
 
 @end

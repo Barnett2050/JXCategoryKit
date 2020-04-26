@@ -8,6 +8,8 @@
 
 #import "UIImage+JXGenerate.h"
 
+#import <CoreText/CoreText.h>
+
 @implementation UIImage (JXGenerate)
 
 + (UIImage *)jx_cornerRadiusImageWithColor:(UIColor *)tintColor targetSize:(CGSize)targetSize corners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius backgroundColor:(UIColor *)backgroundColor
@@ -115,6 +117,46 @@ endPoint:(CGPoint)endP
     UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newimg;
-    
 }
+
++ (nullable UIImage *)jx_imageWithEmoji:(NSString *)emoji size:(CGFloat)size
+{
+    if (emoji.length == 0) return nil;
+    if (size < 1) return nil;
+    
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CTFontRef font = CTFontCreateWithName(CFSTR("AppleColorEmoji"), size * scale, NULL);
+    if (!font) return nil;
+    
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:emoji attributes:@{ (__bridge id)kCTFontAttributeName:(__bridge id)font, (__bridge id)kCTForegroundColorAttributeName:(__bridge id)[UIColor whiteColor].CGColor }];
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef ctx = CGBitmapContextCreate(NULL, size * scale, size * scale, 8, 0, colorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    CGContextSetInterpolationQuality(ctx, kCGInterpolationHigh);
+    CTLineRef line = CTLineCreateWithAttributedString((__bridge CFTypeRef)str);
+    CGRect bounds = CTLineGetBoundsWithOptions(line, kCTLineBoundsUseGlyphPathBounds);
+    CGContextSetTextPosition(ctx, 0, -bounds.origin.y);
+    CTLineDraw(line, ctx);
+    CGImageRef imageRef = CGBitmapContextCreateImage(ctx);
+    UIImage *image = [[UIImage alloc] initWithCGImage:imageRef scale:scale orientation:UIImageOrientationUp];
+    
+    CFRelease(font);
+    CGColorSpaceRelease(colorSpace);
+    CGContextRelease(ctx);
+    if (line)CFRelease(line);
+    if (imageRef) CFRelease(imageRef);
+    
+    return image;
+}
+
++ (UIImage *)jx_imageWithSize:(CGSize)size drawBlock:(void (^)(CGContextRef context))drawBlock {
+    if (!drawBlock) return nil;
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    if (!context) return nil;
+    drawBlock(context);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 @end

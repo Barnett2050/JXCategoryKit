@@ -10,9 +10,6 @@
 
 @implementation UIView (JXGeneral)
 
-/**
- 截图
- */
 - (UIImage *)jx_snapshot
 {
     /*
@@ -51,9 +48,25 @@
         return image;
     }
 }
-/**
- 截取 view 上某个位置的图像
- */
+
+- (NSData *)jx_snapshotPDF
+{
+    CGRect bounds = self.bounds;
+    NSMutableData* data = [NSMutableData data];
+    CGDataConsumerRef consumer = CGDataConsumerCreateWithCFData((__bridge CFMutableDataRef)data);
+    CGContextRef context = CGPDFContextCreate(consumer, &bounds, NULL);
+    CGDataConsumerRelease(consumer);
+    if (!context) return nil;
+    CGPDFContextBeginPage(context, NULL);
+    CGContextTranslateCTM(context, 0, bounds.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    [self.layer renderInContext:context];
+    CGPDFContextEndPage(context);
+    CGPDFContextClose(context);
+    CGContextRelease(context);
+    return data;
+}
+
 - (UIImage *)jx_cutoutInViewWithRect:(CGRect)rect
 {
     UIGraphicsBeginImageContextWithOptions(self.frame.size, self.opaque, 0.0);
@@ -66,11 +79,7 @@
     img = [UIImage imageWithCGImage:imageRef];
     return img;
 }
-/**
- 毛玻璃效果
- 
- @param blurStyle 程度
- */
+
 - (void)jx_addBlurEffectWith:(UIBlurEffectStyle)blurStyle
 {
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:blurStyle];

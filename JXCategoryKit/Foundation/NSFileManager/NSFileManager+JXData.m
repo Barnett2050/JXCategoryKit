@@ -61,7 +61,10 @@
 + (void)jx_writeDataToFile:(NSString *)filePath data:(NSData *)data
 {
     if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        return;
+        BOOL flag = [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
+        if (!flag) {
+            return;
+        }
     }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSFileHandle *fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:filePath];

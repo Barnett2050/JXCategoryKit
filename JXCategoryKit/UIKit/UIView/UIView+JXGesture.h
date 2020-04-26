@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)jx_addTapGestureRecognizerWithTarget:(id)target action:(SEL)action;
 
-
 /**
  添加Pan手势
  
@@ -27,7 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param action 方法名
  */
 - (void)jx_addPanGestureRecognizerWithTarget:(id)target action:(SEL)action;
-
 
 /**
  添加LongPress手势

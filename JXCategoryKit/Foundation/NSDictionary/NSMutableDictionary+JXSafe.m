@@ -14,7 +14,7 @@ static const char *NSDictionaryM = "__NSDictionaryM";
 
 @implementation NSMutableDictionary (JXSafe)
 
-+ (void)initialize
++ (void)load
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

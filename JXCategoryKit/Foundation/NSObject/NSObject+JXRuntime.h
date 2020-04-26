@@ -37,6 +37,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)jx_isMethodOverride:(Class)cls selector:(SEL)sel;
 
+/// 将一个对象与“self”相关联，它是一个strong属性（strong，nonatomic）。
+- (void)jx_setAssociateValue:(nullable id)value withKey:(void *)key;
+
+/// 将一个对象与“self”相关联，它是一个弱属性（assign，nonatomic）。
+- (void)jx_setAssociateWeakValue:(nullable id)value withKey:(void *)key;
+
+/// 获取一个关联对象
+- (nullable id)jx_getAssociatedValueForKey:(void *)key;
+
+/// 移除所有的关联对象
+- (void)jx_removeAssociatedValues;
+
 /**
  判断当前类是否在主bundle里
  
@@ -54,6 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
  返回类属性字典
  */
 - (NSDictionary *)jx_properties_aps;
+
 @end
 
 NS_ASSUME_NONNULL_END

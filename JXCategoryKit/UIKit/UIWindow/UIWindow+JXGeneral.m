@@ -25,11 +25,9 @@
     return nil;
 }
 
-+ (UIViewController *)jx_getCurrentViewController:(UIWindow *)window
++ (UIViewController *)jx_topViewController
 {
-    if (!window) {
-        window = [UIWindow jx_getCurrentWindow];
-    }
+    UIWindow *window = [UIWindow jx_getCurrentWindow];
     UIViewController *result = nil;
     id nextResponder = nil;
     UIView *frontView = nil;
@@ -85,6 +83,5 @@
             return vc;
         }
     }
-    
 }
 @end

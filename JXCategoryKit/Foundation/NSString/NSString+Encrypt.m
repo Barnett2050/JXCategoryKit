@@ -10,42 +10,25 @@
 
 #import <CommonCrypto/CommonCrypto.h>
 #import <CommonCrypto/CommonDigest.h>
+#import "NSData+JXEncrypt.h"
 
 @implementation NSString (Encrypt)
 
-#pragma mark - MD5
-- (NSString *)jx_encryptWithMD5_32bit
-{
-    //1.获取C字符串（MD5加密基于C语言实现，Foundation框架字符串需要转化）
-    const char *passData = [self UTF8String];//__strong const char *UTF8String,C语言无法持有字符串，必须用__strong修饰来拷贝内容
-    
-    //2.创建字符串数组接收MD5值
-    //开辟一个16字节（128位：md5加密出来就是128位/bit）的空间（一个字节=8字位=8个二进制数）
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
-    
-    /**
-     *  3.计算MD5值(结果存储在result数组中)
-     *
-     *  @param data#> 加密的数据 description#>
-     *  @param len#>  strlen计算加密数据字符的长度,strlen只能用char*做参数，且必须是以''\0''结尾的 description#>
-     *  @param md#>   保存的地方 description#>
-     *
-     */
-    //把passData字符串转换成了32位的16进制数列（这个过程不可逆转)存储到了result这个空间中
-    CC_MD5(passData, (CC_LONG)strlen(passData), result);
-    
-    //4.获取摘要值
-    NSMutableString *bar = [[NSMutableString alloc] initWithCapacity:CC_MD5_DIGEST_LENGTH];
-    
-    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i ++) {
-        //X 表示以十六进制形式输出,02 表示不足两位，前面补0输出；出过两位，不影响
-        [bar appendFormat:@"%02X",result[i]];
-    }
-    return bar;
+- (NSString *)jx_md2String {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] jx_md2String];
 }
+
+- (NSString *)jx_md4String {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] jx_md4String];
+}
+
+- (NSString *)jx_md5String {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] jx_md5String];
+}
+
 - (NSString *)jx_encryptWithMD5_16bit
 {
-    NSString *md5Str = [self jx_encryptWithMD5_32bit];
+    NSString *md5Str = [self jx_md5String];
     NSString *md5_16Str;
     if (md5Str.length > 24) {
         md5_16Str = [md5Str substringWithRange:NSMakeRange(8, 16)];
@@ -53,95 +36,58 @@
     return md5_16Str;
 }
 
-- (NSString *)jx_encryptUseHMACMD5WithHmacKey:(NSString *)key
-{
-    const char *passData = [self UTF8String];
-    const char *keyData = [key UTF8String];
-    
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
-    
-    CCHmac(kCCHmacAlgMD5, keyData, strlen(keyData), passData, strlen(passData), result);
-    
-    NSMutableString *bar = [[NSMutableString alloc] initWithCapacity:CC_MD5_DIGEST_LENGTH];
-    
-    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i ++) {
-        
-        [bar appendFormat:@"%02X",result[i]];
-    }
-    
-    return bar;
+- (NSString *)jx_sha1String {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] jx_sha1String];
 }
 
-#pragma mark - SHA
-- (NSString *)jx_encryptWithSHA1
-{
-    const char * cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData * data = [NSData dataWithBytes:cstr length:self.length];
-    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-    
-    CC_SHA1(data.bytes,(CC_LONG)data.length, digest);
-    
-    NSMutableString * string = [[NSMutableString alloc] initWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
-    for (int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
-        [string appendFormat:@"%02x", digest[i]];
-    }
-    return string;
+- (NSString *)jx_sha224String {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] jx_sha224String];
 }
 
-- (NSString *)jx_encryptWithSHA1_base64
-{
-    const char * cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData * data = [NSData dataWithBytes:cstr length:self.length];
-    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-    
-    CC_SHA1(data.bytes,(CC_LONG)data.length, digest);
-    
-    NSData * base64 = [NSData dataWithBytes:digest length:CC_SHA1_DIGEST_LENGTH];
-    base64 = [base64 base64EncodedDataWithOptions:0];
-    NSString * output = [[NSString alloc] initWithData:base64 encoding:NSUTF8StringEncoding];
-    
-    return output;
+- (NSString *)jx_sha256String {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] jx_sha256String];
 }
 
-- (NSString *)jx_encryptWithSHA256
-{
-    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data = [NSData dataWithBytes:cstr length:self.length];
-    uint8_t digest[CC_SHA256_DIGEST_LENGTH];
-    
-    CC_SHA1(data.bytes, (CC_LONG)data.length, digest);
-    NSMutableString* result = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++) {
-        [result appendFormat:@"%02x", digest[i]];
-    }
-    return result;
+- (NSString *)jx_sha384String {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] jx_sha384String];
 }
 
-- (NSString *)jx_encryptWithSHA384
-{
-    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data = [NSData dataWithBytes:cstr length:self.length];
-    uint8_t digest[CC_SHA384_DIGEST_LENGTH];
-    
-    CC_SHA1(data.bytes, (CC_LONG)data.length, digest);
-    NSMutableString* result = [NSMutableString stringWithCapacity:CC_SHA384_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_SHA384_DIGEST_LENGTH; i++) {
-        [result appendFormat:@"%02x", digest[i]];
-    }
-    return result;
+- (NSString *)jx_sha512String {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] jx_sha512String];
 }
 
-- (NSString *)jx_encryptWithSHA512
-{
-    const char *cstr = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data = [NSData dataWithBytes:cstr length:self.length];
-    uint8_t digest[CC_SHA512_DIGEST_LENGTH];
-    
-    CC_SHA512(data.bytes, (CC_LONG)data.length, digest);
-    NSMutableString* result = [NSMutableString stringWithCapacity:CC_SHA512_DIGEST_LENGTH * 2];
-    for(int i = 0; i < CC_SHA512_DIGEST_LENGTH; i++)
-        [result appendFormat:@"%02x", digest[i]];
-    return result;
+- (NSString *)jx_crc32String {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding] jx_crc32String];
+}
+
+- (NSString *)jx_hmacMD5StringWithKey:(NSString *)key {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding]
+            jx_hmacMD5StringWithKey:key];
+}
+
+- (NSString *)jx_hmacSHA1StringWithKey:(NSString *)key {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding]
+            jx_hmacSHA1StringWithKey:key];
+}
+
+- (NSString *)jx_hmacSHA224StringWithKey:(NSString *)key {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding]
+            jx_hmacSHA224StringWithKey:key];
+}
+
+- (NSString *)jx_hmacSHA256StringWithKey:(NSString *)key {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding]
+            jx_hmacSHA256StringWithKey:key];
+}
+
+- (NSString *)jx_hmacSHA384StringWithKey:(NSString *)key {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding]
+            jx_hmacSHA384StringWithKey:key];
+}
+
+- (NSString *)jx_hmacSHA512StringWithKey:(NSString *)key {
+    return [[self dataUsingEncoding:NSUTF8StringEncoding]
+            jx_hmacSHA512StringWithKey:key];
 }
 
 #pragma mark - base64
@@ -159,84 +105,22 @@
     return base64Decoded;
 }
 
-#pragma mark - HEX 转换
-
-- (NSString *)jx_hexStringFromStringWithLower:(BOOL)isOutputLower
+- (NSString *)jx_URLEncode
 {
-    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    static const char HexEncodeCharsLower[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-    static const char HexEncodeChars[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-    char *resultData;
-    // malloc result data
-    resultData = malloc([data length] * 2 +1);
-    // convert imgData(NSData) to char[]
-    unsigned char *sourceData = ((unsigned char *)[data bytes]);
-    uint length = (uint)[data length];
-    
-    if (isOutputLower)
-    {
-        for (uint index = 0; index < length; index++) {
-            // set result data
-            resultData[index * 2] = HexEncodeCharsLower[(sourceData[index] >> 4)];
-            resultData[index * 2 + 1] = HexEncodeCharsLower[(sourceData[index] % 0x10)];
-        }
-    }
-    else {
-        for (uint index = 0; index < length; index++) {
-            // set result data
-            resultData[index * 2] = HexEncodeChars[(sourceData[index] >> 4)];
-            resultData[index * 2 + 1] = HexEncodeChars[(sourceData[index] % 0x10)];
-        }
-    }
-    resultData[[data length] * 2] = 0;
-    
-    // convert result(char[]) to NSString
-    NSString *result = [NSString stringWithCString:resultData encoding:NSASCIIStringEncoding];
-    sourceData = nil;
-    free(resultData);
-    
-    return result;
+    NSString *charactersToEscape = @"?!@#$^&%*+,:;='\"`<>()[]{}/\\| ";
+    NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
+    NSString *encodedStr = [self stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
+    return encodedStr;
 }
 
-/**
- 十六进制转换为普通字符串的
- */
-- (NSString *)jx_stringFromHexString
+- (NSString *)jx_URLDecode
 {
-    static const unsigned char HexDecodeChars[] =
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, //49
-        2, 3, 4, 5, 6, 7, 8, 9, 0, 0, //59
-        0, 0, 0, 0, 0, 10, 11, 12, 13, 14,
-        15, 0, 0, 0, 0, 0, 0, 0, 0, 0,  //79
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 10, 11, 12,   //99
-        13, 14, 15
-    };
-    
-    // convert data(NSString) to CString
-    const char *source = [self cStringUsingEncoding:NSUTF8StringEncoding];
-    // malloc buffer
-    unsigned char *buffer;
-    uint length =(uint)strlen(source) / 2;
-    buffer = malloc(length);
-    for (uint index = 0; index < length; index++) {
-        buffer[index] = (HexDecodeChars[source[index * 2]] << 4) + (HexDecodeChars[source[index * 2 + 1]]);
-    }
-    // init result NSData
-    NSData *result = [NSData dataWithBytes:buffer length:length];
-    free(buffer);
-    source = nil;
-    
-    return  [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];;
+    NSString *decodedStr = [self stringByRemovingPercentEncoding];
+    return decodedStr;
 }
 
 #pragma mark - DES 加密
-- (NSString *)jx_encryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse;
+- (NSString *)jx_encryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse
 {
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
     char keyPtr[kCCKeySizeAES256+1];

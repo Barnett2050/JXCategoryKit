@@ -59,6 +59,17 @@ endPoint:(CGPoint)endP;
 /// @param direction 三角方向
 + (UIImage *)jx_triangleImageWithSize:(CGSize)size color:(UIColor *)color direction:(TriangleDirection)direction;
 
+/// 从苹果表情符号创建图像
+/// @param emoji 表情符号
+/// @param size 尺寸
++ (nullable UIImage *)jx_imageWithEmoji:(NSString *)emoji size:(CGFloat)size;
+
+/// 图像绘制block
+/// @param size 尺寸
+/// @param drawBlock 绘制回调
++ (nullable UIImage *)jx_imageWithSize:(CGSize)size drawBlock:(void (^)(CGContextRef context))drawBlock;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

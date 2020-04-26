@@ -58,7 +58,7 @@
     for (int i = 0; i<[self length]; i++) {
         //截取字符串中的每一个字符
         NSString *s = [self substringWithRange:NSMakeRange(i, 1)];
-        if ([self jx_validateChineseChar:s]) {
+        if ([self p_validateChineseChar:s]) {
             length +=2;
         }else{
             length +=1;
@@ -78,7 +78,7 @@
     
     for (int i = 0; i<[self length]; i++) {
         NSString *s = [self substringWithRange:NSMakeRange(i, 1)];
-        if ([self jx_validateChineseChar:s])
+        if ([self p_validateChineseChar:s])
         {
             if (length + 2 > index)
             {
@@ -138,7 +138,7 @@
 /**
  修改html标签style
  */
-+ (NSString *)modifyHtmlImgStyleWith:(NSString *)html
++ (NSString *)jx_modifyHtmlImgStyleWith:(NSString *)html
 {
     NSString *htmlStr = html;
     NSString *parten = @"<img[^>]*>";
@@ -160,26 +160,26 @@
 
 #pragma mark - private method
 //检测中文或者中文符号
-- (BOOL)jx_validateChineseChar:(NSString *)string
+- (BOOL)p_validateChineseChar:(NSString *)string
 {
     NSString *nameRegEx = @"[\\u0391-\\uFFE5]";
-    if (![string jx_isMatchesRegularExp:nameRegEx]) {
+    if (![string p_isMatchesRegularExp:nameRegEx]) {
         return NO;
     }
     return YES;
 }
 
 //检测中文
-- (BOOL)jx_validateChinese:(NSString*)string
+- (BOOL)p_validateChinese:(NSString*)string
 {
     NSString *nameRegEx = @"[\u4e00-\u9fa5]";
-    if (![string jx_isMatchesRegularExp:nameRegEx]) {
+    if (![string p_isMatchesRegularExp:nameRegEx]) {
         return NO;
     }
     return YES;
 }
 
-- (BOOL)jx_isMatchesRegularExp:(NSString *)regex {
+- (BOOL)p_isMatchesRegularExp:(NSString *)regex {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return [predicate evaluateWithObject:self];
 }

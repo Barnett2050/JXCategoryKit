@@ -12,43 +12,52 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSDate (JXGeneral)
 
-/**
- 获取本地时间戳
- */
-+ (NSTimeInterval)getLocalTimestamp;
+@property (nonatomic, readonly) NSInteger year; /// 年
+@property (nonatomic, readonly) NSInteger month; /// 月
+@property (nonatomic, readonly) NSInteger day; /// 日
+@property (nonatomic, readonly) NSInteger hour; /// 小时
+@property (nonatomic, readonly) NSInteger minute; /// 分钟
+@property (nonatomic, readonly) NSInteger second; /// 秒
+@property (nonatomic, readonly) NSInteger nanosecond; /// 纳秒
+@property (nonatomic, readonly) NSInteger weekday; /// 星期单位。范围为1-7 （一个星期有七天）
+@property (nonatomic, readonly) NSInteger weekdayOrdinal; ///以7天为单位，范围为1-5 （1-7号为第1个7天，8-14号为第2个7天...）
+@property (nonatomic, readonly) NSInteger weekOfMonth; /// 当前月的周数
+@property (nonatomic, readonly) NSInteger weekOfYear; /// 当前年的周数
+@property (nonatomic, readonly) NSInteger yearForWeekOfYear; /// 年
+@property (nonatomic, readonly) NSInteger quarter; /// 刻钟单位。范围为1-4 （1刻钟等于15分钟）
+
+/// 当前日期添加年，月，周，日，时，分，秒
+- (nullable NSDate *)jx_dateByAddingYears:(NSInteger)years;
+- (nullable NSDate *)jx_dateByAddingMonths:(NSInteger)months;
+- (nullable NSDate *)jx_dateByAddingWeeks:(NSInteger)weeks;
+- (nullable NSDate *)jx_dateByAddingDays:(NSInteger)days;
+- (nullable NSDate *)jx_dateByAddingHours:(NSInteger)hours;
+- (nullable NSDate *)jx_dateByAddingMinutes:(NSInteger)minutes;
+- (nullable NSDate *)jx_dateByAddingSeconds:(NSInteger)seconds;
 
 /**
- 获取当前日期的星期，日，月，年
+ 获取本地时间戳，单位秒
  */
-- (NSInteger)week;// 国外星期日视为第一天
-- (NSInteger)day;
-- (NSInteger)month;
-- (NSInteger)year;
-
-/// 当前日期添加日，月，年
-- (NSDate *)jx_dateByAddingDays:(NSInteger)days;
-- (NSDate *)jx_dateByAddingMonths:(NSInteger)months;
-- (NSDate *)jx_dateByAddingYears:(NSInteger)years;
-
++ (NSTimeInterval)jx_getLocalTimestamp;
 /**
  与世界标准时间的时差
  */
-+ (NSString *)getTimeDifferenceString;
++ (NSString *)jx_getTimeDifferenceString;
 
 /**
  获取当前时区的差值
  */
-+ (CGFloat)getTimeDifferenceWithUTCTime;
++ (CGFloat)jx_getTimeDifferenceWithUTCTime;
 
 /**
  计算于现在的时间差
  */
-+ (NSInteger)getTimeIntervalWithCurrent:(NSDate *)date;
++ (NSInteger)jx_getTimeIntervalWithCurrent:(NSDate *)date;
 
 /**
  计算时间差(单位天)
  */
-+ (NSInteger)calculatedTimeDifferenceWith:(UInt64)startTime endTime:(UInt64)endTime;
++ (NSInteger)jx_calculatedTimeDifferenceWith:(UInt64)startTime endTime:(UInt64)endTime;
 
 @end
 

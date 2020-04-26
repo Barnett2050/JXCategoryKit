@@ -14,28 +14,26 @@
  使用CAShapeLayer和UIBezierPath设置圆角，对内存的消耗最少，而且渲染快速
  注意：view的frame必须已知，自动布局调入另一个传入frame方法
  */
-- (void)jx_addRectCornerWith:(CGRect)viewBounds corner:(UIRectCorner)rectCorner cornerRadius:(CGFloat)radius
+- (void)jx_addRectCornerWithViewBounds:(CGRect)rect corner:(UIRectCorner)corner radius:(CGFloat)radius
 {
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:viewBounds byRoundingCorners:rectCorner cornerRadii:CGSizeMake(radius, radius)];
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:corner cornerRadii:CGSizeMake(radius, radius)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
-    maskLayer.frame = viewBounds;
+    maskLayer.frame = rect;
     maskLayer.path = path.CGPath;
     self.layer.mask = maskLayer;
 }
-- (void)jx_addRectCornerWith:(UIRectCorner)rectCorner cornerRadius:(CGFloat)radius
+- (void)jx_addRectCornerWith:(UIRectCorner)corner radius:(CGFloat)radius
 {
-    [self jx_addRectCornerWith:self.bounds corner:rectCorner cornerRadius:radius];
+    [self jx_addRectCornerWithViewBounds:self.bounds corner:corner radius:radius];
 }
-/**
- 添加全圆角
- */
+
 - (void)jx_addAllCornerWith:(CGFloat)radius
 {
-    [self jx_addRectCornerWith:UIRectCornerAllCorners cornerRadius:radius];
+    [self jx_addRectCornerWith:UIRectCornerAllCorners radius:radius];
 }
-- (void)jx_addAllCornerWith:(CGRect)viewBounds radius:(CGFloat)radius
+- (void)jx_addAllCornerWithViewBounds:(CGRect)rect radius:(CGFloat)radius
 {
-    [self jx_addRectCornerWith:viewBounds corner:UIRectCornerAllCorners cornerRadius:radius];
+    [self jx_addRectCornerWithViewBounds:rect corner:UIRectCornerAllCorners radius:radius];
 }
 
 - (void)jx_drawDashLineWithpointArray:(NSArray *)pointArr lineWidth:(float)lineWidth lineLength:(float)lineLength lineSpacing:(float)lineSpacing lineColor:(UIColor *)lineColor

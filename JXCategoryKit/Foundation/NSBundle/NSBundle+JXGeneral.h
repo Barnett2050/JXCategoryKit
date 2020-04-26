@@ -16,15 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)jx_getApplicationName;
 /**
- 获取 APP 应用版本
+ 获取 APP 应用版本, 1.0.0
  */
 + (NSString *)jx_getApplicationVersion;
 /**
- 获取BundleID
+ 获取BundleID,com.xxx.xxx
  */
 + (NSString *)jx_getBundleID;
 /**
- 获取编译版本
+ 获取编译版本,123
  */
 + (NSString *)jx_getBuildVersion;
 /**

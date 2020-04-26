@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  修改html标签style
  */
-+ (NSString *)modifyHtmlImgStyleWith:(NSString *)html;
++ (NSString *)jx_modifyHtmlImgStyleWith:(NSString *)html;
 
 @end
 

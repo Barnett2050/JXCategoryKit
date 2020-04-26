@@ -18,7 +18,7 @@
         return [self scheduledTimerWithTimeInterval:inTimeInterval repeats:inRepeats block:inBlock];
     }else
     {
-        return [self scheduledTimerWithTimeInterval:inTimeInterval target:self selector:@selector(jx_executeBlockFromTimer:) userInfo:[inBlock copy] repeats:inRepeats];
+        return [self scheduledTimerWithTimeInterval:inTimeInterval target:self selector:@selector(p_executeBlockFromTimer:) userInfo:[inBlock copy] repeats:inRepeats];
     }
 }
 
@@ -30,7 +30,7 @@
         return [self timerWithTimeInterval:inTimeInterval repeats:inRepeats block:inBlock];
     }else
     {
-        return [self timerWithTimeInterval:inTimeInterval target:self selector:@selector(jx_executeBlockFromTimer:) userInfo:[inBlock copy] repeats:inRepeats];
+        return [self timerWithTimeInterval:inTimeInterval target:self selector:@selector(p_executeBlockFromTimer:) userInfo:[inBlock copy] repeats:inRepeats];
     }
 }
 
@@ -60,7 +60,7 @@
 }
 
 #pragma mark - private
-+ (void)jx_executeBlockFromTimer:(NSTimer *)aTimer {
++ (void)p_executeBlockFromTimer:(NSTimer *)aTimer {
     void (^block)(NSTimer *) = [aTimer userInfo];
     if (block) block(aTimer);
 }

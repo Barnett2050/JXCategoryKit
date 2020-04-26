@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import <sys/sysctl.h>
+#import <mach/mach.h>
 
 @interface ViewController ()
 
@@ -16,8 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 }
-
 
 @end
