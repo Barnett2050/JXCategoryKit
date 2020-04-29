@@ -84,7 +84,21 @@
 		61F0E409244EF0A000683643 /* UIGestureRecognizer+JXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E408244EF0A000683643 /* UIGestureRecognizer+JXBlock.m */; };
 		61F0E40D24503BFC00683643 /* UIScrollView+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E40C24503BFC00683643 /* UIScrollView+JXGeneral.m */; };
 		61F0E41124503D3600683643 /* UITableView+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E41024503D3600683643 /* UITableView+JXGeneral.m */; };
+		61F0E41B2458006500683643 /* JXCategoryKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E41A2458006500683643 /* JXCategoryKitTests.m */; };
+		61F0E4232458022C00683643 /* CoreLocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E4222458022C00683643 /* CoreLocationTests.m */; };
+		61F0E42724594B6700683643 /* NSNotificationCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E42624594B6700683643 /* NSNotificationCenterTests.m */; };
+		61F0E42924594DD700683643 /* NSDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E42824594DD700683643 /* NSDataTests.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		61F0E41D2458006500683643 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 617A337F2427B4F20098EF1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 617A33862427B4F20098EF1A;
+			remoteInfo = JXCategoryKit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		613FCB9F2428DDCB004ACC9D /* CLLocation+JXCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+JXCalculation.m"; sourceTree = "<group>"; };
@@ -235,6 +249,12 @@
 		61F0E40C24503BFC00683643 /* UIScrollView+JXGeneral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+JXGeneral.m"; sourceTree = "<group>"; };
 		61F0E40F24503D3600683643 /* UITableView+JXGeneral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableView+JXGeneral.h"; sourceTree = "<group>"; };
 		61F0E41024503D3600683643 /* UITableView+JXGeneral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableView+JXGeneral.m"; sourceTree = "<group>"; };
+		61F0E4182458006500683643 /* JXCategoryKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JXCategoryKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		61F0E41A2458006500683643 /* JXCategoryKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JXCategoryKitTests.m; sourceTree = "<group>"; };
+		61F0E41C2458006500683643 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61F0E4222458022C00683643 /* CoreLocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreLocationTests.m; sourceTree = "<group>"; };
+		61F0E42624594B6700683643 /* NSNotificationCenterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSNotificationCenterTests.m; sourceTree = "<group>"; };
+		61F0E42824594DD700683643 /* NSDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDataTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +265,13 @@
 				613FCBE824290CBF004ACC9D /* Accelerate.framework in Frameworks */,
 				613FCBAC2428E57D004ACC9D /* CoreLocation.framework in Frameworks */,
 				613FCBAA2428E56F004ACC9D /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61F0E4152458006500683643 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +623,7 @@
 				613FCC6A242A54E7004ACC9D /* README.md */,
 				613FCBA52428DE57004ACC9D /* JXCategoryKit.podspec */,
 				617A33892427B4F20098EF1A /* JXCategoryKit */,
+				61F0E4192458006500683643 /* JXCategoryKitTests */,
 				617A33882427B4F20098EF1A /* Products */,
 				613FCBA82428E56F004ACC9D /* Frameworks */,
 			);
@@ -605,6 +633,7 @@
 			isa = PBXGroup;
 			children = (
 				617A33872427B4F20098EF1A /* JXCategoryKit.app */,
+				61F0E4182458006500683643 /* JXCategoryKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -612,11 +641,11 @@
 		617A33892427B4F20098EF1A /* JXCategoryKit */ = {
 			isa = PBXGroup;
 			children = (
+				613FCBA72428DFD5004ACC9D /* JXCategoryKit.h */,
 				613FCB9E2428DD8F004ACC9D /* CoreLocation */,
 				613FCBB02428F2A7004ACC9D /* QuartzCore */,
 				613FCBB42428F2D1004ACC9D /* UIKit */,
 				613FCC27242A1CB7004ACC9D /* Foundation */,
-				613FCBA72428DFD5004ACC9D /* JXCategoryKit.h */,
 				617A338A2427B4F20098EF1A /* AppDelegate.h */,
 				617A338B2427B4F20098EF1A /* AppDelegate.m */,
 				617A338D2427B4F20098EF1A /* SceneDelegate.h */,
@@ -677,6 +706,18 @@
 			path = UITableView;
 			sourceTree = "<group>";
 		};
+		61F0E4192458006500683643 /* JXCategoryKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				61F0E41A2458006500683643 /* JXCategoryKitTests.m */,
+				61F0E41C2458006500683643 /* Info.plist */,
+				61F0E4222458022C00683643 /* CoreLocationTests.m */,
+				61F0E42624594B6700683643 /* NSNotificationCenterTests.m */,
+				61F0E42824594DD700683643 /* NSDataTests.m */,
+			);
+			path = JXCategoryKitTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -697,6 +738,24 @@
 			productReference = 617A33872427B4F20098EF1A /* JXCategoryKit.app */;
 			productType = "com.apple.product-type.application";
 		};
+		61F0E4172458006500683643 /* JXCategoryKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61F0E41F2458006500683643 /* Build configuration list for PBXNativeTarget "JXCategoryKitTests" */;
+			buildPhases = (
+				61F0E4142458006500683643 /* Sources */,
+				61F0E4152458006500683643 /* Frameworks */,
+				61F0E4162458006500683643 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				61F0E41E2458006500683643 /* PBXTargetDependency */,
+			);
+			name = JXCategoryKitTests;
+			productName = JXCategoryKitTests;
+			productReference = 61F0E4182458006500683643 /* JXCategoryKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -708,6 +767,10 @@
 				TargetAttributes = {
 					617A33862427B4F20098EF1A = {
 						CreatedOnToolsVersion = 11.3.1;
+					};
+					61F0E4172458006500683643 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = 617A33862427B4F20098EF1A;
 					};
 				};
 			};
@@ -725,6 +788,7 @@
 			projectRoot = "";
 			targets = (
 				617A33862427B4F20098EF1A /* JXCategoryKit */,
+				61F0E4172458006500683643 /* JXCategoryKitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -739,6 +803,13 @@
 				613FCC6B242A54E7004ACC9D /* README.md in Resources */,
 				617A33972427B4F30098EF1A /* Assets.xcassets in Resources */,
 				617A33952427B4F20098EF1A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61F0E4162458006500683643 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,7 +892,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		61F0E4142458006500683643 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61F0E41B2458006500683643 /* JXCategoryKitTests.m in Sources */,
+				61F0E42724594B6700683643 /* NSNotificationCenterTests.m in Sources */,
+				61F0E42924594DD700683643 /* NSDataTests.m in Sources */,
+				61F0E4232458022C00683643 /* CoreLocationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		61F0E41E2458006500683643 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 617A33862427B4F20098EF1A /* JXCategoryKit */;
+			targetProxy = 61F0E41D2458006500683643 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		617A33932427B4F20098EF1A /* Main.storyboard */ = {
@@ -989,6 +1079,46 @@
 			};
 			name = Release;
 		};
+		61F0E4202458006500683643 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9ACE2C9PJG;
+				INFOPLIST_FILE = JXCategoryKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.qwbcg.JXCategoryKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JXCategoryKit.app/JXCategoryKit";
+			};
+			name = Debug;
+		};
+		61F0E4212458006500683643 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9ACE2C9PJG;
+				INFOPLIST_FILE = JXCategoryKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.qwbcg.JXCategoryKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JXCategoryKit.app/JXCategoryKit";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1006,6 +1136,15 @@
 			buildConfigurations = (
 				617A33A12427B4F30098EF1A /* Debug */,
 				617A33A22427B4F30098EF1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61F0E41F2458006500683643 /* Build configuration list for PBXNativeTarget "JXCategoryKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61F0E4202458006500683643 /* Debug */,
+				61F0E4212458006500683643 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

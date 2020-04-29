@@ -10,19 +10,19 @@
 
 @implementation CLLocation (JXCalculation)
 
-+ (double)jx_getKMDistance:(double)latOne withLng1:(double)lngOne withLat2:(double)latAnother withLng2:(double)lngAnother
++ (double)jx_getDistanceWithLat1:(double)latOne lon1:(double)lonOne withLat2:(double)latAnother lon2:(double)lonAnother
 {
-    CLLocation *orig = [[CLLocation alloc] initWithLatitude:latOne longitude:lngOne];
-    CLLocation *dist = [[CLLocation alloc] initWithLatitude:latAnother longitude:lngAnother];
-    CLLocationDistance kilometers = [orig distanceFromLocation:dist] / 1000;
+    CLLocation *orig = [[CLLocation alloc] initWithLatitude:latOne longitude:lonOne];
+    CLLocation *dist = [[CLLocation alloc] initWithLatitude:latAnother longitude:lonAnother];
+    CLLocationDistance kilometers = [orig distanceFromLocation:dist];
     return kilometers;
 }
 
-+ (double)jx_getKMDistance:(CLLocationCoordinate2D)oneLocation withAnotherLocation:(CLLocationCoordinate2D)anotherLocation
++ (double)jx_getDistance:(CLLocationCoordinate2D)oneLocation withAnotherLocation:(CLLocationCoordinate2D)anotherLocation
 {
     CLLocation *orig = [[CLLocation alloc] initWithLatitude:oneLocation.latitude longitude:oneLocation.longitude];
     CLLocation *dist = [[CLLocation alloc] initWithLatitude:anotherLocation.latitude longitude:anotherLocation.longitude];
-    CLLocationDistance kilometers = [orig distanceFromLocation:dist] / 1000;
+    CLLocationDistance kilometers = [orig distanceFromLocation:dist];
     return kilometers;
 }
 

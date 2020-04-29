@@ -12,17 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CLLocation (JXCalculation)
 
-/// 两个坐标间的距离
+/// 两个坐标间的距离，单位 米
 /// @param latOne one维度
-/// @param lngOne one经度
+/// @param lonOne one经度
 /// @param latAnother Another维度
-/// @param lngAnother Another经度
-+ (double)jx_getKMDistance:(double)latOne withLng1:(double)lngOne withLat2:(double)latAnother withLng2:(double)lngAnother;
+/// @param lonAnother Another经度
++ (double)jx_getDistanceWithLat1:(double)latOne lon1:(double)lonOne withLat2:(double)latAnother lon2:(double)lonAnother;
 
-/// 两个坐标间的距离
+/// 两个坐标间的距离，单位 米
 /// @param oneLocation 第一个坐标
 /// @param anotherLocation 另一个坐标
-+ (double)jx_getKMDistance:(CLLocationCoordinate2D)oneLocation withAnotherLocation:(CLLocationCoordinate2D)anotherLocation;
++ (double)jx_getDistance:(CLLocationCoordinate2D)oneLocation withAnotherLocation:(CLLocationCoordinate2D)anotherLocation;
 
 @end
 
