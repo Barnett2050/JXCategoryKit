@@ -75,6 +75,8 @@
 		617A33972427B4F30098EF1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 617A33962427B4F30098EF1A /* Assets.xcassets */; };
 		617A339A2427B4F30098EF1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 617A33982427B4F30098EF1A /* LaunchScreen.storyboard */; };
 		617A339D2427B4F30098EF1A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A339C2427B4F30098EF1A /* main.m */; };
+		61DB82D82463AA14006308CB /* NSFileManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DB82D72463AA14006308CB /* NSFileManagerTests.m */; };
+		61DB82DA2463E98F006308CB /* NSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DB82D92463E98F006308CB /* NSDateTests.m */; };
 		61F0E3E824497D1D00683643 /* NSDictionary+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E3E724497D1D00683643 /* NSDictionary+JXGeneral.m */; };
 		61F0E3EB24498BA600683643 /* NSMutableDictionary+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E3EA24498BA600683643 /* NSMutableDictionary+JXGeneral.m */; };
 		61F0E3EF24498FA400683643 /* NSNotificationCenter+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E3EE24498FA400683643 /* NSNotificationCenter+JXGeneral.m */; };
@@ -84,7 +86,6 @@
 		61F0E409244EF0A000683643 /* UIGestureRecognizer+JXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E408244EF0A000683643 /* UIGestureRecognizer+JXBlock.m */; };
 		61F0E40D24503BFC00683643 /* UIScrollView+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E40C24503BFC00683643 /* UIScrollView+JXGeneral.m */; };
 		61F0E41124503D3600683643 /* UITableView+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E41024503D3600683643 /* UITableView+JXGeneral.m */; };
-		61F0E41B2458006500683643 /* JXCategoryKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E41A2458006500683643 /* JXCategoryKitTests.m */; };
 		61F0E4232458022C00683643 /* CoreLocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E4222458022C00683643 /* CoreLocationTests.m */; };
 		61F0E42724594B6700683643 /* NSNotificationCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E42624594B6700683643 /* NSNotificationCenterTests.m */; };
 		61F0E42924594DD700683643 /* NSDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E42824594DD700683643 /* NSDataTests.m */; };
@@ -231,6 +232,8 @@
 		617A33992427B4F30098EF1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		617A339B2427B4F30098EF1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		617A339C2427B4F30098EF1A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		61DB82D72463AA14006308CB /* NSFileManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSFileManagerTests.m; sourceTree = "<group>"; };
+		61DB82D92463E98F006308CB /* NSDateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDateTests.m; sourceTree = "<group>"; };
 		61F0E3E624497D1D00683643 /* NSDictionary+JXGeneral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JXGeneral.h"; sourceTree = "<group>"; };
 		61F0E3E724497D1D00683643 /* NSDictionary+JXGeneral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JXGeneral.m"; sourceTree = "<group>"; };
 		61F0E3E924498BA600683643 /* NSMutableDictionary+JXGeneral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+JXGeneral.h"; sourceTree = "<group>"; };
@@ -250,7 +253,6 @@
 		61F0E40F24503D3600683643 /* UITableView+JXGeneral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITableView+JXGeneral.h"; sourceTree = "<group>"; };
 		61F0E41024503D3600683643 /* UITableView+JXGeneral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITableView+JXGeneral.m"; sourceTree = "<group>"; };
 		61F0E4182458006500683643 /* JXCategoryKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JXCategoryKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		61F0E41A2458006500683643 /* JXCategoryKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JXCategoryKitTests.m; sourceTree = "<group>"; };
 		61F0E41C2458006500683643 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61F0E4222458022C00683643 /* CoreLocationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreLocationTests.m; sourceTree = "<group>"; };
 		61F0E42624594B6700683643 /* NSNotificationCenterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSNotificationCenterTests.m; sourceTree = "<group>"; };
@@ -709,11 +711,12 @@
 		61F0E4192458006500683643 /* JXCategoryKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				61F0E41A2458006500683643 /* JXCategoryKitTests.m */,
 				61F0E41C2458006500683643 /* Info.plist */,
 				61F0E4222458022C00683643 /* CoreLocationTests.m */,
 				61F0E42624594B6700683643 /* NSNotificationCenterTests.m */,
 				61F0E42824594DD700683643 /* NSDataTests.m */,
+				61DB82D72463AA14006308CB /* NSFileManagerTests.m */,
+				61DB82D92463E98F006308CB /* NSDateTests.m */,
 			);
 			path = JXCategoryKitTests;
 			sourceTree = "<group>";
@@ -896,8 +899,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61F0E41B2458006500683643 /* JXCategoryKitTests.m in Sources */,
 				61F0E42724594B6700683643 /* NSNotificationCenterTests.m in Sources */,
+				61DB82D82463AA14006308CB /* NSFileManagerTests.m in Sources */,
+				61DB82DA2463E98F006308CB /* NSDateTests.m in Sources */,
 				61F0E42924594DD700683643 /* NSDataTests.m in Sources */,
 				61F0E4232458022C00683643 /* CoreLocationTests.m in Sources */,
 			);

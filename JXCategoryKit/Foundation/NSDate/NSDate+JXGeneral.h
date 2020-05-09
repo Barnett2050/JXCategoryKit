@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSInteger weekdayOrdinal; ///以7天为单位，范围为1-5 （1-7号为第1个7天，8-14号为第2个7天...）
 @property (nonatomic, readonly) NSInteger weekOfMonth; /// 当前月的周数
 @property (nonatomic, readonly) NSInteger weekOfYear; /// 当前年的周数
-@property (nonatomic, readonly) NSInteger yearForWeekOfYear; /// 年
 @property (nonatomic, readonly) NSInteger quarter; /// 刻钟单位。范围为1-4 （1刻钟等于15分钟）
 
 /// 当前日期添加年，月，周，日，时，分，秒
@@ -50,14 +49,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (CGFloat)jx_getTimeDifferenceWithUTCTime;
 
 /**
- 计算于现在的时间差
+ 计算相对现在的时间差，单位秒，大于0表示小于当前时间，小于0表示大于当前时间
  */
-+ (NSInteger)jx_getTimeIntervalWithCurrent:(NSDate *)date;
++ (NSTimeInterval)jx_getTimeIntervalWithCurrent:(NSDate *)date;
 
 /**
  计算时间差(单位天)
  */
-+ (NSInteger)jx_calculatedTimeDifferenceWith:(UInt64)startTime endTime:(UInt64)endTime;
++ (NSInteger)jx_calculatedTimeDifferenceWith:(NSTimeInterval)startTime endTime:(NSTimeInterval)endTime;
 
 @end
 

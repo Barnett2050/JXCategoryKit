@@ -23,10 +23,14 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL existed = [fileManager fileExistsAtPath:path isDirectory:&isDir];
     //目标路径的目录不存在则创建目录
-    if (!(isDir == YES && existed == YES)) {
+    if (isDir && existed) {
+        return true;
+    }else if(!existed && isDir)
+    {
         return [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
-    } else {
-        return NO;
+    }else
+    {
+        return false;
     }
 }
 
@@ -91,15 +95,18 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if (srcPath.length < 1) {
-        return NO;
+        return false;
     }
     BOOL srcExisted = [fileManager fileExistsAtPath:srcPath isDirectory:nil];
     if (!srcExisted) {
-        return NO;
+        return false;
     }
     
     //如果不存在则创建目录
-    [self jx_creatDirectory:[dstPath stringByDeletingLastPathComponent]];
+    BOOL flag = [self jx_creatDirectory:[dstPath stringByDeletingLastPathComponent]];
+    if (!flag) {
+        return false;
+    }
     
     NSError *error;
     BOOL moveSuccess = [fileManager moveItemAtPath:srcPath toPath:dstPath error:&error];

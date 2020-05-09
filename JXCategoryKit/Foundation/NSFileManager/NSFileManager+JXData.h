@@ -18,7 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
  @param filePath 文件路径
  @return 文件大小 B,KB,MB,GB 保留两位
  */
-+ (NSString *)jx_fileSizeAtPath:(NSString*)filePath;
++ (NSString *)jx_fileSizeStringAtPath:(NSString*)filePath;
+
+/// 获取单个文件的大小
+/// @param filePath 文件路径
++ (double)jx_fileSizeAtPath:(NSString*)filePath;
 
 /**
  向itunes共享文件夹中写入文件，即NSDocumentDirectory
@@ -27,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param directory 文件夹名称
  @param file 文件名称
  */
-+ (void)jx_writeDataToSharedDocumentsWith:(NSData *)data DirectoryName:(NSString *)directory FileName:(NSString *)file Result:(void(^)(BOOL isSuccess))writeDataToFile;
++ (void)jx_writeDataToSharedDocumentsWith:(NSData *)data directoryName:(NSString *)directory fileName:(NSString *)file result:(void(^)(BOOL isSuccess))resultBlock;
 
 /**
  向文件写入数据

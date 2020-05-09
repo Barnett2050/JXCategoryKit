@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param dateFormat 时间类型
  @return (-1 oneTime小于anotherTime)(0 oneTime等于anotherTime)(1 oneTime大于anotherTime)
  */
-+ (NSInteger)jx_compareTwoTimesOneTime:(NSString *)oneTime AnotherTime:(NSString *)anotherTime TimeDateFormat:(NSString *)dateFormat;
++ (NSInteger)jx_compareTwoTimesOneTime:(NSString *)oneTime anotherTime:(NSString *)anotherTime dateFormat:(NSString *)dateFormat;
 @end
 
 NS_ASSUME_NONNULL_END

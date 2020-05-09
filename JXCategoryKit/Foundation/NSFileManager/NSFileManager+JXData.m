@@ -10,31 +10,42 @@
 
 @implementation NSFileManager (JXData)
 
-+ (NSString *)jx_fileSizeAtPath:(NSString*)filePath {
++ (NSString *)jx_fileSizeStringAtPath:(NSString*)filePath
+{
     
-    NSFileManager* manager = [NSFileManager defaultManager];
-    
-    if ([manager fileExistsAtPath:filePath]){
-        
-        double theSize = [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+    double fileSize = [NSFileManager jx_fileSizeAtPath:filePath];
+    if (fileSize == 0) {
+        return nil;
+    }else
+    {
         NSString *ret = nil;
-        if (theSize<100) {
+        if (fileSize<=0) {
             ret = @"0.00B";
-        } else if (theSize < 1024) {
-            ret = [NSString stringWithFormat:@"%.2fB", theSize];
-        } else if (theSize < 1024*1024) {
-            ret = [NSString stringWithFormat:@"%.2fKB", theSize/1024];
-        } else if (theSize < 1024*1024*1024) {
-            ret = [NSString stringWithFormat:@"%.2fMB", theSize/(1024*1024)];
+        } else if (fileSize < 1024) {
+            ret = [NSString stringWithFormat:@"%.2fB", fileSize];
+        } else if (fileSize < 1024*1024) {
+            ret = [NSString stringWithFormat:@"%.2fKB", fileSize/1024];
+        } else if (fileSize < 1024*1024*1024) {
+            ret = [NSString stringWithFormat:@"%.2fMB", fileSize/(1024*1024)];
         } else {
-            ret = [NSString stringWithFormat:@"%.2fGB", theSize/(1024*1024*1024)];
+            ret = [NSString stringWithFormat:@"%.2fGB", fileSize/(1024*1024*1024)];
         }
         return ret;
     }
-    return nil;
 }
 
-+ (void)jx_writeDataToSharedDocumentsWith:(NSData *)data DirectoryName:(NSString *)directory FileName:(NSString *)file Result:(void(^)(BOOL isSuccess))writeDataToFile
++ (double)jx_fileSizeAtPath:(NSString*)filePath
+{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    
+    if ([manager fileExistsAtPath:filePath]){
+        double theSize = [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+        return theSize;
+    }
+    return 0;
+}
+
++ (void)jx_writeDataToSharedDocumentsWith:(NSData *)data directoryName:(NSString *)directory fileName:(NSString *)file result:(void(^)(BOOL isSuccess))resultBlock
 {
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -55,7 +66,9 @@
     if (file != nil) {
         filePath = [filePath stringByAppendingPathComponent:file];
     }
-    writeDataToFile([data writeToFile:filePath atomically:YES]);
+    if (resultBlock) {
+        resultBlock([data writeToFile:filePath atomically:YES]);
+    }
 }
 
 + (void)jx_writeDataToFile:(NSString *)filePath data:(NSData *)data

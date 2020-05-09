@@ -54,10 +54,6 @@
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekOfYear fromDate:self] weekOfYear];
 }
 
-- (NSInteger)yearForWeekOfYear {
-    return [[[NSCalendar currentCalendar] components:NSCalendarUnitYearForWeekOfYear fromDate:self] yearForWeekOfYear];
-}
-
 - (NSInteger)quarter {
     return [[[NSCalendar currentCalendar] components:NSCalendarUnitQuarter fromDate:self] quarter];
 }
@@ -139,39 +135,26 @@
     return hourTime;
 }
 
-/**
- 计算于现在的时间差
- */
-+ (NSInteger)jx_getTimeIntervalWithCurrent:(NSDate *)date
++ (NSTimeInterval)jx_getTimeIntervalWithCurrent:(NSDate *)date
 {
-    UInt64 time = [date timeIntervalSince1970];
+    NSTimeInterval time = [date timeIntervalSince1970];
     NSDate *nowDate = [NSDate dateWithTimeIntervalSinceNow:0];
     NSTimeInterval currentTime = [nowDate timeIntervalSince1970];
-    return (NSInteger)(currentTime - time);
+    return currentTime - time;
 }
 
-/**
- 计算时间差
- */
-+ (NSInteger)jx_calculatedTimeDifferenceWith:(UInt64)startTime endTime:(UInt64)endTime
++ (NSInteger)jx_calculatedTimeDifferenceWith:(NSTimeInterval)startTime endTime:(NSTimeInterval)endTime
 {
-    if (startTime >= endTime) {
-        return 0;
-    }else
-    {
-        NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:startTime];
-        NSDate *endDate = [NSDate dateWithTimeIntervalSince1970:endTime];
-        
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSCalendarUnit type = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
-        
-        NSDateComponents *cmps = [calendar components:type fromDate:startDate toDate:endDate options:0];
-        NSInteger day = cmps.day;
-        if (cmps.hour > 12 && cmps.hour < 24) {
-            day = cmps.day + 1;
-        }
-        return day;
+    if (startTime > 140000000000) {
+        startTime = startTime / 1000;
     }
+    if (endTime > 140000000000) {
+        endTime = endTime / 1000;
+    }
+    
+    NSTimeInterval seconds = fabs(endTime - startTime);
+    double day = seconds / 60.0 / 60.0 / 24.0;
+    return roundf(day);
 }
 
 @end

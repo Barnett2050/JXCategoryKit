@@ -8,11 +8,11 @@
 #import <Foundation/Foundation.h>
 
 typedef enum : NSUInteger {
-    JXDocumentPathType,
-    JXCachesPathType,
-    JXPreferencesPathType,
-    JXTempPathType,
-    JXBundlePathType
+    JXDocumentPathType, // 读写
+    JXCachesPathType, // 读写
+    JXPreferencesPathType, // 读写
+    JXTempPathType, // 读写
+    JXBundlePathType // 读
 } JXPathType;
 
 NS_ASSUME_NONNULL_BEGIN

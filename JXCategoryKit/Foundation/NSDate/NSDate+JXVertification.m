@@ -33,7 +33,7 @@
     [comp1 year] == [comp2 year];
 }
 
-+ (NSInteger)jx_compareTwoTimesOneTime:(NSString *)oneTime AnotherTime:(NSString *)anotherTime TimeDateFormat:(NSString *)dateFormat
++ (NSInteger)jx_compareTwoTimesOneTime:(NSString *)oneTime anotherTime:(NSString *)anotherTime dateFormat:(NSString *)dateFormat
 {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     [format setDateFormat:dateFormat];
