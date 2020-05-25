@@ -11,20 +11,20 @@
 
 @interface UIButton ()
 
-/** bool true 忽略点击事件   false 允许点击事件 */
-@property (nonatomic, assign) BOOL isIgnoreEvent;
+/// bool true 忽略点击事件   false 允许点击事件
+@property (nonatomic, assign) BOOL ignoreEventTimeInterval;
 
 @end
 
 @implementation UIButton (JXGeneral)
 
-// runtime 动态绑定 属性
-- (void)setIsIgnoreEvent:(BOOL)isIgnoreEvent
+- (void)setIgnoreEventTimeInterval:(BOOL)ignoreEventTimeInterval
 {
-    objc_setAssociatedObject(self, @selector(isIgnoreEvent), @(isIgnoreEvent), OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, @selector(ignoreEventTimeInterval), @(ignoreEventTimeInterval), OBJC_ASSOCIATION_ASSIGN);
 }
-- (BOOL)isIgnoreEvent{
-    return [objc_getAssociatedObject(self, @selector(isIgnoreEvent)) boolValue];
+- (BOOL)ignoreEventTimeInterval
+{
+    return [objc_getAssociatedObject(self, @selector(ignoreEventTimeInterval)) boolValue];
 }
 
 - (NSTimeInterval)eventTimeInterval
@@ -63,14 +63,14 @@
         [self wxd_sendAction:action to:target forEvent:event];
     }else
     {
-        if (self.isIgnoreEvent){
+        if (self.ignoreEventTimeInterval){
             return;
         }else if (self.eventTimeInterval > 0){
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.eventTimeInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self setIsIgnoreEvent:false];
+                [self setIgnoreEventTimeInterval:false];
             });
         }
-        self.isIgnoreEvent = true;
+        self.ignoreEventTimeInterval = true;
         // 实现自定义方法
         [self jx_sendAction:action to:target forEvent:event];
         // 这里看上去会陷入递归调用死循环，但在运行期此方法是和sendAction:to:forEvent:互换的，相当于执行sendAction:to:forEvent:方法，所以并不会陷入死循环。
@@ -81,5 +81,17 @@
 - (void)jx_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event
 {
     
+}
+
+-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent*)event
+{
+    if (!UIEdgeInsetsEqualToEdgeInsets(self.hitEdgeInsets, UIEdgeInsetsZero)) {
+        CGRect btnBounds = self.bounds;
+        btnBounds = UIEdgeInsetsInsetRect(btnBounds, self.hitEdgeInsets);
+        return CGRectContainsPoint(btnBounds, point);
+    }else
+    {
+        return CGRectContainsPoint(self.bounds, point);
+    }
 }
 @end

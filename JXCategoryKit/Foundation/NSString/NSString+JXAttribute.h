@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)jx_addTextFont:(UIFont *)font;
 /**
- paragraphType 绘图的风格（居中，换行模式，间距等诸多风格）NSParagraphStyle
+ paragraphType 绘图的风格（居中，换行模式，行间距等诸多风格）NSParagraphStyle
  */
 - (void)jx_addParagraphType:(NSParagraphStyle *)paragraphType;
 /**

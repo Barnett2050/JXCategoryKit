@@ -106,6 +106,40 @@
     return props;
 }
 
+- (void)jx_cleanWithAllProperties {
+    unsigned int pro_count = 0;
+    objc_property_t *properties = class_copyPropertyList([self class], &pro_count);
+    for (int i = 0; i < pro_count; i ++) {
+        objc_property_t property = properties[i];
+        NSString *propertyName = [NSString stringWithFormat:@"%s", property_getName(property)];
+        id propertyValue = [self valueForKey:(NSString *)propertyName];
+        
+        if (!propertyValue ||
+            [propertyValue isKindOfClass:[NSNull class]]) {
+            continue;
+        }
+        
+        if ([propertyValue isKindOfClass:[NSString class]]) {
+            [self setValue:@"" forKey:propertyName];
+        } else if ([propertyValue isKindOfClass:[NSNumber class]]) {
+            
+            [self setValue:[NSNumber numberWithInteger:0] forKey:propertyName];
+        } else if ([propertyValue isKindOfClass:[NSMutableDictionary class]] ||
+                 [propertyValue isKindOfClass:[NSDictionary class]]) {
+            
+            [self setValue:@{} forKey:propertyName];
+        } else if ([propertyValue isKindOfClass:[NSMutableArray class]] ||
+                 [propertyValue isKindOfClass:[NSArray class]]) {
+            
+            [self setValue:@[] forKey:propertyName];
+        } else {
+            
+            [self setValue:nil forKey:propertyName];
+        }
+    }
+    free(properties);
+}
+
 
 #pragma mark - private
 + (void)p_swizzleMethodWithOriginSel:(SEL)oriSel

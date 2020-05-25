@@ -199,6 +199,7 @@ NSMutableString：Hook了系统方法，安全取值，插入，删除。
       * 输出类属性
       * 返回类属性字典
       * kvo使用block实现
+      * 清空所有属性值
     * NSNull
       * nil空对象方法调用时安全处理
     * NSString

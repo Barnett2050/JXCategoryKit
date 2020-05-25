@@ -67,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSDictionary *)jx_properties_aps;
 
+/// 清空所有属性值
+- (void)jx_cleanWithAllProperties;
 @end
 
 NS_ASSUME_NONNULL_END
