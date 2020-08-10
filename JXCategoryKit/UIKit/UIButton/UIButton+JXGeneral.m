@@ -37,6 +37,16 @@
     objc_setAssociatedObject(self, @selector(eventTimeInterval), @(eventTimeInterval), OBJC_ASSOCIATION_ASSIGN);
 }
 
+- (void)setHitEdgeInsets:(UIEdgeInsets)hitEdgeInsets
+{
+    objc_setAssociatedObject(self, @selector(hitEdgeInsets), @(hitEdgeInsets), OBJC_ASSOCIATION_ASSIGN);
+}
+- (UIEdgeInsets)hitEdgeInsets
+{
+    NSNumber *number = objc_getAssociatedObject(self, @selector(hitEdgeInsets));
+    return number.UIEdgeInsetsValue;
+}
+
 + (void)initialize
 {
     static dispatch_once_t onceToken;

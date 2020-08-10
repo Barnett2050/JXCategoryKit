@@ -16,19 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
  substringFromIndex:
  substringToIndex:
  substringWithRange:
- getLineStart:end:contentsEnd:forRange:
  lineRangeForRange:
- getParagraphStart:end:contentsEnd:forRange:
  paragraphRangeForRange:
  enumerateSubstringsInRange:options:usingBlock:
  stringByReplacingOccurrencesOfString:withString:options:range:
  stringByReplacingCharactersInRange:withString:
  
- replaceCharactersInRange:withString:
  insertString:atIndex:
  deleteCharactersInRange:
  replaceOccurrencesOfString:withString:options:range:
- applyTransform:reverse:range:updatedRange:
  
  内部做了安全取值处理
 */

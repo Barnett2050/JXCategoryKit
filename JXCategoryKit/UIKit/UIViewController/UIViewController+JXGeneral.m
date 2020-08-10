@@ -23,6 +23,7 @@
         [dic setValue:font forKey:NSFontAttributeName];
     }
     [self.navigationController.navigationBar setTitleTextAttributes:dic];
+    
 }
 
 - (void)jx_setStatusBarBackgroundColor:(UIColor *)color

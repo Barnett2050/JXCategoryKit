@@ -10,10 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, JXImagePosition) {
-    JXImageLeftTextRightPosition = 0,              //图片在左，文字在右，默认
-    JXImageRightTextLeftPosition = 1,             //图片在右，文字在左
-    JXImageTopTextBottomPosition = 2,               //图片在上，文字在下
-    JXImageBottomTextTopPosition = 3,            //图片在下，文字在上
+    JXImageTextPositionNone = 0,              //默认无效果
+    JXImageLeftTextRightPosition,             //图片在左，文字在右
+    JXImageRightTextLeftPosition,             //图片在右，文字在左
+    JXImageTopTextBottomPosition,             //图片在上，文字在下
+    JXImageBottomTextTopPosition,             //图片在下，文字在上
 };
 
 @interface UIButton (JXShow)

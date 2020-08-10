@@ -52,13 +52,6 @@ static const char *NSCFConstantString = "__NSCFConstantString";
     }
     return @"";
 }
-// 返回指定开始索引到结束索引，指定段的字符串
-- (void)CFConstantString_getLineStart:(nullable NSUInteger *)startPtr end:(nullable NSUInteger *)lineEndPtr contentsEnd:(nullable NSUInteger *)contentsEndPtr forRange:(NSRange)range
-{
-    if ([self rangeIsAvailable:range]) {
-        [self CFConstantString_getLineStart:startPtr end:lineEndPtr contentsEnd:contentsEndPtr forRange:[self getNewRangeWith:range]];
-    }
-}
 // 返回字符串指定段的位置和长度
 - (NSRange)CFConstantString_lineRangeForRange:(NSRange)range
 {
@@ -66,13 +59,6 @@ static const char *NSCFConstantString = "__NSCFConstantString";
         return [self CFConstantString_lineRangeForRange:[self getNewRangeWith:range]];
     }
     return NSMakeRange(0, 0);
-}
-// 指定段分段取字符串
-- (void)CFConstantString_getParagraphStart:(nullable NSUInteger *)startPtr end:(nullable NSUInteger *)parEndPtr contentsEnd:(nullable NSUInteger *)contentsEndPtr forRange:(NSRange)range
-{
-    if ([self rangeIsAvailable:range]) {
-        [self CFConstantString_getParagraphStart:startPtr end:parEndPtr contentsEnd:contentsEndPtr forRange:[self getNewRangeWith:range]];
-    }
 }
 // 指定段分段的位置和长度
 - (NSRange)CFConstantString_paragraphRangeForRange:(NSRange)range

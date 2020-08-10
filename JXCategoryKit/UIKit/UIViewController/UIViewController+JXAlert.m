@@ -111,12 +111,12 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
         
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
-            if (cancleBlock) {
+        if (cancleBlock) {
+            UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
                 cancleBlock();
-            }
-        }];
-        [alertController addAction:cancelAction];
+            }];
+            [alertController addAction:cancleAction];
+        }
         
         NSArray *colors;
         if (btnColorArr.count == 0 || btnColorArr.count != btnTitleArr.count) {
@@ -173,64 +173,5 @@
     [self jx_showAlertSheetWithTitle:nil message:nil buttonTitles:btnTitleArr buttonColors:nil alertClick:clickBlock alertCancle:cancleBlock];
 }
 
-- (void)jx_showAlertSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message buttonTitles:(NSArray *)btnTitleArr buttonColors:(nullable NSArray *)btnColorArr  alertClick:(JXAlertClickIndexBlock)clickBlock
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
-        
-        NSArray *colors;
-        if (btnColorArr.count == 0 || btnColorArr.count != btnTitleArr.count) {
-            if (btnColorArr.count == 1) {
-                colors = btnColorArr;
-            }else
-            {
-                colors = nil;
-            }
-        }else
-        {
-            colors = btnColorArr;
-        }
-        
-        for (int i = 0; i < btnTitleArr.count; i++) {
-            NSString *title = btnTitleArr[i];
-            UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if (clickBlock) {
-                    NSInteger index = [btnTitleArr indexOfObject:action.title];
-                    clickBlock(index);
-                }
-            }];
-            if (colors.count != 0) {
-                if (colors.count == 1) {
-                    [action setValue:[colors firstObject] forKey:@"_titleTextColor"];
-                }else
-                {
-                    [action setValue:colors[i] forKey:@"_titleTextColor"];
-                }
-            }
-            [alertController addAction:action];
-        }
-        [self presentViewController:alertController animated:YES completion:nil];
-    });
-}
-
-- (void)jx_showAlertSheetWithTitle:(nullable NSString *)title buttonTitles:(NSArray *)btnTitleArr buttonColors:(nullable NSArray *)btnColorArr alertClick:(JXAlertClickIndexBlock)clickBlock
-{
-    [self jx_showAlertSheetWithTitle:nil message:title buttonTitles:btnTitleArr buttonColors:btnColorArr alertClick:clickBlock];
-}
-
-- (void)jx_showAlertSheetWithTitle:(nullable NSString *)title buttonTitles:(NSArray *)btnTitleArr alertClick:(JXAlertClickIndexBlock)clickBlock
-{
-    [self jx_showAlertSheetWithTitle:nil message:title buttonTitles:btnTitleArr buttonColors:nil alertClick:clickBlock];
-}
-
-- (void)jx_showAlertSheetWithButtonTitles:(NSArray *)btnTitleArr buttonColors:(nullable NSArray *)btnColorArr  alertClick:(JXAlertClickIndexBlock)clickBlock
-{
-    [self jx_showAlertSheetWithTitle:nil message:nil buttonTitles:btnTitleArr buttonColors:btnColorArr alertClick:clickBlock];
-}
-
-- (void)jx_showAlertSheetWithButtonTitles:(NSArray *)btnTitleArr alertClick:(JXAlertClickIndexBlock)clickBlock
-{
-    [self jx_showAlertSheetWithTitle:nil message:nil buttonTitles:btnTitleArr buttonColors:nil alertClick:clickBlock];
-}
 
 @end

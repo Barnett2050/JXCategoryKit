@@ -15,11 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^JXAlertClickIndexBlock)(NSInteger clickNumber);
 
 /**
- alert输入点击
- */
-typedef void(^JXAlertTextFieldClickBlock)(NSInteger clickNumber,NSArray *inputStrArr);
-
-/**
  alert 取消
  */
 typedef void(^JXAlertCancleBlock)(void);
@@ -48,40 +43,20 @@ typedef void(^JXAlertCancleBlock)(void);
 /// @param btnTitleArr 按钮标题数组
 /// @param btnColorArr 按钮颜色数组
 /// @param clickBlock 点击回调
-/// @param cancleBlock 取消回调
+/// @param cancleBlock 取消回调，为nil时不显示默认取消按钮
 - (void)jx_showAlertSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message buttonTitles:(NSArray *)btnTitleArr buttonColors:(nullable NSArray *)btnColorArr  alertClick:(JXAlertClickIndexBlock)clickBlock alertCancle:(JXAlertCancleBlock)cancleBlock;
 
-/// AlertSheet系统提示，无message，默认带取消按钮
+/// AlertSheet系统提示，无message
 - (void)jx_showAlertSheetWithTitle:(nullable NSString *)title buttonTitles:(NSArray *)btnTitleArr buttonColors:(nullable NSArray *)btnColorArr  alertClick:(JXAlertClickIndexBlock)clickBlock alertCancle:(JXAlertCancleBlock)cancleBlock;
 
-/// AlertSheet系统提示，无message，无colors，默认带取消按钮
+/// AlertSheet系统提示，无message，无colors
 - (void)jx_showAlertSheetWithTitle:(nullable NSString *)title buttonTitles:(NSArray *)btnTitleArr alertClick:(JXAlertClickIndexBlock)clickBlock alertCancle:(JXAlertCancleBlock)cancleBlock;
 
-/// AlertSheet系统提示，无title，无message，默认带取消按钮
+/// AlertSheet系统提示，无title，无message
 - (void)jx_showAlertSheetWithButtonTitles:(NSArray *)btnTitleArr buttonColors:(nullable NSArray *)btnColorArr  alertClick:(JXAlertClickIndexBlock)clickBlock alertCancle:(JXAlertCancleBlock)cancleBlock;
 
-/// AlertSheet系统提示，无title，无message，无colors，默认带取消按钮
-- (void)jx_showAlertSheetWithButtonTitles:(NSArray *)btnTitleArr   alertClick:(JXAlertClickIndexBlock)clickBlock alertCancle:(JXAlertCancleBlock)cancleBlock;
-
-/// AlertSheet系统提示
-/// @param title 标题
-/// @param message 内容
-/// @param btnTitleArr 按钮标题数组
-/// @param btnColorArr 按钮颜色数组
-/// @param clickBlock 点击回调
-- (void)jx_showAlertSheetWithTitle:(nullable NSString *)title message:(nullable NSString *)message buttonTitles:(NSArray *)btnTitleArr buttonColors:(nullable NSArray *)btnColorArr alertClick:(JXAlertClickIndexBlock)clickBlock;
-
-/// AlertSheet系统提示，无message
-- (void)jx_showAlertSheetWithTitle:(nullable NSString *)title buttonTitles:(NSArray *)btnTitleArr buttonColors:(nullable NSArray *)btnColorArr alertClick:(JXAlertClickIndexBlock)clickBlock;
-
-/// AlertSheet系统提示，无message，无colors
-- (void)jx_showAlertSheetWithTitle:(nullable NSString *)title buttonTitles:(NSArray *)btnTitleArr alertClick:(JXAlertClickIndexBlock)clickBlock;
-
-/// AlertSheet系统提示，无title，无message
-- (void)jx_showAlertSheetWithButtonTitles:(NSArray *)btnTitleArr buttonColors:(nullable NSArray *)btnColorArr  alertClick:(JXAlertClickIndexBlock)clickBlock;
-
 /// AlertSheet系统提示，无title，无message，无colors
-- (void)jx_showAlertSheetWithButtonTitles:(NSArray *)btnTitleArr alertClick:(JXAlertClickIndexBlock)clickBlock;
+- (void)jx_showAlertSheetWithButtonTitles:(NSArray *)btnTitleArr   alertClick:(JXAlertClickIndexBlock)clickBlock alertCancle:(JXAlertCancleBlock)cancleBlock;
 
 @end
 

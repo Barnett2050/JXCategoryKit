@@ -20,19 +20,15 @@ static const char *NSCFString = "__NSCFString";
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(substringFromIndex:) swizzleSel:@selector(CFConstantString_substringFromIndex:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(substringToIndex:) swizzleSel:@selector(CFConstantString_substringToIndex:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(substringWithRange:) swizzleSel:@selector(CFConstantString_substringWithRange:)];
-        [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(getLineStart:end:contentsEnd:forRange:) swizzleSel:@selector(CFConstantString_getLineStart:end:contentsEnd:forRange:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(lineRangeForRange:) swizzleSel:@selector(CFConstantString_lineRangeForRange:)];
-        [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(getParagraphStart:end:contentsEnd:forRange:) swizzleSel:@selector(CFConstantString_getParagraphStart:end:contentsEnd:forRange:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(paragraphRangeForRange:) swizzleSel:@selector(CFConstantString_paragraphRangeForRange:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(enumerateSubstringsInRange:options:usingBlock:) swizzleSel:@selector(CFConstantString_enumerateSubstringsInRange:options:usingBlock:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(stringByReplacingOccurrencesOfString:withString:options:range:) swizzleSel:@selector(CFConstantString_stringByReplacingOccurrencesOfString:withString:options:range:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(stringByReplacingCharactersInRange:withString:) swizzleSel:@selector(CFConstantString_stringByReplacingCharactersInRange:withString:)];
         // mutablestring
-        [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(replaceCharactersInRange:withString:) swizzleSel:@selector(CFConstantString_replaceCharactersInRange:withString:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(insertString:atIndex:) swizzleSel:@selector(CFConstantString_insertString:atIndex:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(deleteCharactersInRange:) swizzleSel:@selector(CFConstantString_deleteCharactersInRange:)];
         [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(replaceOccurrencesOfString:withString:options:range:) swizzleSel:@selector(CFConstantString_replaceOccurrencesOfString:withString:options:range:)];
-        [objc_getClass(NSCFString) jx_swizzleClassInstanceMethodWithOriginSel:@selector(applyTransform:reverse:range:updatedRange:) swizzleSel:@selector(CFConstantString_applyTransform:reverse:range:updatedRange:)];
     });
 }
 
@@ -58,13 +54,6 @@ static const char *NSCFString = "__NSCFString";
     }
     return @"";
 }
-// 返回指定开始索引到结束索引，指定段的字符串
-- (void)CFConstantString_getLineStart:(nullable NSUInteger *)startPtr end:(nullable NSUInteger *)lineEndPtr contentsEnd:(nullable NSUInteger *)contentsEndPtr forRange:(NSRange)range
-{
-    if ([self rangeIsAvailable:range]) {
-        [self CFConstantString_getLineStart:startPtr end:lineEndPtr contentsEnd:contentsEndPtr forRange:[self getNewRangeWith:range]];
-    }
-}
 // 返回字符串指定段的位置和长度
 - (NSRange)CFConstantString_lineRangeForRange:(NSRange)range
 {
@@ -72,13 +61,6 @@ static const char *NSCFString = "__NSCFString";
         return [self CFConstantString_lineRangeForRange:[self getNewRangeWith:range]];
     }
     return NSMakeRange(0, 0);
-}
-// 指定段分段取字符串
-- (void)CFConstantString_getParagraphStart:(nullable NSUInteger *)startPtr end:(nullable NSUInteger *)parEndPtr contentsEnd:(nullable NSUInteger *)contentsEndPtr forRange:(NSRange)range
-{
-    if ([self rangeIsAvailable:range]) {
-        [self CFConstantString_getParagraphStart:startPtr end:parEndPtr contentsEnd:contentsEndPtr forRange:[self getNewRangeWith:range]];
-    }
 }
 // 指定段分段的位置和长度
 - (NSRange)CFConstantString_paragraphRangeForRange:(NSRange)range
@@ -112,12 +94,6 @@ static const char *NSCFString = "__NSCFString";
     return self;
 }
 
-- (void)CFConstantString_replaceCharactersInRange:(NSRange)range withString:(NSString *)aString
-{
-    if ([self rangeIsAvailable:range]) {
-        return [self CFConstantString_replaceCharactersInRange:[self getNewRangeWith:range] withString:aString];
-    }
-}
 - (void)CFConstantString_insertString:(NSString *)aString atIndex:(NSUInteger)loc
 {
     if (loc >= 0 && loc < self.length + 1) {
@@ -136,13 +112,6 @@ static const char *NSCFString = "__NSCFString";
         return [self CFConstantString_replaceOccurrencesOfString:target withString:replacement options:options range:[self getNewRangeWith:searchRange]];
     }
     return NSNotFound;
-}
-- (BOOL)CFConstantString_applyTransform:(NSStringTransform)transform reverse:(BOOL)reverse range:(NSRange)range updatedRange:(nullable NSRangePointer)resultingRange
-{
-    if ([self rangeIsAvailable:range]) {
-        return [self CFConstantString_applyTransform:transform reverse:reverse range:[self getNewRangeWith:range] updatedRange:resultingRange];
-    }
-    return false;
 }
 #pragma mark - private
 - (BOOL)rangeIsAvailable:(NSRange)range

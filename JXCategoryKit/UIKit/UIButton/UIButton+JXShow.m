@@ -14,6 +14,7 @@
 @property (nonatomic, weak) UIActivityIndicatorView *loadIndicatorView;
 /** 按钮名称 */
 @property (nonatomic, copy) NSString *btnTitle;
+
 @end
 
 @implementation UIButton (JXShow)
@@ -43,6 +44,12 @@
     CGFloat changedHeight = labelHeight + imageHeight + spacing - tempHeight;
     
     switch (postion) {
+        case JXImageTextPositionNone:
+            self.imageEdgeInsets = UIEdgeInsetsZero;
+            self.titleEdgeInsets = UIEdgeInsetsZero;
+            self.contentEdgeInsets = UIEdgeInsetsZero;
+            break;
+            
         case JXImageLeftTextRightPosition:
             self.imageEdgeInsets = UIEdgeInsetsMake(0, -spacing/2, 0, spacing/2);
             self.titleEdgeInsets = UIEdgeInsetsMake(0, spacing/2, 0, -spacing/2);
@@ -70,6 +77,7 @@
         default:
             break;
     }
+    [self layoutIfNeeded];
 }
 
 - (void)jx_startAnimationWithTransform:(CGFloat)transform color:(UIColor *)color isHideTitle:(BOOL)isHideTitle

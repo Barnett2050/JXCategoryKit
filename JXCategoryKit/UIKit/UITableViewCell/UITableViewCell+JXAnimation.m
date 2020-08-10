@@ -16,7 +16,7 @@
     self.layer.transform = transform;
     // 不透明度
     self.layer.opacity = 0;
-    [UIView beginAnimations:@"scale" context:nil];
+    [UIView beginAnimations:@"s" context:nil];
     [UIView setAnimationDuration:0.5];
     self.layer.transform = CATransform3DIdentity;
     self.layer.opacity = 1;
