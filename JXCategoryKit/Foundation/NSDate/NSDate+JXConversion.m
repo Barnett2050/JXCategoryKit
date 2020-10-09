@@ -35,8 +35,7 @@
     NSDate *date;
     if (isMilliSecond) {
         date = [NSDate dateWithTimeIntervalSince1970:(timestamp/1000)];
-    }else
-    {
+    } else {
         date = [NSDate dateWithTimeIntervalSince1970:timestamp];
     }
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -60,8 +59,7 @@
     UInt64 time;
     if (isMilliSecond) {
         time = [date timeIntervalSince1970]*1000;
-    }else
-    {
+    } else {
         time = [date timeIntervalSince1970];
     }
     return time;
@@ -74,8 +72,7 @@
     BOOL isMilliSecond = [timestamp doubleValue] > 140000000000;
     if (isMilliSecond) {
         date = [NSDate dateWithTimeIntervalSince1970:timestamp.longLongValue/1000];
-    }else
-    {
+    } else {
         date = [NSDate dateWithTimeIntervalSince1970:timestamp.longLongValue];
     }
     NSString * strBefore = @"";
@@ -91,18 +88,15 @@
         
         if (nDay > 0) {
             strBefore = [df stringFromDate:date];
-        }
-        else if (nHour > 0) {
+        } else if (nHour > 0) {
             strBefore = [NSString stringWithFormat:@"%li小时前",(long)nHour];
-        }
-        else if (nMin > 0) {
+        } else if (nMin > 0) {
             strBefore = [NSString stringWithFormat:@"%li分钟前",(long)nMin];
-        }
-        else if (nSec > 0) {
+        } else if (nSec > 0) {
             strBefore = [NSString stringWithFormat:@"%li秒前",(long)nSec];
-        }
-        else
+        } else {
             strBefore = @"刚刚";
+        }
     }
     return strBefore;
 }
@@ -115,46 +109,42 @@
     NSString *formatStr;
     if (format == nil) {
         formatStr = @"hh:mm:ss";
-    }else
-    {
-        formatStr = format;
+    } else {
+        formatStr = [format lowercaseString];
     }
-    
-    formatStr = [formatStr lowercaseString];
+
     NSString *format_time;
     
     NSInteger seconds = totalSecond % 60;
     NSInteger minutes = (totalSecond / 60) % 60;
     NSInteger hours = ((totalSecond / 60) / 60) % 24;
     
-    //format of hour
     NSString *str_hour;
+    NSString *str_minute;
+    NSString *str_second;
+    
+    // format of hour
     if ([formatStr containsString:@"hh"]) {
-        str_hour = [NSString stringWithFormat:@"%02ld",hours];
+        str_hour = [NSString stringWithFormat:@"%02ld",(long)hours];
         format_time = [formatStr stringByReplacingOccurrencesOfString:@"hh" withString:str_hour];
-    }else if ([formatStr containsString:@"h"])
-    {
-        str_hour = [NSString stringWithFormat:@"%ld",hours];
+    } else if ([formatStr containsString:@"h"]) {
+        str_hour = [NSString stringWithFormat:@"%ld",(long)hours];
         format_time = [formatStr stringByReplacingOccurrencesOfString:@"h" withString:str_hour];
     }
-    //format of minute
-    NSString *str_minute;
+    // format of minute
     if ([formatStr containsString:@"mm"]) {
-        str_minute = [NSString stringWithFormat:@"%02ld",minutes];
+        str_minute = [NSString stringWithFormat:@"%02ld",(long)minutes];
         format_time = [format_time stringByReplacingOccurrencesOfString:@"mm" withString:str_minute];
-    }else if ([formatStr containsString:@"m"])
-    {
-        str_minute = [NSString stringWithFormat:@"%ld",minutes];
+    } else if ([formatStr containsString:@"m"]) {
+        str_minute = [NSString stringWithFormat:@"%ld",(long)minutes];
         format_time = [format_time stringByReplacingOccurrencesOfString:@"m" withString:str_minute];
     }
-    //format of second
-    NSString *str_second;
+    // format of second
     if ([formatStr containsString:@"ss"]) {
-        str_second = [NSString stringWithFormat:@"%02ld",seconds];
+        str_second = [NSString stringWithFormat:@"%02ld",(long)seconds];
         format_time = [format_time stringByReplacingOccurrencesOfString:@"ss" withString:str_second];
-    }else if ([formatStr containsString:@"s"])
-    {
-        str_second = [NSString stringWithFormat:@"%ld",seconds];
+    } else if ([formatStr containsString:@"s"]) {
+        str_second = [NSString stringWithFormat:@"%ld",(long)seconds];
         format_time = [format_time stringByReplacingOccurrencesOfString:@"s" withString:str_second];
     }
 
@@ -169,28 +159,24 @@
     NSDate *date;
     if (isMilliSecond) {
         date = [NSDate dateWithTimeIntervalSince1970:[timestamp longLongValue] / 1000];
-    }else
-    {
+    } else {
         date = [NSDate dateWithTimeIntervalSince1970:[timestamp longLongValue]];
     }
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     if ([NSDate p_isToday:date]) {
         // 同一天
         [formatter setDateFormat:@"HH:mm"];
-        return [formatter stringFromDate:date];
     } else if ([NSDate p_isYesterday:date]) {
         // 昨天
         [formatter setDateFormat:@"昨天 HH:mm"];
-        return [formatter stringFromDate:date];
     } else if ([NSDate p_isSameYear:[NSDate date] date2:date]) {
         // 同一年
         [formatter setDateFormat:@"M月dd日 HH:mm"];
-        return [formatter stringFromDate:date];
     } else {
         // 不同年
         [formatter setDateFormat:@"yyyy年M月dd日"];
-        return [formatter stringFromDate:date];
     }
+    return [formatter stringFromDate:date];
 }
 
 - (NSString *)jx_getDateTimeStringWithformat:(NSString *)format
@@ -206,20 +192,19 @@
     if (timestamp.length < 1 || !timestamp) return @"";
     
     double value = timestamp.doubleValue;
-    NSDate *dat = [NSDate dateWithTimeIntervalSinceNow:0];
-    NSTimeInterval time = [dat timeIntervalSince1970];
+    BOOL isMilliSecond = value > 140000000000;
+    if (isMilliSecond) {
+        value = value/1000;
+    }
+    
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval time = [date timeIntervalSince1970];
     if (time <= value) {
         return @"刚刚";
     }
 
-    BOOL isMilliSecond = [timestamp doubleValue] > 140000000000;
-    NSDate *expireDate;
-    if (isMilliSecond) {
-        expireDate = [NSDate dateWithTimeIntervalSince1970:value/1000];
-    }else
-    {
-        expireDate = [NSDate dateWithTimeIntervalSince1970:value];
-    }
+    NSDate *expireDate = [NSDate dateWithTimeIntervalSince1970:value];
+ 
     NSDate *nowDate = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth
@@ -233,24 +218,17 @@
     int jxHour = abs((int)dateCom.hour);
     int jxMinute = abs((int)dateCom.minute);
     
-    if(jxYear != 0)
-    {
+    if(jxYear != 0) {
         returnStr = [NSString stringWithFormat:@"%d年前",jxYear];
-    }else if (jxMonth != 0)
-    {
+    } else if (jxMonth != 0) {
         returnStr = [NSString stringWithFormat:@"%d月前",jxMonth];
-    }else if (jxDay != 0)
-    {
+    } else if (jxDay != 0) {
         returnStr = [NSString stringWithFormat:@"%d天前",jxDay];
-    }
-    else if(jxHour != 0)
-    {
+    } else if(jxHour != 0) {
         returnStr = [NSString stringWithFormat:@"%d小时前",jxHour];
-    }else if(jxMinute > 1 && jxMinute < 60)
-    {
+    } else if(jxMinute > 1 && jxMinute < 60) {
         returnStr = [NSString stringWithFormat:@"%d分钟前",jxMinute];
-    }else
-    {
+    } else {
         returnStr = @"刚刚";
     }
     return returnStr;
@@ -265,14 +243,14 @@
     NSDate *date = [dateFormatter dateFromString:timeStr];
     return date;
 }
-+ (BOOL)p_isToday:(NSDate*)date {
++ (BOOL)p_isToday:(NSDate *)date {
     if (fabs(date.timeIntervalSinceNow) >= 60 * 60 * 24) return NO;
     NSInteger day = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:date] day];
     NSInteger nowDay = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:[NSDate new]] day];
     return nowDay == day;
 }
 
-+ (BOOL)p_isYesterday:(NSDate*)date {
++ (BOOL)p_isYesterday:(NSDate *)date {
     NSTimeInterval aTimeInterval = [date timeIntervalSinceReferenceDate] + 86400 * 1;
     NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:aTimeInterval];
     return [NSDate p_isToday:newDate];
@@ -281,9 +259,6 @@
 + (BOOL)p_isSameYear:(NSDate *)date1 date2:(NSDate*)date2 {
     NSInteger year1 = [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:date1] year];
     NSInteger year2 = [[[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:date2] year];
-    if (year1 != year2) {
-        return NO;
-    }
-    return YES;
+    return year1 == year2;
 }
 @end

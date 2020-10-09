@@ -11,10 +11,22 @@
 
 @implementation NSData (JXGeneral)
 
+- (BOOL)jx_isGzippedData
+{
+    const UInt8 *bytes = (const UInt8 *)self.bytes;
+    return (self.length >= 2 && bytes[0] == 0x1f && bytes[1] == 0x8b);
+}
+
+- (BOOL)jx_isZlibbedData
+{
+    const UInt8 *bytes = (const UInt8 *)self.bytes;
+    return (self.length >= 2 && bytes[0] == 0x78 && bytes[1] == 0x9c);
+}
+
+
 - (NSData *)jx_gzippedDataWithCompressionLevel:(float)level
 {
-    if (self.length == 0 || [self jx_isGzippedData])
-    {
+    if (self.length == 0 || [self jx_isGzippedData]) {
         return self;
     }
 
@@ -98,11 +110,7 @@
     return output;
 }
 
-- (BOOL)jx_isGzippedData
-{
-    const UInt8 *bytes = (const UInt8 *)self.bytes;
-    return (self.length >= 2 && bytes[0] == 0x1f && bytes[1] == 0x8b);
-}
+
 
 - (nullable NSData *)jx_zlibbedDataWithCompressionLevel:(float)level
 {
@@ -197,12 +205,6 @@
         [decompressed setLength:strm.total_out];
         return [NSData dataWithData:decompressed];
     } else return nil;
-}
-
-- (BOOL)jx_isZlibbedData
-{
-    const UInt8 *bytes = (const UInt8 *)self.bytes;
-    return (self.length >= 2 && bytes[0] == 0x78 && bytes[1] == 0x9c);
 }
 
 + (NSData *)jx_dataNamed:(NSString *)name

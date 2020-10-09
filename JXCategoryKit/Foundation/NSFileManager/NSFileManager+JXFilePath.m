@@ -32,7 +32,7 @@
     return [[self jx_pathForSystemFile:directory] stringByAppendingPathComponent:fileName];
 }
 
-+ (NSString *)jx_pathFor:(JXPathType)pathType
++ (NSString *)jx_directoryPathFor:(JXPathType)pathType
 {
     switch (pathType) {
         case JXDocumentPathType:
@@ -76,7 +76,7 @@
 
 + (NSString *)jx_filePathAt:(JXPathType)pathType fileName:(NSString *)fileName isCreat:(BOOL)isCreat
 {
-    NSString *filePath = [[self jx_pathFor:pathType] stringByAppendingPathComponent:fileName];
+    NSString *filePath = [[self jx_directoryPathFor:pathType] stringByAppendingPathComponent:fileName];
     if (![[NSFileManager defaultManager] fileExistsAtPath:filePath] && isCreat) {
         [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
     }
@@ -85,7 +85,7 @@
 
 + (NSString *)jx_directoryPathAt:(JXPathType)pathType directoryName:(NSString *)directoryName isCreat:(BOOL)isCreat
 {
-    NSString *directoryPath = [[self jx_pathFor:pathType] stringByAppendingPathComponent:directoryName];
+    NSString *directoryPath = [[self jx_directoryPathFor:pathType] stringByAppendingPathComponent:directoryName];
     if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath] && isCreat) {
         [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:true attributes:nil error:nil];
     }

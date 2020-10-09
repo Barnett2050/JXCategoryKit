@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "NSData+JXEncrypt.h"
 @interface ViewController ()
 
 @end
@@ -19,6 +19,9 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    NSString *str = @"123456789haha";
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    NSLog(@"%@",[data jx_hexString]);
 }
 
 @end

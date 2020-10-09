@@ -38,11 +38,9 @@
         UIColor *dynamicColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
          if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight) {
              return lightColor;
-         }else if(traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-         {
+         } else if(traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
              return darkColor;
-         }else
-         {
+         } else {
              return lightColor;
          }
         }];
@@ -55,7 +53,7 @@
 
 + (UIColor *)jx_colorFromRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b alpha:(CGFloat)a
 {
-    return [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a/255.0f];
+    return [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a];
 }
 
 + (UIColor *)jx_colorFromRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b
@@ -66,11 +64,11 @@
 + (UIColor *)jx_colorFromRGBA:(uint32_t)rgbaValue
 {
     CGFloat r= (rgbaValue & 0xFF000000) >> 24;
-    CGFloat g= (rgbaValue & 0xFF0000) >> 16 ;
+    CGFloat g= (rgbaValue & 0xFF0000) >> 16;
     CGFloat b= (rgbaValue & 0xFF00) >> 8;
     CGFloat a= (rgbaValue & 0xFF);
     
-    return [UIColor jx_colorFromRed:r green:g blue:b alpha:a];
+    return [UIColor jx_colorFromRed:r green:g blue:b alpha:a/255.0];
 }
 
 + (UIColor *)jx_colorFromRGB:(uint32_t)rgbValue
@@ -124,7 +122,7 @@
     uint8_t green = g * 255;
     uint8_t blue = b * 255;
     uint8_t alpha = a * 255;
-    return (red << 24) + (green << 16) + (blue << 8) + alpha;
+    return (red << 24) + (green << 16) + (blue << 8) + (alpha);
 }
 
 - (NSString*)jx_rgbaHexString
@@ -138,7 +136,6 @@
 }
 
 #pragma mark - private
-
 - (NSString *)p_hexStringWithAlpha:(BOOL)withAlpha {
     CGColorRef color = self.CGColor;
     size_t count = CGColorGetNumberOfComponents(color);
@@ -169,7 +166,7 @@
     
     if ([rgbaString hasPrefix:@"#"]) {
         rgbaString = [rgbaString substringFromIndex:1];
-    }else if ([rgbaString hasPrefix:@"0X"]){
+    } else if ([rgbaString hasPrefix:@"0X"]){
         rgbaString = [rgbaString substringFromIndex:2];
     }
     
@@ -183,19 +180,16 @@
         *b = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(2, 1)]] / 255.0f;
         if (length == 4) {
             *a = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(3, 1)]] / 255.0f;
-        }else
-        {
+        } else {
             *a = 1.0;
         }
-    }else
-    {
+    } else {
         *r = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(0, 2)]] / 255.0f;
         *g = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(2, 2)]] / 255.0f;
         *b = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(4, 2)]] / 255.0f;
         if (length == 8) {
             *a = [self p_hexStringToInt:[rgbaString substringWithRange:NSMakeRange(6, 2)]] / 255.0f;
-        }else
-        {
+        } else {
             *a = 1.0;
         }
     }

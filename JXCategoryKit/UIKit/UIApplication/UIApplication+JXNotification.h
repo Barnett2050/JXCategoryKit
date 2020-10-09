@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIApplication (JXNotification)
 
 /// 通知是否启用
-+ (BOOL)jx_userNotificationIsEnable;
++ (void)jx_userNotificationIsEnable:(void(^)(BOOL isEnable))authorityBlock;
 
 /// 跳转App系统通知设置
 + (void)jx_goToAppSystemSetting;

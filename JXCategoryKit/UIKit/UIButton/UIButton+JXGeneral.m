@@ -71,8 +71,7 @@
 {
     if (self.eventTimeInterval == 0) {
         [self wxd_sendAction:action to:target forEvent:event];
-    }else
-    {
+    } else {
         if (self.ignoreEventTimeInterval){
             return;
         }else if (self.eventTimeInterval > 0){
@@ -99,8 +98,7 @@
         CGRect btnBounds = self.bounds;
         btnBounds = UIEdgeInsetsInsetRect(btnBounds, self.hitEdgeInsets);
         return CGRectContainsPoint(btnBounds, point);
-    }else
-    {
+    } else {
         return CGRectContainsPoint(self.bounds, point);
     }
 }

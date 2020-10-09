@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  快速返回沙盒中，你指定的系统文件的中某个子文件的路径。tmp文件除外，请使用filePathAtTempWithFileName，不创建文件
  
- @param directory 你指的的系统文件
+ @param directory NSSearchPathDirectory枚举
  @param fileName 子文件名
  @return 快速返回沙盒中，你指定的系统文件的中某个子文件的路径
  */
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @return Documents文件的路径
  */
-+ (NSString *)jx_pathFor:(JXPathType)pathType;
++ (NSString *)jx_directoryPathFor:(JXPathType)pathType;
 
 /**
  快速返回沙盒中选定文件的路径

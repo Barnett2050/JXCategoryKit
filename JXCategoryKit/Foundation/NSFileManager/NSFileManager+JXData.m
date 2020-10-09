@@ -10,6 +10,17 @@
 
 @implementation NSFileManager (JXData)
 
++ (double)jx_fileSizeAtPath:(NSString*)filePath
+{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    
+    if ([manager fileExistsAtPath:filePath]){
+        double theSize = [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+        return theSize;
+    }
+    return 0;
+}
+
 + (NSString *)jx_fileSizeStringAtPath:(NSString*)filePath
 {
     
@@ -34,17 +45,6 @@
     }
 }
 
-+ (double)jx_fileSizeAtPath:(NSString*)filePath
-{
-    NSFileManager* manager = [NSFileManager defaultManager];
-    
-    if ([manager fileExistsAtPath:filePath]){
-        double theSize = [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
-        return theSize;
-    }
-    return 0;
-}
-
 + (void)jx_writeDataToSharedDocumentsWith:(NSData *)data directoryName:(NSString *)directory fileName:(NSString *)file result:(void(^)(BOOL isSuccess))resultBlock
 {
     
@@ -59,8 +59,7 @@
         } else {
             NSLog(@"%@已存在.",filePath);
         }
-    }else
-    {
+    } else {
         filePath = [NSString stringWithString:documentsPath];
     }
     if (file != nil) {

@@ -20,17 +20,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIImage *)jx_blurImageWithAccelerateBlurValue:(CGFloat)blurValue;
 
 /// 高亮模糊
--(UIImage*)jx_applyLightEffect;
+-(UIImage *)jx_applyLightEffect;
 
 /// 轻度亮模糊
--(UIImage*)jx_applyExtraLightEffect;
+-(UIImage *)jx_applyExtraLightEffect;
 
 /// 暗色模糊
--(UIImage*)jx_applyDarkEffect;
+-(UIImage *)jx_applyDarkEffect;
 
 /// 自定义颜色模糊图片
 /// @param tintColor 影响颜色
--(UIImage*)jx_applyTintEffectWithColor:(UIColor*)tintColor;
+-(UIImage *)jx_applyTintEffectWithColor:(UIColor*)tintColor;
 
 /// 模糊图片
 /// @param blurRadius 模糊半径

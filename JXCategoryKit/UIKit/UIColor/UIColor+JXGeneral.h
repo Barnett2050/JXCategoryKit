@@ -21,8 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - iOS 13.0 之后颜色设置
 
 /// iOS 13.0 亮暗颜色设置
-/// @param lightColor 浅色
-/// @param darkColor 深色
+/// @param lightColor 浅色模式时颜色
+/// @param darkColor 深色模式时颜色
 + (UIColor *)jx_colorWithLight:(UIColor *)lightColor darkColor:(UIColor *)darkColor;
 
 #pragma mark - 十进制

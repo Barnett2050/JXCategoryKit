@@ -11,12 +11,48 @@
 
 @implementation UIApplication (JXNotification)
 
-+ (BOOL)jx_userNotificationIsEnable
++ (void)jx_userNotificationIsEnable:(void(^)(BOOL isEnable))authorityBlock
 {
-    BOOL isEnable = NO;
-    UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
-    isEnable = (UIUserNotificationTypeNone == setting.types) ? NO : YES;
-    return isEnable;
+    if (@available(iOS 10.0, *)) {
+        [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+            if (settings.authorizationStatus == UNAuthorizationStatusDenied) {
+                // 用户未授权通知
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (authorityBlock) {
+                        authorityBlock(NO);
+                    }
+                });
+            } else if (settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
+                // 用户已授权通知
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (authorityBlock) {
+                        authorityBlock(YES);
+                    }
+                });
+            } else if (settings.authorizationStatus == UNAuthorizationStatusNotDetermined) {
+                // 用户未判断
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (authorityBlock) {
+                        authorityBlock(NO);
+                    }
+                });
+            }
+        }];
+    } else {
+        if ([[UIApplication sharedApplication] currentUserNotificationSettings].types  == UIUserNotificationTypeNone) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (authorityBlock) {
+                    authorityBlock(NO);
+                }
+            });
+        }else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (authorityBlock) {
+                    authorityBlock(YES);
+                }
+            });
+        }
+    }
 }
 
 + (void)jx_goToAppSystemSetting
@@ -49,8 +85,7 @@
                     }
                 }];
                 
-            }else
-            {
+            } else {
                 UIApplication *application = [UIApplication sharedApplication];
                 if ([application
                      respondsToSelector:@selector(registerUserNotificationSettings:)]) {

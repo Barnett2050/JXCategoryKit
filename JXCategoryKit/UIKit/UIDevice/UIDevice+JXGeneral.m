@@ -61,7 +61,7 @@
 + (NSInteger)jx_getSignalStrength{
     UIApplication *app = [UIApplication sharedApplication];
     NSArray *subviews = [[[app valueForKey:@"statusBar"] valueForKey:@"foregroundView"] subviews];
-    NSString *dataNetworkItemView = nil;
+    UIView *dataNetworkItemView = nil;
     
     for (id subview in subviews) {
         if([subview isKindOfClass:[NSClassFromString(@"UIStatusBarDataNetworkItemView") class]]) {
@@ -78,10 +78,8 @@
 + (NSString *)jx_deviceName
 {
     struct utsname systemInfo;
-    
     uname(&systemInfo);
-    
-    NSString*platform = [NSString stringWithCString: systemInfo.machine encoding:NSASCIIStringEncoding];
+    NSString *platform = [NSString stringWithCString: systemInfo.machine encoding:NSASCIIStringEncoding];
     
     // iPhone
     NSDictionary *phoneTypeDictionary = @{@"iPhone1,1":@"iPhone 2G",
@@ -101,7 +99,7 @@
                                           @"iPhone7,2":@"iPhone 6",
                                           @"iPhone8,1":@"iPhone 6s",
                                           @"iPhone8,2":@"iPhone 6s",
-                                          @"iPhone8,4":@"iPhone SE",
+                                          @"iPhone8,4":@"iPhone SE (1st generation)",
                                           @"iPhone9,1":@"iPhone 7",
                                           @"iPhone9,2":@"iPhone 7 Plus",
                                           @"iPhone9,3":@"iPhone 7",
@@ -109,7 +107,7 @@
                                           @"iPhone10,1":@"iPhone 8",
                                           @"iPhone10,4":@"iPhone 8",
                                           @"iPhone10,2":@"iPhone 8 Plus",
-                                          @"iPhone10,5":@"iPhone 8",
+                                          @"iPhone10,5":@"iPhone 8 Plus",
                                           @"iPhone10,3":@"iPhone X",
                                           @"iPhone10,6":@"iPhone X",
                                           @"iPhone11,8":@"iPhone XR",
@@ -118,7 +116,8 @@
                                           @"iPhone11,4":@"iPhone XS Max",
                                           @"iPhone12,1":@"iPhone 11",
                                           @"iPhone12,3":@"iPhone 11 Pro",
-                                          @"iPhone12,5":@"iPhone 11 Pro Max"};
+                                          @"iPhone12,5":@"iPhone 11 Pro Max",
+                                          @"iPhone12,8":@"iPhone SE (2nd generation)"};
     if ([platform containsString:@"iPhone"]) {
         return [phoneTypeDictionary objectForKey:platform];
     }
@@ -171,6 +170,10 @@
                                         @"iPad7,2":@"iPad Pro 2 12.9",
                                         @"iPad7,3":@"iPad Pro 10.5",
                                         @"iPad7,4":@"iPad Pro 10.5",
+                                        @"iPad7,5":@"iPad 6",
+                                        @"iPad7,6":@"iPad 6",
+                                        @"iPad7,11":@"iPad 7",
+                                        @"iPad7,12":@"iPad 7",
                                         @"iPad8,1":@"iPad Pro 11.0",
                                         @"iPad8,2":@"iPad Pro 11.0",
                                         @"iPad8,3":@"iPad Pro 11.0",
@@ -179,6 +182,10 @@
                                         @"iPad8,6":@"iPad Pro 3 12.9",
                                         @"iPad8,7":@"iPad Pro 3 12.9",
                                         @"iPad8,8":@"iPad Pro 3 12.9",
+                                        @"iPad8,9":@"iPad Pro 2 11.0",
+                                        @"iPad8,10":@"iPad Pro 2 11.0",
+                                        @"iPad8,11":@"iPad Pro 4 12.9",
+                                        @"iPad8,12":@"iPad Pro 4 12.9",
                                         @"iPad11,1":@"iPad mini 5",
                                         @"iPad11,2":@"iPad mini 5",
                                         @"iPad11,3":@"iPad Air 3",

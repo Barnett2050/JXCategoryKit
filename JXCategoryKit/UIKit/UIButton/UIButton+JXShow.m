@@ -27,11 +27,9 @@
     
     CGFloat imageWidth = self.imageView.image.size.width;
     CGFloat imageHeight = self.imageView.image.size.height;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    CGFloat labelWidth = [self.titleLabel.text sizeWithFont:self.titleLabel.font].width;
-    CGFloat labelHeight = [self.titleLabel.text sizeWithFont:self.titleLabel.font].height;
-#pragma clang diagnostic pop
+
+    CGFloat labelWidth = [self.titleLabel.text sizeWithAttributes:@{NSFontAttributeName : self.titleLabel.font}].width;
+    CGFloat labelHeight = [self.titleLabel.text sizeWithAttributes:@{NSFontAttributeName : self.titleLabel.font}].height;
     
     CGFloat imageOffsetX = (imageWidth + labelWidth) / 2 - imageWidth / 2;//image中心移动的x距离
     CGFloat imageOffsetY = imageHeight / 2 + spacing / 2;//image中心移动的y距离

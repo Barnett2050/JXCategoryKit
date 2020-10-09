@@ -41,11 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)jx_getBeforeTimeFromTimestamp:(NSString *)timestamp;
 
 /// 将秒根据格式转换，限于时分秒
-/// @param totalSecond 秒，
+/// @param totalSecond 秒
 /// @param format 格式,h小时 m分钟 s秒，hh代表不够补零,默认hh:mm:ss
 + (NSString *)jx_getHHMMSSFromSS:(NSInteger)totalSecond format:(nullable NSString *)format;
 
-/**  时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)*/
+/**  时间戳根据格式返回数据 HH:mm / 昨天 HH:mm / MM月dd日 HH:mm / yyyy年MM月dd日 */
 + (NSString *)jx_getVariableFormatDateStringFromTimestamp:(NSString *)timestamp;
 
 /// 根据日期格式Date转时间字符串

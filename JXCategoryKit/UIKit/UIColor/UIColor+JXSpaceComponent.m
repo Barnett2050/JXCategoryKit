@@ -105,7 +105,7 @@
     if (![self getRed:&r green:&g blue:&b alpha:&a]) {
         return NO;
     }
-    YY_RGB2CMYK(r, g, b, cyan, magenta, yellow, black);
+    [UIColor jx_RGBToCMYKWithRed:r green:g blue:b cyan:cyan magenta:magenta yellow:yellow black:black];
     *alpha = a;
     return YES;
 }
@@ -163,9 +163,7 @@
     *g = (1 - m) * (1 - k);
     *b = (1 - y) * (1 - k);
 }
-
-void YY_RGB2CMYK(CGFloat r, CGFloat g, CGFloat b,
-                 CGFloat *c, CGFloat *m, CGFloat *y, CGFloat *k) {
++ (void)jx_RGBToCMYKWithRed:(CGFloat)r green:(CGFloat)g blue:(CGFloat)b cyan:(CGFloat *)c magenta:(CGFloat *)m yellow:(CGFloat *)y black:(CGFloat *)k {
     CLAMP_COLOR_VALUE(r);
     CLAMP_COLOR_VALUE(g);
     CLAMP_COLOR_VALUE(b);

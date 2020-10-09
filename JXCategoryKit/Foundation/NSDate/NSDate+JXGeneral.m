@@ -112,8 +112,8 @@
 
 + (NSTimeInterval)jx_getLocalTimestamp
 {
-    NSDate *dat = [NSDate dateWithTimeIntervalSinceNow:0];
-    NSTimeInterval time = [dat timeIntervalSince1970];
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval time = [date timeIntervalSince1970];
     return time;
 }
 

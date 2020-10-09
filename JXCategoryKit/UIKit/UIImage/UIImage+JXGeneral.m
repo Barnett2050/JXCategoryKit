@@ -172,9 +172,6 @@
         CGFloat footScale = footImage.size.height / footImage.size.width;
         footH = footScale * width;
         totalH += footH;
-    }else
-    {
-        totalH -= imageSpace;
     }
     totalH += edgeMargin.bottom;
     totalH = floor(totalH);
@@ -186,7 +183,6 @@
     if (headImage) {
         [headImage drawInRect:CGRectMake(edgeMargin.left, maxY, width, headH)];
         maxY += headH;
-        maxY += imageSpace;
     }
     if (masterImgArr.count != 0) {
         // 主视图
@@ -194,9 +190,8 @@
             UIImage *masterImage = masterImgArr[i];
             CGFloat masterImgScale = masterImage.size.height / masterImage.size.width;
             CGFloat masterImgH = masterImgScale * width;
-            if (i != 0) {
-                maxY += imageSpace;
-            }
+            
+            maxY += imageSpace;
             [masterImage drawInRect:CGRectMake(edgeMargin.left, maxY, width, masterImgH)];
             maxY += masterImgH;
         }
