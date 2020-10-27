@@ -22,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)jx_firstCharacterString;
 
-
 /**
  获取字符串字节长度
  */

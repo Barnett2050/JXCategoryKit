@@ -57,16 +57,16 @@
 + (void)jx_printClassMethodList
 {
     unsigned int methodCount =0;
-    Method* methodList = class_copyMethodList([self class],&methodCount);
+    Method *methodList = class_copyMethodList([self class],&methodCount);
     
-    for(int i=0;i<methodCount;i++)
+    for(int i = 0; i < methodCount; i++)
     {
         Method temp = methodList[i];
 //        IMP imp = method_getImplementation(temp);
 //        SEL name_f = method_getName(temp);
-        const char* name_s =sel_getName(method_getName(temp));
+        const char *name_s = sel_getName(method_getName(temp));
         int arguments = method_getNumberOfArguments(temp);
-        const char* encoding =method_getTypeEncoding(temp);
+        const char *encoding = method_getTypeEncoding(temp);
         NSLog(@"方法名：%@,参数个数：%d,编码方式：%@",[NSString stringWithUTF8String:name_s],
               arguments,
               [NSString stringWithUTF8String:encoding]);
@@ -84,20 +84,18 @@
         // 属性名称
         const char *name = property_getName(property);
         
-        id value = [self valueForKey:[NSString stringWithCString:name encoding:NSUTF8StringEncoding]];
-        
-        NSLog(@"name:%s value:%@",name,value);
+        NSLog(@"name:%s",name);
     }
     free(propertys);
 }
 - (NSDictionary *)jx_properties_aps {
     NSMutableDictionary *props = [NSMutableDictionary dictionary];
-    unsigned int outCount, i;
+    unsigned int outCount;
     objc_property_t *properties = class_copyPropertyList([self class], &outCount);
-    for (i = 0; i<outCount; i++)
+    for (int i = 0; i< outCount; i++)
     {
         objc_property_t property = properties[i];
-        const char* char_f =property_getName(property);
+        const char *char_f = property_getName(property);
         NSString *propertyName = [NSString stringWithUTF8String:char_f];
         id propertyValue = [self valueForKey:(NSString *)propertyName];
         if (propertyValue) [props setValue:propertyValue forKey:propertyName];

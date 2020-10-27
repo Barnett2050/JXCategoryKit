@@ -120,10 +120,10 @@
 }
 
 #pragma mark - DES 加密
-- (NSString *)jx_encryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse
+- (NSString *)jx_encryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUseBase64:(BOOL)isUse
 {
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    char keyPtr[kCCKeySizeAES256+1];
+    char keyPtr[kCCKeySizeAES256 + 1];
     bzero(keyPtr, sizeof(keyPtr));
     
     [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
@@ -147,8 +147,7 @@
                             buffer, // 密文的内存地址
                             bufferSize, // 密文缓冲区的大小
                             &numBytesEncrypted); // 加密结果大小
-    }else
-    {
+    } else {
         cryptStatus = CCCrypt(kCCEncrypt, // kCCEncrypt  加密/kCCDecrypt 解密
                             kCCAlgorithmDES, // 加密算法,默认使用的是  AES/DES
                             kCCOptionPKCS7Padding, // 加密选项  ECB/CBC kCCOptionPKCS7Padding                      CBC 的加密方式  kCCOptionPKCS7Padding | kCCOptionECBMode   ECB 的加密方式
@@ -170,8 +169,7 @@
             NSData *base64Data = [data base64EncodedDataWithOptions:1];
             outputStr = [[NSString alloc] initWithData:base64Data encoding:NSUTF8StringEncoding];
             return outputStr;
-        }else
-        {
+        } else {
             outputStr = [NSString stringWithHexBytes:data];
             return outputStr;
         }
@@ -180,13 +178,12 @@
     return nil;
 }
 
-- (NSString *)jx_decryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse
+- (NSString *)jx_decryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUseBase64:(BOOL)isUse
 {
     NSData *data;
     if (isUse) {
         data = [[NSData alloc] initWithBase64EncodedString:self options:0];
-    }else
-    {
+    } else {
         data = [NSString parseHexToByteArray:self];
     }
     char keyPtr[kCCKeySizeAES256+1];
@@ -213,8 +210,7 @@
                                 buffer,
                                 bufferSize,
                                 &numBytesDecrypted);
-    }else
-    {
+    } else {
         cryptStatus = CCCrypt(kCCDecrypt,
                                 kCCAlgorithmDES,
                                 kCCOptionPKCS7Padding,
@@ -237,7 +233,7 @@
 }
 
 #pragma mark - 3DES 加密
-- (NSString *)jx_encryptWith3DES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse
+- (NSString *)jx_encryptWith3DES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUseBase64:(BOOL)isUse
 {
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
     // 字节的个数
@@ -280,8 +276,7 @@
             NSData *base64Data = [data base64EncodedDataWithOptions:1];
             outputStr = [[NSString alloc] initWithData:base64Data encoding:NSUTF8StringEncoding];
             return outputStr;
-        }else
-        {
+        } else {
             outputStr = [NSString stringWithHexBytes:data];
             return outputStr;
         }
@@ -290,13 +285,12 @@
     return outputStr;
 }
 
-- (NSString *)jx_decryptWith3DES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse
+- (NSString *)jx_decryptWith3DES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUseBase64:(BOOL)isUse
 {
     NSData *base64Decode;
     if (isUse) {
         base64Decode = [[NSData alloc] initWithBase64EncodedString:self options:0];
-    }else
-    {
+    } else {
         base64Decode = [NSString parseHexToByteArray:self];
     }
     
@@ -333,7 +327,7 @@
 
 #pragma mark - AES 加密
 
-- (NSString *)jx_encryptWithAES128_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUsewBase64:(BOOL)isUse
+- (NSString *)jx_encryptWithAES128_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUseBase64:(BOOL)isUse
 {
     char keyPtr[kCCKeySizeAES128+1];
     memset(keyPtr, 0, sizeof(keyPtr));
@@ -366,7 +360,7 @@
     free(buffer);
     return nil;
 }
-- (NSString *)jx_decryptWithAES128_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUsewBase64:(BOOL)isUse
+- (NSString *)jx_decryptWithAES128_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUseBase64:(BOOL)isUse
 {
     char keyPtr[kCCKeySizeAES128 + 1];
     memset(keyPtr, 0, sizeof(keyPtr));
@@ -400,7 +394,7 @@
     return nil;
 }
 
-- (NSString *)jx_encryptWithAES256_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUsewBase64:(BOOL)isUse
+- (NSString *)jx_encryptWithAES256_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUseBase64:(BOOL)isUse
 {
     NSData *dataSource = [self dataUsingEncoding:NSUTF8StringEncoding];
 
@@ -440,7 +434,7 @@
     free(buffer);
     return nil;
 }
-- (NSString *)jx_decryptWithAES256_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUsewBase64:(BOOL)isUse
+- (NSString *)jx_decryptWithAES256_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUseBase64:(BOOL)isUse
 {
     NSData *base64Decode = [[NSData alloc] initWithBase64EncodedString:self options:0];
     

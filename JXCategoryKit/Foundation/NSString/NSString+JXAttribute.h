@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  阴影
  */
-- (void)jx_addShadow:(CGSize)shadowOffset shadowBlurRadius:(float)shadowBlurRadius shadowColor:(id)shadowColor;
+- (void)jx_addShadow:(CGSize)shadowOffset shadowBlurRadius:(float)shadowBlurRadius shadowColor:(UIColor *)shadowColor;
 /**
  文字效果，取值为 NSString 对象，目前只有图版印刷效果可用，NSTextEffectLetterpressStyle
  */

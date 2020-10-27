@@ -28,36 +28,18 @@
     CGSize newSize = CGSizeMake(ceil(stringSize.width), ceil(stringSize.height));
     return newSize;
 }
-/**
- CoreText计算单行文本
- 这种方法支持包含emoji表情符的计算。文本开头空格、包含自定义插入的文本图片不纳入计算范围，这类情况会导致计算偏差。
- */
-- (CGSize)jx_singleLineSizeWithAttributeText:(UIFont *)font {
-    CTFontRef cfFont = CTFontCreateWithName((CFStringRef) font.fontName, font.pointSize, NULL);
-    CGFloat leading = font.lineHeight - font.ascender + font.descender;
-    CTParagraphStyleSetting paragraphSettings[1] = { kCTParagraphStyleSpecifierLineSpacingAdjustment, sizeof (CGFloat), &leading };
-    
-    CTParagraphStyleRef  paragraphStyle = CTParagraphStyleCreate(paragraphSettings, 1);
-    CFRange textRange = CFRangeMake(0, self.length);
-    
-    CFMutableAttributedStringRef string = CFAttributedStringCreateMutable(kCFAllocatorDefault, self.length);
-    
-    CFAttributedStringReplaceString(string, CFRangeMake(0, 0), (CFStringRef) self);
-    
-    CFAttributedStringSetAttribute(string, textRange, kCTFontAttributeName, cfFont);
-    CFAttributedStringSetAttribute(string, textRange, kCTParagraphStyleAttributeName, paragraphStyle);
-    
-    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(string);
-    return CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, 0), nil, CGSizeMake(DBL_MAX, DBL_MAX), nil);
-}
 
 /**
  CoreText计算多行文本size
  这种方法支持包含emoji表情符的计算。文本开头空格、包含自定义插入的文本图片不纳入计算范围，这类情况会导致计算偏差。
  */
-- (CGSize)jx_multiLineSizeWithAttributeText:(CGFloat)width font:(UIFont *)font
+- (CGSize)jx_coreTextAttributeTextSizeWith:(CGFloat)width font:(UIFont *)font
 {
-    CTFontRef cfFont = CTFontCreateWithName((CFStringRef) font.fontName, font.pointSize, NULL);
+    NSString *fontName = font.fontName;
+    if ([font.fontName isEqualToString:@".SFUI-Regular"]) {
+        fontName = @"TimesNewRomanPSMT";
+    }
+    CTFontRef cfFont = CTFontCreateWithName((CFStringRef) fontName, font.pointSize, NULL);
     CGFloat leading = font.lineHeight - font.ascender + font.descender;
     CTParagraphStyleSetting paragraphSettings[1] = { kCTParagraphStyleSpecifierLineBreakMode, sizeof (CGFloat), &leading };
     

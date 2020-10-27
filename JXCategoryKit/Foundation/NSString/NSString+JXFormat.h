@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  字符串转16进制
  */
-- (NSString*)hexString;
+- (NSString *)hexString;
 
 /**
  出现类似这样格式的字段"\\U6df1\\U5733\\U56fd\\U5f00\\U884c01\\U673a\\U623",通常为Unicode码，将Unicode码转换

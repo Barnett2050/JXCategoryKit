@@ -10,38 +10,27 @@
 
 @implementation NSString (JXFormat)
 
-/**
- 数字转为金额 例：1000000.00 -> 1,000,000.00
- */
 - (NSString *)jx_changeNumberToMoneyFormat
 {
     if (self == nil) {
         return @"";
     }
-    
     double number = [self doubleValue];
-    NSString* newStr = [[NSString alloc] init];
+    NSString *newStr = [[NSString alloc] init];
     NSNumberFormatter *formatter =[NSNumberFormatter new];
-    //    formatter.numberStyle = NSNumberFormatterDecimalStyle;
     formatter.positiveFormat=@"###,##0.00";
-    
     newStr = [formatter stringFromNumber:[NSNumber numberWithDouble:number]];
     return newStr;
 }
 
-/**
- 手机号码替换****
- */
 - (NSString *)jx_phoneNumberHideMiddle
 {
-    NSString *phoneRegex = @"1[34578]{1}\\d{9}$";
-    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
-    if ([phoneTest evaluateWithObject:self]) {
-        NSRange range = NSMakeRange(3, 4);
-        NSString *newStr = [self stringByReplacingCharactersInRange:range withString:@"****"];
-        return newStr;
+    if (self.length != 11) {
+        return self;
     }
-    return self;
+    NSRange range = NSMakeRange(3, 4);
+    NSString *newStr = [self stringByReplacingCharactersInRange:range withString:@"****"];
+    return newStr;
 }
 
 - (NSString *)jx_removeFirstAndLastLineBreak
@@ -58,13 +47,11 @@
 
 - (NSString *)jx_idCardFormat
 {
-    BOOL flag;
-    if (self.length <= 0) {
-        flag = NO;
+    if (self.length != 18) {
         return self;
     }
-    NSString *regex2 = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
-    NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex2];
+    NSString *regex = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
+    NSPredicate *identityCardPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     if ([identityCardPredicate evaluateWithObject:self]) {
         NSMutableArray *array = [NSMutableArray array];
         [array addObject:[self substringToIndex:6]];
@@ -91,21 +78,16 @@
     return newString;
 }
 
-- (NSString*)hexString
+- (NSString *)hexString
 {
-    NSData *myD = [self dataUsingEncoding:NSUTF8StringEncoding];
-    Byte *bytes = (Byte *)[myD bytes];
-    NSString *hexStr=@"";
-    for(int i = 0; i < [myD length]; i++)
-    {
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    Byte *bytes = (Byte *)[data bytes];
+    NSString *hexStr = @"";
+    for(int i = 0; i < [data length]; i++) {
         NSString *newHexStr = [NSString stringWithFormat:@"%x", bytes[i]&0xff];//16进制数
-        
-        if([newHexStr length]==1)
-        {
+        if([newHexStr length]==1){
             hexStr = [NSString stringWithFormat:@"%@0%@",hexStr,newHexStr];
-        }
-        else
-        {
+        } else {
             hexStr = [NSString stringWithFormat:@"%@%@",hexStr,newHexStr];
         }
     }
@@ -123,7 +105,7 @@
 }
 - (id)jx_jsonStringToJson
 {
-    if (self == nil) {
+    if (self == nil || self.length == 0) {
         return nil;
     }
     NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
@@ -131,8 +113,7 @@
     id json = [NSJSONSerialization JSONObjectWithData:jsonData
                                               options:NSJSONReadingMutableContainers
                                                 error:&err];
-    if(err)
-    {
+    if(err){
         NSLog(@"json解析失败：%@",err);
         return nil;
     }

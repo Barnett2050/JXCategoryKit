@@ -12,7 +12,10 @@
 
 - (BOOL)jx_isToday
 {
-    return [[NSDate p_acquireDayMonthYearFromDate:self] isEqualToDate:[NSDate p_acquireDayMonthYearFromDate:[NSDate date]]];
+    if (fabs(self.timeIntervalSinceNow) >= 60 * 60 * 24) return NO;
+    NSInteger day = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:self] day];
+    NSInteger nowDay = [[[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:[NSDate new]] day];
+    return nowDay == day;
 }
 - (BOOL)jx_isYesterday
 {
@@ -61,19 +64,5 @@
             break;
     }
 }
-
-#pragma mark - private
-/**
- 获取日期年月日
- */
-+ (NSDate*)p_acquireDayMonthYearFromDate:(NSDate*)date
-{
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
-    NSDateComponents* comps = [calendar components:unitFlags fromDate:date];
-    NSDate* result = [calendar dateFromComponents:comps];
-    return result;
-}
-
 
 @end

@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param desIv iv 初始化向量,ECB 不需要指定(秘钥偏移量)，例：@"qwertyui"
  @param isUse true返回base64处理，false返回16进制字符串
  */
-- (NSString *)jx_encryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse;
+- (NSString *)jx_encryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUseBase64:(BOOL)isUse;
 
 /**
  des 解密
@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param desIv iv 初始化向量,ECB 不需要指定(秘钥偏移量)
  @param isUse 是否base64处理
  */
-- (NSString *)jx_decryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse;
+- (NSString *)jx_decryptWithDES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUseBase64:(BOOL)isUse;
 
 #pragma mark - 3DES 加密
 /**
@@ -99,12 +99,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param key 秘钥
  @param desIv iv 初始化向量,例：@"qwertyuiopasdfghjklzxcvb"
  */
-- (NSString *)jx_encryptWith3DES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse;
+- (NSString *)jx_encryptWith3DES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUseBase64:(BOOL)isUse;
 /**
  3des 解密
  @param key 秘钥
  */
-- (NSString *)jx_decryptWith3DES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUsewBase64:(BOOL)isUse;
+- (NSString *)jx_decryptWith3DES_Key:(NSString *)key desIv:(nullable NSString *)desIv isUseBase64:(BOOL)isUse;
 
 #pragma mark - AES 加密
 /**
@@ -113,25 +113,25 @@ NS_ASSUME_NONNULL_BEGIN
  @param key 秘钥 例：@"qwertyuiopasdfgh"
 @param aesIv iv 初始化向量,
  */
-- (NSString *)jx_encryptWithAES128_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUsewBase64:(BOOL)isUse;
+- (NSString *)jx_encryptWithAES128_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUseBase64:(BOOL)isUse;
 /**
  AES128 解密 key必须大于32字节,否则加密失败，返回错误参数
  
  @param key 秘钥
  */
-- (NSString *)jx_decryptWithAES128_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUsewBase64:(BOOL)isUse;
+- (NSString *)jx_decryptWithAES128_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUseBase64:(BOOL)isUse;
 /**
  AES256 加密 (秘钥偏移量最少32)
  
  @param key 秘钥 例：@"qwertyuiopasdfghjklzxcvbnm123456"
  */
-- (NSString *)jx_encryptWithAES256_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUsewBase64:(BOOL)isUse;
+- (NSString *)jx_encryptWithAES256_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUseBase64:(BOOL)isUse;
 /**
  AES256 解密
  
  @param key 秘钥
  */
-- (NSString *)jx_decryptWithAES256_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUsewBase64:(BOOL)isUse;
+- (NSString *)jx_decryptWithAES256_Key:(NSString *)key desIv:(nullable NSString *)aesIv isUseBase64:(BOOL)isUse;
 
 @end
 

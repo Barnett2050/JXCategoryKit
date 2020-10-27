@@ -22,16 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGSize)jx_contenSizeWith:(NSDictionary<NSAttributedStringKey, id> *)attributeDic maxSize:(CGSize)maxSize;
 
 /**
- CoreText计算单行文本
+ CoreText计算文本size
  这种方法支持包含emoji表情符的计算。文本开头空格、包含自定义插入的文本图片不纳入计算范围，这类情况会导致计算偏差。
  */
-- (CGSize)jx_singleLineSizeWithAttributeText:(UIFont *)font;
-
-/**
- CoreText计算多行文本size
- 这种方法支持包含emoji表情符的计算。文本开头空格、包含自定义插入的文本图片不纳入计算范围，这类情况会导致计算偏差。
- */
-- (CGSize)jx_multiLineSizeWithAttributeText:(CGFloat)width font:(UIFont *)font;
+- (CGSize)jx_coreTextAttributeTextSizeWith:(CGFloat)width font:(UIFont *)font;
 
 @end
 

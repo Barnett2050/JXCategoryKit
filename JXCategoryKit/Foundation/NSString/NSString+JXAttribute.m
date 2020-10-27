@@ -125,7 +125,7 @@
     }
     [self setValue:[NSNumber numberWithFloat:lineWidth] forKey:NSStrokeWidthAttributeName];
 }
-- (void)jx_addShadow:(CGSize)shadowOffset shadowBlurRadius:(float)shadowBlurRadius shadowColor:(id)shadowColor
+- (void)jx_addShadow:(CGSize)shadowOffset shadowBlurRadius:(float)shadowBlurRadius shadowColor:(UIColor *)shadowColor
 {
     NSShadow *shadow = [[NSShadow alloc] init];
     if (!CGSizeEqualToSize(shadowOffset, CGSizeZero)) {
@@ -137,6 +137,7 @@
     if (shadowColor) {
         shadow.shadowColor = shadowColor;
     }
+    [self setValue:shadow forKey:NSShadowAttributeName];
 }
 - (void)jx_addTextEffect:(NSString *)errect
 {

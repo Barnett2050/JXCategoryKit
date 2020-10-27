@@ -7,7 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "NSData+JXEncrypt.h"
+#import "NSString+JXSize.h"
+#import "NSString+JXGeneral.h"
+#import "NSString+Encrypt.h"
 @interface ViewController ()
 
 @end
@@ -18,10 +20,13 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    NSString *str = @"123456789haha";
-    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@",[data jx_hexString]);
+    NSString *email = @"这是一段神奇的代码";
+    NSLog(@"%@",[email jx_encryptWithDES_Key:@"key" desIv:@"qwertyui" isUseBase64:YES]);
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+
 }
 
 @end

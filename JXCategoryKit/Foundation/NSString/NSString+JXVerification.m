@@ -9,128 +9,198 @@
 #import "NSString+JXVerification.h"
 
 @implementation NSString (JXVerification)
-- (BOOL)jx_isValidateAccountNumberWith:(NSInteger)min max:(NSInteger)max
+
+- (BOOL)jx_accountNumberIsValidateWithSpecialCharacters:(NSString *)specialC min:(NSInteger)min max:(NSInteger)max
 {
-    NSString *userNameRegex = [NSString stringWithFormat:@"^[A-Za-z0-9]{%ld,%ld}+$",min,max];
+    NSString *userNameRegex;
+    if (specialC != nil && specialC.length > 0) {
+        userNameRegex = [NSString stringWithFormat:@"^[A-Za-z0-9%@]{%ld,%ld}+$",specialC,min,max];
+    }else {
+        userNameRegex = [NSString stringWithFormat:@"^[A-Za-z0-9]{%ld,%ld}+$",min,max];
+    }
     return [self jx_isValidateWith:userNameRegex];
 }
-- (BOOL)jx_isValidateAccountPasswordWith:(NSInteger)min max:(NSInteger)max
-{
-    NSString *passWordRegex = [NSString stringWithFormat:@"^[a-zA-Z0-9]{%ld,%ld}+$",min,max];
-    // 密码强度
-//    NSString *passWordRegex = @"^(?=.*\\d.*)(?=.*[a-zA-Z].*).{6,20}$";
-    return [self jx_isValidateWith:passWordRegex];
-}
-- (BOOL)jx_isValidateVerificationCode
-{
-    NSString *regex = @"^(\\d{6})";
-    return [self jx_isValidateWith:regex];
-}
-- (BOOL)jx_isValidateMobile
+- (BOOL)jx_mobileIsValidate
 {
     NSString *mobileRegex = @"^1(3[0-9]|4[6-9]|5[0-35-9]|6[6]|7[0-8]|8[0-9]|9[89])\\d{8}$";
     return [self jx_isValidateWith:mobileRegex];
 }
-- (BOOL)jx_isValidateCMMobile
+- (BOOL)jx_CMMobileIsValidate
 {
     NSString *cmRegex = @"^1(3[4-9]|4[78]|5[0-27-9]|7[28]|8[2-478]|9[8])\\d{8}$";
     return [self jx_isValidateWith:cmRegex];
 }
-- (BOOL)jx_isValidateCUMobile
+- (BOOL)jx_CUMobileIsValidate
 {
     NSString *cuRegex = @"^1(3[0-2]|4[6]|5[56]|6[6]|7[156]|8[56])\\d{8}$";
     return [self jx_isValidateWith:cuRegex];
 }
-- (BOOL)jx_isValidateCTMobile
+- (BOOL)jx_CTMobileIsValidate
 {
     NSString *ctRegex = @"^1(3[3]|4[9]|5[3]|7[347]|8[019]|9[9])\\d{8}$";
     return [self jx_isValidateWith:ctRegex];
 }
-- (BOOL)jx_isValidateIdentityCard
+- (BOOL)jx_emailIsValidate
 {
-    NSString *regex = @"^(\\d{14}|\\d{17})(\\d|[xX])$";
-    return [self jx_isValidateWith:regex];
-}
-- (BOOL)jx_isValidateEmail
-{
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    /*
+     @之前必须有内容且只能是字母（大小写）、数字、下划线(_)、减号（-）、点（.）
+     @和最后一个点（.）之间必须有内容且只能是字母（大小写）、数字、点（.）、减号（-），且两个点不能挨着
+     最后一个点（.）之后必须有内容且内容只能是字母（大小写）、数字且长度为大于等于2个字节，小于等于6个字节
+     */
+    NSString *emailRegex = @"^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$";
     return [self jx_isValidateWith:emailRegex];
 }
-- (BOOL)jx_isValidateNickName
+
+- (BOOL)jx_accountPasswordIsValidateWithSpecialCharacters:(NSString *)specialC
+                                           leastOneNumber:(BOOL)leastOneNumber
+                                  leastOneUppercaseLetter:(BOOL)leastOneUppercaseLetter
+                                  leastOneLowercaseLetter:(BOOL)leastOneLowercaseLetter
+                                leastOneSpecialCharacters:(BOOL)leastOneSpecialCharacters
+                                                      min:(NSInteger)min
+                                                      max:(NSInteger)max
 {
-    NSString *nicknameRegex = @"([\u4e00-\u9fa5]{2,5})";
-    return [self jx_isValidateWith:nicknameRegex];
+    NSMutableString *passWordRegex;
+    if (specialC != nil && specialC.length > 0) {
+        passWordRegex = [NSMutableString stringWithFormat:@"^[A-Za-z0-9%@]{%ld,%ld}$",specialC,min,max];
+    } else {
+        passWordRegex = [NSMutableString stringWithFormat:@"^[A-Za-z0-9]{%ld,%ld}$",min,max];
+    }
+    
+    if (leastOneNumber) {
+        [passWordRegex insertString:@"(?=.*[0-9])" atIndex:1];
+    }
+    if (leastOneUppercaseLetter) {
+        [passWordRegex insertString:@"(?=.*[A-Z])" atIndex:1];
+    }
+    if (leastOneLowercaseLetter) {
+        [passWordRegex insertString:@"(?=.*[a-z])" atIndex:1];
+    }
+    if (leastOneSpecialCharacters && specialC != nil && specialC.length > 0) {
+        NSString *scString = [NSString stringWithFormat:@"(?=.*[%@])",specialC];
+        [passWordRegex insertString:scString atIndex:1];
+    }
+    return [self jx_isValidateWith:passWordRegex];
 }
-- (BOOL)jx_isValidateQQ
+
+- (BOOL)jx_verificationCodeIsValidateWithMin:(NSInteger)min max:(NSInteger)max
 {
-    NSString *regex = @"[1-9][0-9]{4,14}";//第一位1-9之间的数字，第二位0-9之间的数字，数字范围4-14个之间
+    NSString *regex = [NSString stringWithFormat:@"^(\\d{%ld,%ld})",min,max];
     return [self jx_isValidateWith:regex];
 }
-- (BOOL)jx_isValidateWechat
+- (BOOL)jx_identityCardIsValidate
+{
+    if (!(self.length == 15 || self.length == 18)) {
+        return false;
+    }
+    NSMutableString *idString = [NSMutableString stringWithString:self];
+    // 地址码校验
+    NSString *addressCode = [idString substringWithRange:NSMakeRange(0, 2)];
+    NSString *addressCodeRegex = @"^((1[1-5]|2[1-3]|3[1-7]|4[1-3]|5[0-4]|6[1-5]|71|8[1-2]))";
+    if (![addressCode jx_isValidateWith:addressCodeRegex]) {
+        return false;
+    }
+    
+    // 出生日期码校验
+    NSString *bornCode;
+    NSString *bornCodeRegex;
+    if (self.length == 15) {
+        bornCode = [idString substringWithRange:NSMakeRange(6, 6)];
+        bornCodeRegex = @"^\\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)$";
+    } else {
+        bornCode = [idString substringWithRange:NSMakeRange(6, 8)];
+        bornCodeRegex = @"^(19|20)\\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)$";
+    }
+    if (![bornCode jx_isValidateWith:bornCodeRegex]) {
+        return false;
+    }
+    
+    // 校验码校验
+    if (self.length == 15) {
+        return [self jx_isValidateWith:@"^(\\d{15})"];
+    } else {
+        NSString *code = [idString substringWithRange:NSMakeRange(0, 17)];
+        if (![code jx_isValidateWith:@"^(\\d{17})"]) {
+            return false;
+        }
+        NSArray *factor = @[ @7, @9, @10, @5, @8, @4, @2, @1, @6, @3, @7, @9, @10, @5, @8, @4, @2];
+        NSArray *parity = @[ @"1", @"0", @"X", @"9", @"8", @"7", @"6", @"5", @"4", @"3", @"2"];
+        
+        NSInteger sum = 0;
+        for (int i = 0; i < 17; i++) {
+            NSInteger num = [[code substringWithRange:NSMakeRange(i, 1)] integerValue];
+            sum += num * [factor[i] integerValue];
+        }
+        
+        NSString *parityCode = parity[sum % 11];
+        NSString *lastCode = [[idString substringWithRange:NSMakeRange(17, 1)] uppercaseString];
+        return [parityCode isEqualToString:lastCode];
+    }
+}
+
+- (BOOL)jx_QQCodeIsValidate
+{
+    NSString *regex = @"[1-9][0-9]{4,}";//第一位1-9之间的数字，第二位0-9之间的数字，数字范围4-14个之间
+    return [self jx_isValidateWith:regex];
+}
+- (BOOL)jx_WechatIsValidate
 {
     NSString *regex = @"^[a-zA-Z][a-zA-Z0-9_-]{5,19}$";
     return [self jx_isValidateWith:regex];
 }
-- (BOOL)jx_isValidateInputLegal
+- (BOOL)jx_inputLegalIsValidate
 {
     NSString *stringRegex01 = @"[\u4E00-\u9FA5a-zA-Z0-9\\@\\#\\$\\^\\&\\*\\(\\)\\-\\+\\.\\ \\_]*";
     NSString *stringRegex02 = @"[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*";
-    NSPredicate *predicte01 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",stringRegex01];
-    NSPredicate *predicte02 = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",stringRegex02];
-    return ([predicte01 evaluateWithObject:self]||[predicte02 evaluateWithObject:self])&&![self jx_isContainsEmoji];
+    return ([self jx_isValidateWith:stringRegex01] || [self jx_isValidateWith:stringRegex02]) && ![self jx_stringIsContainsEmoji];
 }
-- (BOOL)jx_isValidateCarNumber
+- (BOOL)jx_carNumberIsValidate
 {
-    NSString *carRegex = @"^[\u4e00-\u9fa5]{1}[a-zA-Z]{1}[a-zA-Z_0-9]{4}[a-zA-Z_0-9_\u4e00-\u9fa5]$";
+    NSString *carRegex = @"^(([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z](([0-9]{5}[DF])|([DF]([A-HJ-NP-Z0-9])[0-9]{4})))|([京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领][A-Z][A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳使领]))$";
     return [self jx_isValidateWith:carRegex];
 }
 
 
-- (BOOL)jx_isValidateURL
+- (BOOL)jx_URLStringIsValidate
 {
-    if (self.length != 0 && self != nil) {
-        NSError *error;
-        NSString *regulaStr = @"((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)";
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr options:NSRegularExpressionCaseInsensitive error:&error];
-        NSArray *arrayOfAllMatches = [regex matchesInString:self options:0 range:NSMakeRange(0, [self length])];
-        
-        NSString* substringForMatch;
-        for (NSTextCheckingResult *match in arrayOfAllMatches)
-        {
-            substringForMatch = [self substringWithRange:match.range];
-        }
-        return substringForMatch.length > 0;
+    if (self.length == 0) {
+        return false;
     }
-    return false;
+    NSError *error;
+    NSString *regulaStr = @"((http[s]{0,1}|ftp)://[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\\.\\-]+\\.([a-zA-Z]{2,4})(:\\d+)?(/[a-zA-Z0-9\\.\\-~!@#$%^&*+?:_/=<>]*)?)";
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr options:NSRegularExpressionCaseInsensitive error:&error];
+    NSArray *arrayOfAllMatches = [regex matchesInString:self options:0 range:NSMakeRange(0, [self length])];
+    
+    NSString *substringForMatch;
+    for (NSTextCheckingResult *match in arrayOfAllMatches) {
+        substringForMatch = [self substringWithRange:match.range];
+    }
+    return substringForMatch.length > 0;
 }
 
-- (BOOL)jx_isValidateHanNumChar
+- (BOOL)jx_hanNumCharStringIsValidate
 {
     NSString *regex = @"^[a-zA-Z0-9\u4e00-\u9fa5]*$";
     return [self jx_isValidateWith:regex];
     
 }
-- (BOOL)jx_isValidateNumChar
+- (BOOL)jx_numCharStringIsValidate
 {
     NSString *regex = @"^[a-zA-Z0-9]*$";
     return [self jx_isValidateWith:regex];
 }
-- (BOOL)jx_isChineseCharacterAndLettersAndNumbersAndUnderScore
+
+- (BOOL)jx_stringIsAllEnglishAlphabet
 {
-    NSInteger len=self.length;
-    for(NSInteger i=0;i<len;i++)
-    {
-        unichar a=[self characterAtIndex:i];
-        if(!((isalpha(a))
-             ||(isalnum(a))
-             ||((a=='_'))
-             ||((a >= 0x4e00 && a <= 0x9fa6))
-             ))
-            return NO;
-    }
-    return YES;
+    NSString *reges = @"^[A-Za-z]+$";
+    return [self jx_isValidateWith:reges];
 }
-- (BOOL)jx_isContainsEmoji
+
+- (BOOL)jx_stringIsChineseCharacterAndLettersAndNumbersAndUnderScore
+{
+    NSString *regex = @"^[a-zA-Z0-9\u4e00-\u9fa5_]*$";
+    return [self jx_isValidateWith:regex];
+}
+- (BOOL)jx_stringIsContainsEmoji
 {
     __block BOOL returnValue = NO;
     [self enumerateSubstringsInRange:NSMakeRange(0, [self length])
@@ -168,18 +238,54 @@
                           }];
     return returnValue;
 }
-- (BOOL)jx_isPureInt{
-    
-    NSScanner* scan = [NSScanner scannerWithString:self];
-    int val;
-    return[scan scanInt:&val] && [scan isAtEnd];
-}
-- (BOOL)jx_isAllAlphabet
+
+- (BOOL)jx_stringIsInteger
 {
-    NSString *reges = @"^[A-Za-z]+$";
+    NSString *reges = @"^-?[1-9]\\d*$";
     return [self jx_isValidateWith:reges];
 }
 
+- (BOOL)jx_stringIsPositiveInteger
+{
+    NSString *reges = @"^[1-9]\\d*$";
+    return [self jx_isValidateWith:reges];
+}
+
+- (BOOL)jx_stringIsNon_PositiveInteger
+{
+    NSString *reges = @"^-[1-9]\\d*|0$";
+    return [self jx_isValidateWith:reges];
+}
+
+- (BOOL)jx_stringIsNegativeInteger
+{
+    NSString *reges = @"^-[1-9]\\d*$";
+    return [self jx_isValidateWith:reges];
+}
+
+- (BOOL)jx_stringIsNon_NegativeInteger
+{
+    NSString *reges = @"^[1-9]\\d*|0$";
+    return [self jx_isValidateWith:reges];
+}
+
+- (BOOL)jx_stringIsPositiveFloat
+{
+    NSString *reges = @"^[1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*$";
+    return [self jx_isValidateWith:reges];
+}
+
+- (BOOL)jx_stringIsNegativeFloat
+{
+    NSString *reges = @"^-[1-9]\\d*\\.\\d*|-0\\.\\d*[1-9]\\d*$";
+    return [self jx_isValidateWith:reges];
+}
+
+- (BOOL)jx_stringIsFloat
+{
+    NSString *reges = @"^-?[1-9]\\d*\\.\\d*|-0\\.\\d*[1-9]\\d*$";
+    return [self jx_isValidateWith:reges];
+}
 
 #pragma mark - private
 - (BOOL)jx_isValidateWith:(NSString *)regexStr
