@@ -69,9 +69,8 @@
         NSString *charactersToEscape = @"?!@#$^&%*+,:;='\"`<>()[]{}/\\| ";
         NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
         url = [NSURL URLWithString:[[NSString stringWithFormat:@"file://%@",bundlePath] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters]];
-    }else
-    {
-        url = [NSURL URLWithString:[[NSString stringWithFormat:@"file://%@",bundlePath] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }else{
+//        url = [NSURL URLWithString:[[NSString stringWithFormat:@"file://%@",bundlePath] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     NSBundle *bundle =[NSBundle bundleWithURL:url];
     return bundle;
@@ -98,9 +97,8 @@
         NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
         
         url = [NSURL URLWithString:[[NSString stringWithFormat:@"file://%@/%@.bundle",bundlePath,bundleName] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters]];
-    }else
-    {
-        url = [NSURL URLWithString:[[NSString stringWithFormat:@"file://%@/%@.bundle",bundlePath,bundleName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }else{
+//        url = [NSURL URLWithString:[[NSString stringWithFormat:@"file://%@/%@.bundle",bundlePath,bundleName] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     NSBundle *bundle =[NSBundle bundleWithURL:url];
     if (bundle) {

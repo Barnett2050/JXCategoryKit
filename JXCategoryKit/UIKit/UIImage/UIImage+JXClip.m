@@ -26,7 +26,7 @@
     return newImage;
 }
 
-- (UIImage *)jx_imageByRoundCornerRadius:(CGFloat)radius corners:(UIRectCorner)corners borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor borderLineJoin:(CGLineJoin)borderLineJoin
+- (nullable UIImage *)jx_imageByRoundCornerRadius:(CGFloat)radius corners:(UIRectCorner)corners borderWidth:(CGFloat)borderWidth borderColor:(nullable UIColor *)borderColor borderLineJoin:(CGLineJoin)borderLineJoin
 {
     if (corners != UIRectCornerAllCorners) {
         UIRectCorner tmp = 0;
@@ -73,7 +73,7 @@
     UIGraphicsEndImageContext();
     return image;
 }
-- (UIImage *)jx_imageByRoundCornerRadius:(CGFloat)radius borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor
+- (nullable UIImage *)jx_imageByRoundCornerRadius:(CGFloat)radius borderWidth:(CGFloat)borderWidth borderColor:(nullable UIColor *)borderColor
 {
     return [self jx_imageByRoundCornerRadius:radius
                                      corners:UIRectCornerAllCorners
