@@ -24,6 +24,25 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param anotherLocation 另一个坐标
 + (double)jx_getDistance:(CLLocationCoordinate2D)oneLocation withAnotherLocation:(CLLocationCoordinate2D)anotherLocation;
 
+/**
+ 判断是否已经超出中国范围
+ */
++(BOOL)locationIsOutOfChina:(CLLocationCoordinate2D)location;
+
+/**
+ 根据坐标获取位置描述（逆地理编码）
+
+ @param location 坐标
+ */
++ (void)placeNameFromLocation:(CLLocation *)location;
+
+/**
+ 根据地址获取坐标（地理编码）
+
+ @param placeStr 地址描述
+ */
++ (void)locationFromString:(NSString *)placeStr;
+
 @end
 
 NS_ASSUME_NONNULL_END
