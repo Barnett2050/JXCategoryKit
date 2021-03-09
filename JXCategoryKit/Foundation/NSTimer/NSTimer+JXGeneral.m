@@ -14,24 +14,14 @@
 {
     NSParameterAssert(inBlock != nil);
     // "scheduledTimer"前缀的为自动启动NSTimer的,(启动NSTimer本质上是将其加入RunLoop中)
-    if (@available(iOS 10.0,*)) {
-        return [self scheduledTimerWithTimeInterval:inTimeInterval repeats:inRepeats block:inBlock];
-    }else
-    {
-        return [self scheduledTimerWithTimeInterval:inTimeInterval target:self selector:@selector(p_executeBlockFromTimer:) userInfo:[inBlock copy] repeats:inRepeats];
-    }
+    return [self scheduledTimerWithTimeInterval:inTimeInterval repeats:inRepeats block:inBlock];
 }
 
 + (NSTimer *)jx_timerWithTimeInterval:(NSTimeInterval)inTimeInterval repeats:(BOOL)inRepeats block:(void (^)(NSTimer *timer))inBlock
 {
     NSParameterAssert(inBlock != nil);
     // "timer"前缀的为只构造不启用的
-    if (@available(iOS 10.0,*)) {
-        return [self timerWithTimeInterval:inTimeInterval repeats:inRepeats block:inBlock];
-    }else
-    {
-        return [self timerWithTimeInterval:inTimeInterval target:self selector:@selector(p_executeBlockFromTimer:) userInfo:[inBlock copy] repeats:inRepeats];
-    }
+    return [self timerWithTimeInterval:inTimeInterval repeats:inRepeats block:inBlock];
 }
 
 -(void)jx_pauseTimer

@@ -144,7 +144,7 @@
 }
 - (BOOL)jx_WechatIsValidate
 {
-    NSString *regex = @"^[a-zA-Z][a-zA-Z0-9_-]{5,19}$";
+    NSString *regex = @"^[a-zA-Z][a-zA-Z0-9_-]{6,20}$";
     return [self jx_isValidateWith:regex];
 }
 - (BOOL)jx_inputLegalIsValidate

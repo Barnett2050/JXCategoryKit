@@ -10,24 +10,30 @@
 
 @implementation NSString (JXAttribute)
 
-- (NSMutableAttributedString *)jx_addAttributedWithKeyWordArr:(NSArray *)keyWordArr attributedDic:(NSDictionary<NSAttributedStringKey, id> *)attributedDic
+- (NSMutableAttributedString *)jx_addAttributedWithKeyWordArr:(NSArray *)keyWordArr attributedDic:(NSDictionary<NSAttributedStringKey, id> *)attributedDic range:(NSRange)range
 {
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc]initWithString:self];
     
-    if (keyWordArr.count == 0) {
+    if (keyWordArr.count == 0 || attributedDic.allValues.count == 0) {
         return attributeString;
     }
     
     for (NSString *keyWord in keyWordArr) {
         NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:[NSString stringWithFormat:@"%@",keyWord] options:NSRegularExpressionCaseInsensitive error:nil];
         
-        [regex enumerateMatchesInString:self options:NSMatchingReportCompletion range:NSMakeRange(0, [self length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+        [regex enumerateMatchesInString:self options:NSMatchingReportCompletion range:range usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
             [attributeString setAttributes:attributedDic range:result.range];
         }];
     }
     return attributeString;
 }
+
+- (NSMutableAttributedString *)jx_addAttributedWithKeyWordArr:(NSArray *)keyWordArr attributedDic:(NSDictionary<NSAttributedStringKey, id> *)attributedDic
+{
+    return [self jx_addAttributedWithKeyWordArr:keyWordArr attributedDic:attributedDic range:NSMakeRange(0, self.length)];
+}
 @end
+
 /*
  NSFontAttributeName; //字体，value是UIFont对象
  NSParagraphStyleAttributeName;//绘图的风格（居中，换行模式，间距等诸多风格），value是NSParagraphStyle对象

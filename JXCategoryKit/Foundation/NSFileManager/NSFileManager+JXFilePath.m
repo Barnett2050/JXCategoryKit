@@ -78,7 +78,12 @@
 {
     NSString *filePath = [[self jx_directoryPathFor:pathType] stringByAppendingPathComponent:fileName];
     if (![[NSFileManager defaultManager] fileExistsAtPath:filePath] && isCreat) {
-        [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
+        BOOL flag = [[NSFileManager defaultManager] createFileAtPath:filePath contents:nil attributes:nil];
+        if (flag) {
+            return filePath;
+        } else {
+            return nil;
+        }
     }
     return filePath;
 }
@@ -87,7 +92,12 @@
 {
     NSString *directoryPath = [[self jx_directoryPathFor:pathType] stringByAppendingPathComponent:directoryName];
     if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath] && isCreat) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:true attributes:nil error:nil];
+        BOOL flag = [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:true attributes:nil error:nil];
+        if (flag) {
+            return directoryPath;
+        } else {
+            return nil;
+        }
     }
     return directoryPath;
 }

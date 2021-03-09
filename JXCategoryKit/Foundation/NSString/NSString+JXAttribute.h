@@ -14,6 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// 一段字符串添加关键字属性
 /// @param keyWordArr 关键字数组
 /// @param attributedDic 属性字典
+/// @param range 范围
+- (NSMutableAttributedString *)jx_addAttributedWithKeyWordArr:(NSArray *)keyWordArr attributedDic:(NSDictionary<NSAttributedStringKey, id> *)attributedDic range:(NSRange)range;
+
+/// 一段字符串添加关键字属性
+/// @param keyWordArr 关键字数组
+/// @param attributedDic 属性字典
 - (NSMutableAttributedString *)jx_addAttributedWithKeyWordArr:(NSArray *)keyWordArr attributedDic:(NSDictionary<NSAttributedStringKey, id> *)attributedDic;
 
 @end

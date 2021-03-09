@@ -22,8 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param level 0.0 ~ 1.0
 - (nullable NSData *)jx_gzippedDataWithCompressionLevel:(float)level;
 
-/// 默认压缩级别。
-- (nullable NSData *)jx_gzippedData;
+/// 默认压缩级别。0.7
+- (nullable NSData *)jx_gzippedDefault;
 
 /// 此方法将解压缩使用deflate算法压缩的数据并返回结果。
 - (nullable NSData *)jx_gunzippedData;
@@ -33,14 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSData *)jx_zlibbedDataWithCompressionLevel:(float)level;
 
 /// 以默认压缩级别将数据压缩为zlib压缩。
-- (nullable NSData *)jx_zlibbedData;
+- (nullable NSData *)jx_zlibbedDefault;
 
 /// 从zlib压缩的数据中解压缩数据。
 - (nullable NSData *)jx_unzlibbedData;
 
 /// 从main bundle获取文件数据
 /// @param name 文件名称（在main bundle）
-+ (nullable NSData *)jx_dataNamed:(NSString *)name;
++ (nullable NSData *)jx_mainBundleDataNamed:(NSString *)name type:(NSString *)type;
 
 @end
 

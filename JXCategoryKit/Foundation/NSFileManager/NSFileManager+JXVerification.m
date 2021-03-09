@@ -107,7 +107,9 @@
     if (!flag) {
         return false;
     }
-    
+    if ([NSFileManager jx_fileIsExists:dstPath]) {
+        [NSFileManager jx_removeFileWithPath:dstPath];
+    }
     NSError *error;
     BOOL moveSuccess = [fileManager moveItemAtPath:srcPath toPath:dstPath error:&error];
     return moveSuccess;

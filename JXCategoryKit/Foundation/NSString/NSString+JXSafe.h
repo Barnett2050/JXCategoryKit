@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
  substringToIndex:
  substringWithRange:
  lineRangeForRange:
- paragraphRangeForRange:
  enumerateSubstringsInRange:options:usingBlock:
  stringByReplacingOccurrencesOfString:withString:options:range:
  stringByReplacingCharactersInRange:withString:

@@ -20,7 +20,7 @@
 - (BOOL)jx_isZlibbedData
 {
     const UInt8 *bytes = (const UInt8 *)self.bytes;
-    return (self.length >= 2 && bytes[0] == 0x78 && bytes[1] == 0x9c);
+    return (self.length >= 2 && bytes[0] == 0x78);
 }
 
 
@@ -43,8 +43,7 @@
 
     NSMutableData *output = nil;
     int compression = (level < 0.0f)? Z_DEFAULT_COMPRESSION: (int)(roundf(level * 9));
-    if (deflateInit2(&stream, compression, Z_DEFLATED, 31, 8, Z_DEFAULT_STRATEGY) == Z_OK)
-    {
+    if (deflateInit2(&stream, compression, Z_DEFLATED, 31, 8, Z_DEFAULT_STRATEGY) == Z_OK) {
         output = [NSMutableData dataWithLength:ChunkSize];
         while (stream.avail_out == 0)
         {
@@ -63,7 +62,7 @@
     return output;
 }
 
-- (NSData *)jx_gzippedData
+- (NSData *)jx_gzippedDefault
 {
     return [self jx_gzippedDataWithCompressionLevel:-1.0f];
 }
@@ -84,24 +83,19 @@
     stream.avail_out = 0;
 
     NSMutableData *output = nil;
-    if (inflateInit2(&stream, 47) == Z_OK)
-    {
+    if (inflateInit2(&stream, 47) == Z_OK) {
         int status = Z_OK;
         output = [NSMutableData dataWithCapacity:self.length * 2];
-        while (status == Z_OK)
-        {
-            if (stream.total_out >= output.length)
-            {
+        while (status == Z_OK) {
+            if (stream.total_out >= output.length) {
                 output.length += self.length / 2;
             }
             stream.next_out = (uint8_t *)output.mutableBytes + stream.total_out;
             stream.avail_out = (uInt)(output.length - stream.total_out);
             status = inflate (&stream, Z_SYNC_FLUSH);
         }
-        if (inflateEnd(&stream) == Z_OK)
-        {
-            if (status == Z_STREAM_END)
-            {
+        if (inflateEnd(&stream) == Z_OK) {
+            if (status == Z_STREAM_END) {
                 output.length = stream.total_out;
             }
         }
@@ -158,15 +152,14 @@
     return [NSData dataWithData:compressed];
 }
 
-- (nullable NSData *)jx_zlibbedData
+- (nullable NSData *)jx_zlibbedDefault
 {
     return [self jx_zlibbedDataWithCompressionLevel:-1.0f];
 }
 
 - (nullable NSData *)jx_unzlibbedData
 {
-    if (self.length == 0 || ![self jx_isZlibbedData])
-    {
+    if (self.length == 0 || ![self jx_isZlibbedData]) {
         return self;
     }
     NSUInteger full_length = [self length];
@@ -207,9 +200,9 @@
     } else return nil;
 }
 
-+ (NSData *)jx_dataNamed:(NSString *)name
++ (nullable NSData *)jx_mainBundleDataNamed:(NSString *)name type:(NSString *)type
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:@""];
+    NSString *path = [[NSBundle mainBundle] pathForResource:name ofType:type];
     if (!path) return nil;
     NSData *data = [NSData dataWithContentsOfFile:path];
     return data;

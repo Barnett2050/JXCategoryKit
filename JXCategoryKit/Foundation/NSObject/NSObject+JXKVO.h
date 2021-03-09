@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSObject (JXKVO)
 
 /// 添加一个kvo的block
-- (void)jx_addObserverBlockForKeyPath:(NSString*)keyPath
+- (void)jx_addObserverBlockForKeyPath:(NSString *)keyPath
                              block:(void (^)(id _Nonnull obj, id _Nonnull oldVal, id _Nonnull newVal))block;
 /// 根据给定的keyPath移除相应的观察者
-- (void)jx_removeObserverBlocksForKeyPath:(NSString*)keyPath;
+- (void)jx_removeObserverBlocksForKeyPath:(NSString *)keyPath;
 
 /// 释放所有的观察者
 - (void)jx_removeObserverBlocks;

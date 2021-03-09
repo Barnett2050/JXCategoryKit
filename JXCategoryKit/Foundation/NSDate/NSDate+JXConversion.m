@@ -112,8 +112,6 @@
     } else {
         formatStr = [format lowercaseString];
     }
-
-    NSString *format_time;
     
     NSInteger seconds = totalSecond % 60;
     NSInteger minutes = (totalSecond / 60) % 60;
@@ -126,29 +124,29 @@
     // format of hour
     if ([formatStr containsString:@"hh"]) {
         str_hour = [NSString stringWithFormat:@"%02ld",(long)hours];
-        format_time = [formatStr stringByReplacingOccurrencesOfString:@"hh" withString:str_hour];
+        formatStr = [formatStr stringByReplacingOccurrencesOfString:@"hh" withString:str_hour];
     } else if ([formatStr containsString:@"h"]) {
         str_hour = [NSString stringWithFormat:@"%ld",(long)hours];
-        format_time = [formatStr stringByReplacingOccurrencesOfString:@"h" withString:str_hour];
+        formatStr = [formatStr stringByReplacingOccurrencesOfString:@"h" withString:str_hour];
     }
     // format of minute
     if ([formatStr containsString:@"mm"]) {
         str_minute = [NSString stringWithFormat:@"%02ld",(long)minutes];
-        format_time = [format_time stringByReplacingOccurrencesOfString:@"mm" withString:str_minute];
+        formatStr = [formatStr stringByReplacingOccurrencesOfString:@"mm" withString:str_minute];
     } else if ([formatStr containsString:@"m"]) {
         str_minute = [NSString stringWithFormat:@"%ld",(long)minutes];
-        format_time = [format_time stringByReplacingOccurrencesOfString:@"m" withString:str_minute];
+        formatStr = [formatStr stringByReplacingOccurrencesOfString:@"m" withString:str_minute];
     }
     // format of second
     if ([formatStr containsString:@"ss"]) {
         str_second = [NSString stringWithFormat:@"%02ld",(long)seconds];
-        format_time = [format_time stringByReplacingOccurrencesOfString:@"ss" withString:str_second];
+        formatStr = [formatStr stringByReplacingOccurrencesOfString:@"ss" withString:str_second];
     } else if ([formatStr containsString:@"s"]) {
         str_second = [NSString stringWithFormat:@"%ld",(long)seconds];
-        format_time = [format_time stringByReplacingOccurrencesOfString:@"s" withString:str_second];
+        formatStr = [formatStr stringByReplacingOccurrencesOfString:@"s" withString:str_second];
     }
 
-    return format_time;
+    return formatStr;
 }
 
 /**  时间戳根据格式返回数据 HH:mm、昨天 HH:mm、MM月dd日 HH:mm、yyyy年MM月dd日)*/

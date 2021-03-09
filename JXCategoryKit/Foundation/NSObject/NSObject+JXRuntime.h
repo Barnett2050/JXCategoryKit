@@ -12,29 +12,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (JXRuntime)
 
-/**
- swizzle交换类方法
-
- @param oriSel 原有方法
- @param swiSel 替换方法
- */
+/// swizzle交换类方法
+/// @param oriSel 原有方法
+/// @param swiSel 替换方法
 + (void)jx_swizzleClassMethodOriginSel:(SEL)oriSel swizzledSel:(SEL)swiSel;
 
-/**
- swizzle交换类实例方法
-
- @param oriSel 原有方法
- @param swiSel 替换方法
- */
+/// swizzle交换类实例方法
+/// @param oriSel 原有方法
+/// @param swiSel 替换方法
 + (void)jx_swizzleClassInstanceMethodWithOriginSel:(SEL)oriSel swizzleSel:(SEL)swiSel;
 
-/**
- 判断方法是否在子类里override了
- 
- @param cls 传入要判断的Class
- @param sel 传入要判断的Selector
- @return 返回判断是否被重载的结果
- */
+/// 判断方法是否在子类里override了
+/// @param cls 传入要判断的Class
+/// @param sel 传入要判断的Selector
 - (BOOL)jx_isMethodOverride:(Class)cls selector:(SEL)sel;
 
 /// 将一个对象与“self”相关联，它是一个strong属性（strong，nonatomic）。
@@ -49,12 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 移除所有的关联对象
 - (void)jx_removeAssociatedValues;
 
-/**
- 判断当前类是否在主bundle里
- 
- @param cls 出入类
- @return 返回判断结果
- */
+/// 判断当前类是否在主bundle里
+/// @param cls 类
 + (BOOL)jx_isMainBundleClass:(Class)cls;
 
 /// 输出类方法
@@ -62,9 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 输出类属性
 + (void)jx_printClassPropertyList;
-/**
- 返回类属性字典
- */
+
+/// 返回类属性字典
 - (NSDictionary *)jx_properties_aps;
 
 /// 清空所有属性值

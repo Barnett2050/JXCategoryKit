@@ -277,16 +277,13 @@ static const char *NSArrayM = "__NSArrayM";
     [indexSet enumerateRangesUsingBlock:^(NSRange range, BOOL * _Nonnull stop) {
         if (range.location == NSNotFound || range.length == NSNotFound) {
             
-        }else if (range.location == self.count-1)
-        {
+        }else if (range.location == self.count-1) {
             NSRange newRange = NSMakeRange(range.location, 1);
             [mutableIndexSet addIndexesInRange:newRange];
-        }else if (range.location < self.count && range.location + range.length > self.count)
-        {
+        }else if (range.location < self.count && range.location + range.length > self.count) {
             NSRange newRange = NSMakeRange(range.location, self.count - range.location);
             [mutableIndexSet addIndexesInRange:newRange];
-        }else
-        {
+        }else {
             [mutableIndexSet addIndexesInRange:range];
         }
     }];
@@ -295,7 +292,7 @@ static const char *NSArrayM = "__NSArrayM";
 - (BOOL)rangeIsAvailable:(NSRange)range
 {
     BOOL flag = true;
-    if (range.location < 0 || range.length <= 0 || range.location > self.count) {
+    if (range.location > self.count) {
         flag = false;
        
     }
@@ -305,7 +302,7 @@ static const char *NSArrayM = "__NSArrayM";
 - (BOOL)rangeIsAvailable:(NSRange)range max:(NSInteger)max
 {
     BOOL flag = true;
-    if (range.location < 0 || range.length <= 0 || range.location > max) {
+    if (range.location > max) {
         flag = false;
        
     }

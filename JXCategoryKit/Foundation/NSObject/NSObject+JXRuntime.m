@@ -83,8 +83,7 @@
         objc_property_t property = propertys[i];
         // 属性名称
         const char *name = property_getName(property);
-        
-        NSLog(@"name:%s",name);
+        NSLog(@"property name:%s",name);
     }
     free(propertys);
 }
@@ -120,18 +119,16 @@
         if ([propertyValue isKindOfClass:[NSString class]]) {
             [self setValue:@"" forKey:propertyName];
         } else if ([propertyValue isKindOfClass:[NSNumber class]]) {
-            
             [self setValue:[NSNumber numberWithInteger:0] forKey:propertyName];
-        } else if ([propertyValue isKindOfClass:[NSMutableDictionary class]] ||
-                 [propertyValue isKindOfClass:[NSDictionary class]]) {
-            
+        } else if ([propertyValue isKindOfClass:[NSDictionary class]]) {
             [self setValue:@{} forKey:propertyName];
-        } else if ([propertyValue isKindOfClass:[NSMutableArray class]] ||
-                 [propertyValue isKindOfClass:[NSArray class]]) {
-            
+        }else if ([propertyValue isKindOfClass:[NSMutableDictionary class]]) {
+            [self setValue:[NSMutableDictionary dictionary] forKey:propertyName];
+        }else if ([propertyValue isKindOfClass:[NSArray class]]) {
             [self setValue:@[] forKey:propertyName];
-        } else {
-            
+        }else if ([propertyValue isKindOfClass:[NSMutableArray class]]) {
+            [self setValue:[NSMutableArray array] forKey:propertyName];
+        }  else {
             [self setValue:nil forKey:propertyName];
         }
     }

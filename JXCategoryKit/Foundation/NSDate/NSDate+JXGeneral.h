@@ -20,8 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSInteger second; /// 秒
 @property (nonatomic, readonly) NSInteger nanosecond; /// 纳秒
 @property (nonatomic, readonly) NSInteger weekday; /// 星期单位。范围为1-7 （一个星期有七天）
-@property (nonatomic, readonly) NSInteger weekdayOrdinal; ///以7天为单位，范围为1-5 （1-7号为第1个7天，8-14号为第2个7天...）
-@property (nonatomic, readonly) NSInteger weekOfMonth; /// 当前月的周数
+@property (nonatomic, readonly) NSInteger weekdayOrdinal; /// 每月以7天为单位，范围为1-5 （1-7号为第1个7天，8-14号为第2个7天...）
+@property (nonatomic, readonly) NSInteger weekOfMonth; /// 当前月的周数,实际
 @property (nonatomic, readonly) NSInteger weekOfYear; /// 当前年的周数
 @property (nonatomic, readonly) NSInteger quarter; /// 刻钟单位。范围为1-4 （1刻钟等于15分钟）
 

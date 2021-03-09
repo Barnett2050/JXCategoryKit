@@ -131,7 +131,7 @@
     NSDate *date = [NSDate date];
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
     NSTimeInterval time = [zone secondsFromGMTForDate:date];
-    CGFloat hourTime = time*1.0 / 3600.;
+    CGFloat hourTime = time * 1.0 / 3600.;
     return hourTime;
 }
 

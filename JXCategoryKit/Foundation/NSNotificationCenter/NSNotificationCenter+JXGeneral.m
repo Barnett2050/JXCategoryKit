@@ -11,21 +11,20 @@
 
 @implementation NSNotificationCenter (JXGeneral)
 
-- (void)jx_postNotificationOnMainThread:(NSNotification *)notification waitUntilDone:(BOOL)wait
++ (void)jx_postNotificationOnMainThread:(NSNotification *)notification waitUntilDone:(BOOL)wait
 {
-    if (pthread_main_np()) return [self postNotification:notification];
+    if (pthread_main_np()) return [[self defaultCenter] postNotification:notification];
     [[self class] performSelectorOnMainThread:@selector(p_postNotification:) withObject:notification waitUntilDone:wait];
 }
 
-- (void)jx_postNotificationOnMainThread:(NSNotification *)notification
++ (void)jx_postNotificationOnMainThread:(NSNotification *)notification
 {
-    if (pthread_main_np()) return [self postNotification:notification];
     [self jx_postNotificationOnMainThread:notification waitUntilDone:NO];
 }
 
-- (void)jx_postNotificationOnMainThreadWithName:(NSString *)name object:(id)object userInfo:(NSDictionary *)userInfo waitUntilDone:(BOOL)wait
++ (void)jx_postNotificationOnMainThreadWithName:(NSString *)name object:(id)object userInfo:(NSDictionary *)userInfo waitUntilDone:(BOOL)wait
 {
-    if (pthread_main_np()) return [self postNotificationName:name object:object userInfo:userInfo];
+    if (pthread_main_np()) return [[self defaultCenter] postNotificationName:name object:object userInfo:userInfo];
     NSMutableDictionary *info = [[NSMutableDictionary allocWithZone:nil] initWithCapacity:3];
     if (name) [info setObject:name forKey:@"name"];
     if (object) [info setObject:object forKey:@"object"];
@@ -33,15 +32,13 @@
     [[self class] performSelectorOnMainThread:@selector(p_postNotificationName:) withObject:info waitUntilDone:wait];
 }
 
-- (void)jx_postNotificationOnMainThreadWithName:(NSString *)name object:(id)object userInfo:(NSDictionary *)userInfo
++ (void)jx_postNotificationOnMainThreadWithName:(NSString *)name object:(id)object userInfo:(NSDictionary *)userInfo
 {
-    if (pthread_main_np()) return [self postNotificationName:name object:object userInfo:userInfo];
     [self jx_postNotificationOnMainThreadWithName:name object:object userInfo:userInfo waitUntilDone:NO];
 }
 
-- (void)jx_postNotificationOnMainThreadWithName:(NSString *)name object:(id)object
++ (void)jx_postNotificationOnMainThreadWithName:(NSString *)name object:(id)object
 {
-    if (pthread_main_np()) return [self postNotificationName:name object:object userInfo:nil];
     [self jx_postNotificationOnMainThreadWithName:name object:object userInfo:nil waitUntilDone:NO];
 }
 

@@ -10,7 +10,7 @@
 
 @implementation NSFileManager (JXData)
 
-+ (double)jx_fileSizeAtPath:(NSString*)filePath
++ (double)jx_fileSizeAtPath:(NSString *)filePath
 {
     NSFileManager* manager = [NSFileManager defaultManager];
     
@@ -21,7 +21,7 @@
     return 0;
 }
 
-+ (NSString *)jx_fileSizeStringAtPath:(NSString*)filePath
++ (NSString *)jx_fileSizeStringAtPath:(NSString *)filePath
 {
     
     double fileSize = [NSFileManager jx_fileSizeAtPath:filePath];
