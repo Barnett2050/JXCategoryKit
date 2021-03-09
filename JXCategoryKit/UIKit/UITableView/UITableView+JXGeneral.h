@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 取消tableView所有行的选中
 /// @param animated 动画效果
 - (void)jx_clearSelectedRowsAnimated:(BOOL)animated;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -210,21 +210,11 @@ static const char *NSArrayI = "__NSArrayI";
 }
 - (NSArray *)singleObjectArrayI_subarrayWithRange:(NSRange)range
 {
-    if ([self rangeIsAvailable:range]) {
-        return [self singleObjectArrayI_subarrayWithRange:[self getNewRangeWith:range]];
-    }else
-    {
-        return nil;
-    }
+    return [self singleObjectArrayI_subarrayWithRange:[self getNewRangeWith:range]];
 }
 - (NSUInteger)singleObjectArrayI_indexOfObject:(id)anObject inRange:(NSRange)range
 {
-    if ([self rangeIsAvailable:range]) {
-        return [self singleObjectArrayI_indexOfObject:anObject inRange:[self getNewRangeWith:range]];
-    }else
-    {
-        return NSNotFound;
-    }
+    return [self singleObjectArrayI_indexOfObject:anObject inRange:[self getNewRangeWith:range]];
 }
 
 - (NSArray *)singleObjectArrayI_objectsAtIndexes:(NSIndexSet *)indexes
@@ -272,12 +262,7 @@ static const char *NSArrayI = "__NSArrayI";
 }
 - (NSUInteger)singleObjectArrayI_indexOfObject:(id)obj inSortedRange:(NSRange)r options:(NSBinarySearchingOptions)opts usingComparator:(NSComparator NS_NOESCAPE)cmp
 {
-    if ([self rangeIsAvailable:r]) {
-        return [self singleObjectArrayI_indexOfObject:obj inSortedRange:[self getNewRangeWith:r] options:opts usingComparator:cmp];
-    }else
-    {
-        return NSNotFound;
-    }
+    return [self singleObjectArrayI_indexOfObject:obj inSortedRange:[self getNewRangeWith:r] options:opts usingComparator:cmp];
 }
 #pragma mark - NSArrayI
 - (id)arrayI_objectAtIndex:(NSUInteger)index
@@ -289,21 +274,11 @@ static const char *NSArrayI = "__NSArrayI";
 }
 - (NSArray *)arrayI_subarrayWithRange:(NSRange)range
 {
-    if ([self rangeIsAvailable:range]) {
-        return [self arrayI_subarrayWithRange:[self getNewRangeWith:range]];
-    }else
-    {
-        return nil;
-    }
+    return [self arrayI_subarrayWithRange:[self getNewRangeWith:range]];
 }
 - (NSUInteger)arrayI_indexOfObject:(id)anObject inRange:(NSRange)range
 {
-    if ([self rangeIsAvailable:range]) {
-        return [self arrayI_indexOfObject:anObject inRange:[self getNewRangeWith:range]];
-    }else
-    {
-        return NSNotFound;
-    }
+    return [self arrayI_indexOfObject:anObject inRange:[self getNewRangeWith:range]];
 }
 
 - (NSArray *)arrayI_objectsAtIndexes:(NSIndexSet *)indexes
@@ -351,12 +326,7 @@ static const char *NSArrayI = "__NSArrayI";
 }
 - (NSUInteger)arrayI_indexOfObject:(id)obj inSortedRange:(NSRange)r options:(NSBinarySearchingOptions)opts usingComparator:(NSComparator NS_NOESCAPE)cmp
 {
-    if ([self rangeIsAvailable:r]) {
-        return [self arrayI_indexOfObject:obj inSortedRange:[self getNewRangeWith:r] options:opts usingComparator:cmp];
-    }else
-    {
-        return NSNotFound;
-    }
+    return [self arrayI_indexOfObject:obj inSortedRange:[self getNewRangeWith:r] options:opts usingComparator:cmp];
 }
 #pragma mark - private
 /// 字典转换为可变字典
@@ -395,25 +365,19 @@ static const char *NSArrayI = "__NSArrayI";
     return [NSDictionary dictionaryWithDictionary:[replaced copy]];
 }
 
-- (BOOL)rangeIsAvailable:(NSRange)range
-{
-    BOOL flag = true;
-    if (range.location < 0 || range.length <= 0 || range.location > self.count) {
-        flag = false;
-       
-    }
-    return flag;
-}
-
 - (NSRange)getNewRangeWith:(NSRange)range
 {
-    NSRange newRange;
-    NSInteger length = range.length;
-    if (length + range.location > self.count) {
-        length = self.count - range.location;
+    NSUInteger location = range.location;
+    NSUInteger length = range.length;
+    
+    if (location > self.count) {
+        return NSMakeRange(self.count, 0);
+    } else {
+        if (length + location > self.count) {
+            length = self.count - location;
+        }
+        return NSMakeRange(location, length);
     }
-    newRange = NSMakeRange(range.location, length);
-    return newRange;
 }
 
 /// 筛选NSIndexSet

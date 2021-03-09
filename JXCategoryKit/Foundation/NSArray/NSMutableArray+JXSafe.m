@@ -107,21 +107,11 @@ static const char *NSArrayM = "__NSArrayM";
 }
 - (NSArray *)arrayM_subarrayWithRange:(NSRange)range
 {
-    if ([self rangeIsAvailable:range]) {
-        return [self arrayM_subarrayWithRange:[self getNewRangeWith:range]];
-    }else
-    {
-        return nil;
-    }
+    return [self arrayM_subarrayWithRange:[self getNewRangeWith:range]];
 }
 - (NSUInteger)arrayM_indexOfObject:(id)anObject inRange:(NSRange)range
 {
-    if ([self rangeIsAvailable:range]) {
-        return [self arrayM_indexOfObject:anObject inRange:[self getNewRangeWith:range]];
-    }else
-    {
-        return NSNotFound;
-    }
+    return [self arrayM_indexOfObject:anObject inRange:[self getNewRangeWith:range]];
 }
 
 - (NSArray *)arrayM_objectsAtIndexes:(NSIndexSet *)indexes
@@ -169,12 +159,7 @@ static const char *NSArrayM = "__NSArrayM";
 }
 - (NSUInteger)arrayM_indexOfObject:(id)obj inSortedRange:(NSRange)r options:(NSBinarySearchingOptions)opts usingComparator:(NSComparator NS_NOESCAPE)cmp
 {
-    if ([self rangeIsAvailable:r]) {
-        return [self arrayM_indexOfObject:obj inSortedRange:[self getNewRangeWith:r] options:opts usingComparator:cmp];
-    }else
-    {
-        return NSNotFound;
-    }
+    return [self arrayM_indexOfObject:obj inSortedRange:[self getNewRangeWith:r] options:opts usingComparator:cmp];
 }
 
 - (void)arrayM_insertObject:(id)anObject atIndex:(NSUInteger)index
@@ -203,33 +188,23 @@ static const char *NSArrayM = "__NSArrayM";
 }
 - (void)arrayM_removeObject:(id)anObject inRange:(NSRange)range
 {
-    if ([self rangeIsAvailable:range]) {
-        [self arrayM_removeObject:anObject inRange:[self getNewRangeWith:range]];
-    }
+    [self arrayM_removeObject:anObject inRange:[self getNewRangeWith:range]];
 }
 - (void)arrayM_removeObjectIdenticalTo:(id)anObject inRange:(NSRange)range
 {
-    if ([self rangeIsAvailable:range]) {
-        [self arrayM_removeObjectIdenticalTo:anObject inRange:[self getNewRangeWith:range]];
-    }
+    [self arrayM_removeObjectIdenticalTo:anObject inRange:[self getNewRangeWith:range]];
 }
 - (void)arrayM_removeObjectsInRange:(NSRange)range
 {
-    if ([self rangeIsAvailable:range]) {
-        [self arrayM_removeObjectsInRange:[self getNewRangeWith:range]];
-    }
+    [self arrayM_removeObjectsInRange:[self getNewRangeWith:range]];
 }
 - (void)arrayM_replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray range:(NSRange)otherRange
 {
-    if ([self rangeIsAvailable:range] && [self rangeIsAvailable:otherRange max:otherArray.count]) {
-        [self arrayM_replaceObjectsInRange:[self getNewRangeWith:range] withObjectsFromArray:otherArray range:[self getNewRangeWith:otherRange max:otherArray.count]];
-    }
+    [self arrayM_replaceObjectsInRange:[self getNewRangeWith:range] withObjectsFromArray:otherArray range:[self getNewRangeWith:otherRange count:otherArray.count]];
 }
 - (void)arrayM_replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray *)otherArray
 {
-    if ([self rangeIsAvailable:range]) {
-        [self arrayM_replaceObjectsInRange:[self getNewRangeWith:range] withObjectsFromArray:otherArray];
-    }
+    [self arrayM_replaceObjectsInRange:[self getNewRangeWith:range] withObjectsFromArray:otherArray];
 }
 - (void)arrayM_insertObjects:(NSArray *)objects atIndexes:(NSIndexSet *)indexes
 {
@@ -289,15 +264,6 @@ static const char *NSArrayM = "__NSArrayM";
     }];
     return mutableIndexSet;
 }
-- (BOOL)rangeIsAvailable:(NSRange)range
-{
-    BOOL flag = true;
-    if (range.location > self.count) {
-        flag = false;
-       
-    }
-    return flag;
-}
 
 - (BOOL)rangeIsAvailable:(NSRange)range max:(NSInteger)max
 {
@@ -311,24 +277,32 @@ static const char *NSArrayM = "__NSArrayM";
 
 - (NSRange)getNewRangeWith:(NSRange)range
 {
-    NSRange newRange;
-    NSInteger length = range.length;
-    if (length + range.location > self.count) {
-        length = self.count - range.location;
+    NSUInteger location = range.location;
+    NSUInteger length = range.length;
+    
+    if (location > self.count) {
+        return NSMakeRange(self.count, 0);
+    } else {
+        if (length + location > self.count) {
+            length = self.count - location;
+        }
+        return NSMakeRange(location, length);
     }
-    newRange = NSMakeRange(range.location, length);
-    return newRange;
 }
 
-- (NSRange)getNewRangeWith:(NSRange)range max:(NSInteger)max
+- (NSRange)getNewRangeWith:(NSRange)range count:(NSUInteger)count
 {
-    NSRange newRange;
-    NSInteger length = range.length;
-    if (length + range.location > max) {
-        length = max - range.location;
+    NSUInteger location = range.location;
+    NSUInteger length = range.length;
+    
+    if (location > count) {
+        return NSMakeRange(count, 0);
+    } else {
+        if (length + location > count) {
+            length = count - location;
+        }
+        return NSMakeRange(location, length);
     }
-    newRange = NSMakeRange(range.location, length);
-    return newRange;
 }
 
 @end

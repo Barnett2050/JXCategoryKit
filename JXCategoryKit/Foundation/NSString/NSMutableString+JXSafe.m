@@ -34,17 +34,14 @@ static const char *NSCFString = "__NSCFString";
 #pragma mark - NSCFString
 - (NSString *)CFConstantString_substringFromIndex:(NSUInteger)from
 {
-    NSInteger newFrom = from;
-    newFrom = newFrom < 0 ? 0 : newFrom;
-    if (newFrom >= 0 && newFrom < self.length) {
-       return [self CFConstantString_substringFromIndex:newFrom];
+    if (from >= 0 && from < self.length) {
+       return [self CFConstantString_substringFromIndex:from];
     }
     return @"";
 }
 - (NSString *)CFConstantString_substringToIndex:(NSUInteger)to
 {
-    NSInteger newTo = to;
-    newTo = newTo < 0 ? 0 : newTo;
+    NSUInteger newTo = to;
     if (newTo >= 0 && newTo < self.length) {
        return [self CFConstantString_substringToIndex:newTo];
     } else if (newTo >= self.length) {
@@ -96,10 +93,8 @@ static const char *NSCFString = "__NSCFString";
 #pragma mark - private
 - (NSRange)getNewRangeWith:(NSRange)range
 {
-    NSInteger location = range.location;
-    location = location > 0 ? location : 0;
-    NSInteger length = range.length;
-    length = length > 0 ? length : 0;
+    NSUInteger location = range.location;
+    NSUInteger length = range.length;
     
     if (location > self.length) {
         return NSMakeRange(self.length, 0);

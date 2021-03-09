@@ -30,18 +30,14 @@
     NSString *string = @"岁月一点一滴的走，在不经意间，快的让我们都来不及在下一个路口挽留，\n也无法预测人生未知的镜头";
     NSMutableString *mutableString = [NSMutableString stringWithString:string];
     
-    XCTAssertEqualObjects([mutableString substringFromIndex:-10], mutableString);
     XCTAssertEqualObjects([mutableString substringFromIndex:0], mutableString);
     XCTAssertEqualObjects([mutableString substringFromIndex:5], @"滴的走，在不经意间，快的让我们都来不及在下一个路口挽留，\n也无法预测人生未知的镜头");
     XCTAssertEqualObjects([mutableString substringFromIndex:100], @"");
 
-    XCTAssertEqualObjects([mutableString substringToIndex:-10], @"");
     XCTAssertEqualObjects([mutableString substringToIndex:0], @"");
     XCTAssertEqualObjects([mutableString substringToIndex:10], @"岁月一点一滴的走，在");
     XCTAssertEqualObjects([mutableString substringToIndex:100], mutableString);
 
-    XCTAssertEqualObjects([mutableString substringWithRange:NSMakeRange(-10, 10)], @"岁月一点一滴的走，在");
-    XCTAssertEqualObjects([mutableString substringWithRange:NSMakeRange(-10, -10)], @"");
     XCTAssertEqualObjects([mutableString substringWithRange:NSMakeRange(0, 10)], @"岁月一点一滴的走，在");
     XCTAssertEqualObjects([mutableString substringWithRange:NSMakeRange(100, 10)], @"");
     XCTAssertEqualObjects([mutableString substringWithRange:NSMakeRange(0, 100)], @"岁月一点一滴的走，在不经意间，快的让我们都来不及在下一个路口挽留，\n也无法预测人生未知的镜头");
