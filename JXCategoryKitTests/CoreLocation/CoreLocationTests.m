@@ -75,13 +75,12 @@
     
     XCTestExpectation *expectation2 = [self expectationWithDescription:@"description"];
     [CLLocation placeDescriptionFromLocation:[[CLLocation alloc] initWithLatitude:location1.latitude longitude:location1.longitude] callBack:^(NSError * _Nonnull error, NSString * _Nonnull country, NSString * _Nonnull locality, NSString * _Nonnull subLocality, NSString * _Nonnull thoroughfare, NSString * _Nonnull name) {
-        [expectation2 fulfill];
         NSLog(@"%@-%@-%@-%@-%@",country,locality,subLocality,thoroughfare,name);
+        [expectation2 fulfill];
     }];
     
     XCTestExpectation *expectation3 = [self expectationWithDescription:@"placemarks"];
     [CLLocation placemarksWithLocation:@"唐山" callBack:^(NSError * _Nonnull error, NSArray * _Nonnull placemarks) {
-        [expectation3 fulfill];
         for (CLPlacemark *placemark in placemarks) {
             NSLog(@"Longitude = %f", placemark.location.coordinate.longitude);
             NSLog(@"Latitude = %f", placemark.location.coordinate.latitude);
@@ -101,6 +100,7 @@
 //            NSString *ocean = placemark.ocean; // 海洋
 //            NSArray *areasOfInterest = placemark.areasOfInterest; //关联的或利益相关的地标
         }
+        [expectation3 fulfill];
     }];
     [self waitForExpectationsWithTimeout:5 handler:^(NSError * _Nullable error) {
         NSLog(@"异步操作超时");

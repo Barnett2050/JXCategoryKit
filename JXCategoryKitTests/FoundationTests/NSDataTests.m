@@ -70,15 +70,16 @@ static NSString *const testIv = @"0123456789111213";
 {
     NSData *data = [NSData jx_mainBundleDataNamed:@"test" type:@"jpg"];
     NSData *gzipData = [data jx_gzippedDefault];
-    XCTAssertTrue([gzipData jx_isGzippedData],@"gzip压缩");
-    XCTAssertTrue([[data jx_gzippedDataWithCompressionLevel:0.9] jx_isGzippedData],@"gzip压缩");
+    
+    XCTAssertTrue([gzipData jx_isGzippedData] == YES,@"gzip压缩");
+    XCTAssertTrue([[data jx_gzippedDataWithCompressionLevel:0.9] jx_isGzippedData] == YES,@"gzip压缩");
     XCTAssertTrue([[gzipData jx_gunzippedData] isEqualToData:data],@"gzip解压缩");
     NSLog(@"%@",gzipData);
     NSLog(@"%@",[data jx_gzippedDataWithCompressionLevel:0]);
     
     NSData *zlibData = [data jx_zlibbedDefault];
-    XCTAssertTrue([zlibData jx_isZlibbedData],@"zlib压缩");
-    XCTAssertTrue([[data jx_zlibbedDataWithCompressionLevel:0.1] jx_isZlibbedData],@"zlib压缩");
+    XCTAssertTrue([zlibData jx_isZlibbedData] == YES,@"zlib压缩");
+    XCTAssertTrue([[data jx_zlibbedDataWithCompressionLevel:0.9] jx_isZlibbedData] == YES,@"zlib压缩");
     XCTAssertTrue([[zlibData jx_unzlibbedData] isEqualToData:data],@"zlib解压缩");
     NSLog(@"%@",zlibData);
     NSLog(@"%@",[data jx_zlibbedDataWithCompressionLevel:0.1]);

@@ -69,10 +69,7 @@
 
 - (NSData *)jx_gunzippedData
 {
-    if (self.length == 0 || ![self jx_isGzippedData])
-    {
-        return self;
-    }
+    if (self.length == 0 || ![self jx_isGzippedData]) { return self; }
 
     z_stream stream;
     stream.zalloc = Z_NULL;
@@ -108,20 +105,16 @@
 
 - (nullable NSData *)jx_zlibbedDataWithCompressionLevel:(float)level
 {
-    if (self.length == 0 || [self jx_isZlibbedData])
-    {
-        return self;
-    }
-    
+    if (self.length == 0 || [self jx_isZlibbedData]) { return self; }
+
     z_stream strm;
-    
     strm.zalloc = Z_NULL;
     strm.zfree = Z_NULL;
     strm.opaque = Z_NULL;
     strm.total_out = 0;
     strm.next_in = (Bytef *)[self bytes];
     strm.avail_in = (uInt)[self length];
-    
+
     static const NSUInteger ChunkSize = 16384;
     // Compresssion Levels:
     //   Z_NO_COMPRESSION         0
@@ -129,25 +122,25 @@
     //   Z_BEST_COMPRESSION       9
     //   Z_DEFAULT_COMPRESSION    -1
     int compression = (level < 0.0f)? Z_DEFAULT_COMPRESSION: (int)(roundf(level * 9));
-    
+
     if (deflateInit(&strm, compression) != Z_OK) return nil;
-    
+
     // 16K chuncks for expansion
     NSMutableData *compressed = [NSMutableData dataWithLength:ChunkSize];
-    
+
     do {
         if (strm.total_out >= [compressed length])
             [compressed increaseLengthBy:ChunkSize];
-        
+
         strm.next_out = [compressed mutableBytes] + strm.total_out;
         strm.avail_out = (uInt)([compressed length] - strm.total_out);
-        
+
         deflate(&strm, Z_FINISH);
     }
     while (strm.avail_out == 0);
-    
+
     deflateEnd(&strm);
-    
+
     [compressed setLength:strm.total_out];
     return [NSData dataWithData:compressed];
 }
