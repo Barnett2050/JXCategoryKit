@@ -151,7 +151,6 @@
     if (endTime > 140000000000) {
         endTime = endTime / 1000;
     }
-    
     NSTimeInterval seconds = fabs(endTime - startTime);
     double day = seconds / 60.0 / 60.0 / 24.0;
     return roundf(day);

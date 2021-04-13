@@ -12,14 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSMutableArray (JXGeneral)
 
-/// 根据指定的属性列表数据创建并返回一个数组。
-/// @param plist 列表data
-+ (nullable NSMutableArray *)jx_arrayWithPlistData:(NSData *)plist;
-
-/// 从指定的属性列表xml字符串创建并返回一个数组。
-/// @param plist xml字符串
-+ (nullable NSMutableArray *)jx_arrayWithPlistString:(NSString *)plist;
-
 /// 删除数组中索引值最低的对象。
 - (void)jx_removeFirstObject;
 

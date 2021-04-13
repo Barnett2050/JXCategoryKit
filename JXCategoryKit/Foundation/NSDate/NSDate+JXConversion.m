@@ -71,22 +71,21 @@
     NSDate *date;
     BOOL isMilliSecond = [timestamp doubleValue] > 140000000000;
     if (isMilliSecond) {
-        date = [NSDate dateWithTimeIntervalSince1970:timestamp.longLongValue/1000];
+        date = [NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue/1000];
     } else {
-        date = [NSDate dateWithTimeIntervalSince1970:timestamp.longLongValue];
+        date = [NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue];
     }
     NSString * strBefore = @"";
     if (date && (id)date != [NSNull null]) {
-        NSInteger interval = -(NSInteger)[date timeIntervalSinceNow];
+        NSInteger interval = fabs([date timeIntervalSinceNow]);
         NSInteger nDay = interval / (60 * 60 * 24);
         NSInteger nHour = interval / (60 * 60);
         NSInteger nMin = interval / 60;
         NSInteger nSec = interval;
         
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        
         if (nDay > 0) {
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
             strBefore = [df stringFromDate:date];
         } else if (nHour > 0) {
             strBefore = [NSString stringWithFormat:@"%li小时前",(long)nHour];
@@ -156,9 +155,9 @@
     BOOL isMilliSecond = [timestamp doubleValue] > 140000000000;
     NSDate *date;
     if (isMilliSecond) {
-        date = [NSDate dateWithTimeIntervalSince1970:[timestamp longLongValue] / 1000];
+        date = [NSDate dateWithTimeIntervalSince1970:[timestamp doubleValue] / 1000];
     } else {
-        date = [NSDate dateWithTimeIntervalSince1970:[timestamp longLongValue]];
+        date = [NSDate dateWithTimeIntervalSince1970:[timestamp doubleValue]];
     }
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     if ([NSDate p_isToday:date]) {

@@ -12,8 +12,7 @@
 
 + (double)jx_fileSizeAtPath:(NSString *)filePath
 {
-    NSFileManager* manager = [NSFileManager defaultManager];
-    
+    NSFileManager *manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath:filePath]){
         double theSize = [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
         return theSize;
@@ -23,12 +22,10 @@
 
 + (NSString *)jx_fileSizeStringAtPath:(NSString *)filePath
 {
-    
     double fileSize = [NSFileManager jx_fileSizeAtPath:filePath];
     if (fileSize == 0) {
         return nil;
-    }else
-    {
+    } else {
         NSString *ret = nil;
         if (fileSize<=0) {
             ret = @"0.00B";

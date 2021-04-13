@@ -26,7 +26,7 @@
 - (void)test_General {
     __block NSInteger index = 0;
     XCTestExpectation *expectation = [self expectationWithDescription:@"timer"];
-    NSTimer *timer0 = [NSTimer jx_scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+    [NSTimer jx_scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
         index++;
         NSLog(@"timer0运行");
         if (index == 3) {

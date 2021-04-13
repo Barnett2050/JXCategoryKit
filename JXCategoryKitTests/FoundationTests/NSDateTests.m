@@ -34,15 +34,15 @@
 - (void)setUp {
     self.currentTimeInterval = 1615182888000;
     self.currentDate = [[NSDate alloc] initWithTimeIntervalSince1970:self.currentTimeInterval / 1000];
-    self.currentDateString = @"2021-03-08 PM 13:54:48 Monday";
+    self.currentDateString = @"2021-03-08 13:54:48";
     
     self.descendingTimeInterval = 1615097111000;
     self.descendingDate = [[NSDate alloc] initWithTimeIntervalSince1970:self.descendingTimeInterval / 1000];
-    self.descendingDateString = @"2021-03-07 PM 14:05:11 Monday";
+    self.descendingDateString = @"2021-03-07 14:05:11";
     
     self.ascendingTimeInterval = 1615097111000;
     self.ascendingDate = [[NSDate alloc] initWithTimeIntervalSince1970:self.ascendingTimeInterval / 1000];
-    self.ascendingDateString = @"2021-03-07 PM 14:05:11 Monday";
+    self.ascendingDateString = @"2021-03-07 14:05:11";
 }
 
 - (void)tearDown {
@@ -82,18 +82,36 @@
     XCTAssertTrue([secondString2 isEqualToString:@"59:06"],@"秒转换为固定格式");
     XCTAssertTrue([secondString3 isEqualToString:@"59:6"],@"秒转换为固定格式");
 
-    NSString *timestampString = [NSString stringWithFormat:@"%.f",self.currentTimeInterval];
-//    XCTAssertTrue([[NSDate jx_getVariableFormatDateStringFromTimestamp:timestampString] isEqualToString:@"13:54"],@"");
-    NSString *timestampString1 = [NSString stringWithFormat:@"%.f",self.currentTimeInterval - 60 * 60 * 24 * 1000];
-//    XCTAssertTrue([[NSDate jx_getVariableFormatDateStringFromTimestamp:timestampString1] isEqualToString:@"昨天 13:54"],@"");
-    NSString *timestampString2 = [NSString stringWithFormat:@"%.f",self.currentTimeInterval - 30 * 60 * 60 * 24 * 1000.0];
-    XCTAssertTrue([[NSDate jx_getVariableFormatDateStringFromTimestamp:timestampString2] isEqualToString:@"2月06日 13:54"],@"");
-    NSString *timestampString3 = [NSString stringWithFormat:@"%.f",self.currentTimeInterval - 12 * 30 * 60 * 60 * 24 * 1000.0];
-    XCTAssertTrue([[NSDate jx_getVariableFormatDateStringFromTimestamp:timestampString3] isEqualToString:@"2020年3月13日"],@"");
+    
+    NSString *timestampString = [NSString stringWithFormat:@"%.f",timeInterval];
+    NSDate *currentDate = [[NSDate alloc] init];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm";
+    XCTAssertTrue([[NSDate jx_getVariableFormatDateStringFromTimestamp:timestampString] isEqualToString:[formatter stringFromDate:currentDate]],@"");
+    XCTAssertTrue([[NSDate jx_getLocalPopularTimeFromTimestamp:timestampString] isEqualToString:@"刚刚"]);
+    
+    timeInterval = timeInterval - 60 * 60 * 24;
+    currentDate = [[NSDate alloc] initWithTimeIntervalSince1970:timeInterval];
+    timestampString = [NSString stringWithFormat:@"%.f",timeInterval];
+    formatter.dateFormat = @"昨天 HH:mm";
+    XCTAssertTrue([[NSDate jx_getVariableFormatDateStringFromTimestamp:timestampString] isEqualToString:[formatter stringFromDate:currentDate]],@"");
+    XCTAssertTrue([[NSDate jx_getLocalPopularTimeFromTimestamp:timestampString] isEqualToString:@"1天前"]);
+    
+    timeInterval = timeInterval - 30 * 60 * 60 * 24;
+    currentDate = [[NSDate alloc] initWithTimeIntervalSince1970:timeInterval];
+    timestampString = [NSString stringWithFormat:@"%.f",timeInterval];
+    formatter.dateFormat = @"M月dd日 HH:mm";
+    XCTAssertTrue([[NSDate jx_getVariableFormatDateStringFromTimestamp:timestampString] isEqualToString:[formatter stringFromDate:currentDate]],@"");
+    XCTAssertTrue([[NSDate jx_getLocalPopularTimeFromTimestamp:timestampString] isEqualToString:@"1月前"]);
+ 
+    timeInterval = timeInterval - 12 * 30 * 60 * 60 * 24;
+    currentDate = [[NSDate alloc] initWithTimeIntervalSince1970:timeInterval];
+    timestampString = [NSString stringWithFormat:@"%.f",timeInterval];
+    formatter.dateFormat = @"yyyy年M月dd日";
+    XCTAssertTrue([[NSDate jx_getVariableFormatDateStringFromTimestamp:timestampString] isEqualToString:[formatter stringFromDate:currentDate]],@"");
+    XCTAssertTrue([[NSDate jx_getLocalPopularTimeFromTimestamp:timestampString] isEqualToString:@"1年前"]);
     
     XCTAssertTrue([[self.currentDate jx_getDateTimeStringWithformat:@"yyyy-MM-dd a HH:mm:ss EEEE"] isEqualToString:self.currentDateString],@"根据日期格式Date转时间字符串");
-
-    NSLog(@"之前时间 = %@",[NSDate jx_getLocalPopularTimeFromTimestamp:timestampString1]);
 }
 
 - (void)test_JXGeneral
@@ -140,22 +158,45 @@
 {
     NSDate *date = [[NSDate alloc] init];
     NSDate *newDate = [date jx_dateByAddingDays:-1];
-    XCTAssertTrue([date jx_isToday],@"日期是否为今天");
-    XCTAssertFalse([newDate jx_isToday],@"日期是否为今天");
+    XCTAssertTrue([date jx_isToday],@"日期是今天");
+    XCTAssertFalse([newDate jx_isToday],@"日期不是今天");
     XCTAssertTrue([newDate jx_isYesterday],@"日期是否为昨天");
     XCTAssertFalse([date jx_isYesterday],@"日期是否为昨天");
     
-    XCTAssertTrue([NSDate jx_isSameDayWithDate:date andDate:[date jx_dateByAddingHours:-1]],@"日期是否为同一天");
-    XCTAssertFalse([NSDate jx_isSameDayWithDate:date andDate:newDate],@"日期是否为同一天");
+    XCTAssertTrue([NSDate jx_isSameDayWithDate:date andDate:[date jx_dateByAddingHours:-1]],@"日期为同一天");
+    XCTAssertFalse([NSDate jx_isSameDayWithDate:date andDate:newDate],@"日期不为同一天");
     
-    XCTAssertTrue([NSDate jx_compareTwoTimesOneTime:@"2020-5-9" anotherTime:@"2020-05-09" dateFormat:@"yyyy-HH-dd"] == 0,@"两个日期相同");
-    XCTAssertFalse([NSDate jx_compareTwoTimesOneTime:@"2020-5-9" anotherTime:@"2020-05-08" dateFormat:@"yyyy-HH-dd"] == 0,@"两个日期相同");
     
-    XCTAssertTrue([NSDate jx_compareTwoTimesOneTime:@"2020-5-8" anotherTime:@"2020-05-09" dateFormat:@"yyyy-HH-dd"] < 0,@"第一个时间小");
-    XCTAssertFalse([NSDate jx_compareTwoTimesOneTime:@"2020-5-10" anotherTime:@"2020-05-09" dateFormat:@"yyyy-HH-dd"] < 0,@"第一个时间小");
+    [NSDate jx_compareTwoTimesOneTime:@"2021-03-08 13:54:48" anotherTime:@"2021-03-07 14:05:11" format:@"yyyy-HH-dd HH:mm:ss" compare:^(NSComparisonResult comparisionResult, NSArray * _Nonnull resultArray) {
+        XCTAssertTrue(comparisionResult == NSOrderedDescending);
+        NSLog(@"%@",resultArray);
+    }];
     
-    XCTAssertTrue([NSDate jx_compareTwoTimesOneTime:@"2020-5-10" anotherTime:@"2020-05-09" dateFormat:@"yyyy-HH-dd"] > 0,@"第一个时间大");
-    XCTAssertFalse([NSDate jx_compareTwoTimesOneTime:@"2020-5-08" anotherTime:@"2020-05-09" dateFormat:@"yyyy-HH-dd"] > 0,@"第一个时间大");
+    [NSDate jx_compareTwoTimesOneTime:@"2020-5-8" anotherTime:@"2020-05-09" format:@"yyyy-HH-dd" compare:^(NSComparisonResult comparisionResult, NSArray * _Nonnull resultArray) {
+        XCTAssertTrue(comparisionResult == NSOrderedAscending);
+        NSLog(@"%@",resultArray);
+    }];
+    
+    [NSDate jx_compareTwoTimesOneTime:@"2020-5-8" anotherTime:@"2020-05-08" format:@"yyyy-HH-dd" compare:^(NSComparisonResult comparisionResult, NSArray * _Nonnull resultArray) {
+        XCTAssertTrue(comparisionResult == NSOrderedSame);
+        NSLog(@"%@",resultArray);
+    }];
+    
+    [NSDate jx_compareTwoTimesOneTime:@"1615182888000" anotherTime:@"1615097111000" format:@"" compare:^(NSComparisonResult comparisionResult, NSArray * _Nonnull resultArray) {
+        XCTAssertTrue(comparisionResult == NSOrderedDescending);
+        NSLog(@"%@",resultArray);
+    }];
+    
+    [NSDate jx_compareTwoTimesOneTime:@"1615182888000" anotherTime:@"1615182888000" format:@"" compare:^(NSComparisonResult comparisionResult, NSArray * _Nonnull resultArray) {
+        XCTAssertTrue(comparisionResult == NSOrderedSame);
+        NSLog(@"%@",resultArray);
+    }];
+    
+    [NSDate jx_compareTwoTimesOneTime:@"1615182888000" anotherTime:@"1615282888000" format:@"" compare:^(NSComparisonResult comparisionResult, NSArray * _Nonnull resultArray) {
+        XCTAssertTrue(comparisionResult == NSOrderedAscending);
+        NSLog(@"%@",resultArray);
+    }];
+    
 }
 
 - (void)test_dateFormatter_JXConversion

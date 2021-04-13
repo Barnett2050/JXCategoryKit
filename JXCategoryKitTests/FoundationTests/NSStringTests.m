@@ -69,8 +69,6 @@
     NSString *string = @"岁月一点一滴的走，在不经意间，快的让我们都来不及在下一个路口挽留，\n也无法预测人生未知的镜头";
     NSMutableDictionary *mutableDic = [NSMutableDictionary dictionary];
     [mutableDic jx_addTextFont:[UIFont systemFontOfSize:100]];
-    
-    
 }
 
 - (void)test_Verification {

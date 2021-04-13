@@ -10,21 +10,6 @@
 
 @implementation NSMutableArray (JXGeneral)
 
-+ (NSMutableArray *)jx_arrayWithPlistData:(NSData *)plist
-{
-    if (!plist) return nil;
-    NSMutableArray *array = [NSPropertyListSerialization propertyListWithData:plist options:NSPropertyListMutableContainersAndLeaves format:NULL error:NULL];
-    if ([array isKindOfClass:[NSMutableArray class]]) return array;
-    return nil;
-}
-
-+ (NSMutableArray *)jx_arrayWithPlistString:(NSString *)plist
-{
-    if (!plist) return nil;
-    NSData* data = [plist dataUsingEncoding:NSUTF8StringEncoding];
-    return [self jx_arrayWithPlistData:data];
-}
-
 - (void)jx_removeFirstObject
 {
     if (self.count) {

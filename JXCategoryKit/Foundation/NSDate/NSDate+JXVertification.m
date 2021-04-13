@@ -36,32 +36,57 @@
     [comp1 year] == [comp2 year];
 }
 
-+ (NSInteger)jx_compareTwoTimesOneTime:(NSString *)oneTime anotherTime:(NSString *)anotherTime dateFormat:(NSString *)dateFormat
++ (void)jx_compareTwoTimesOneTime:(NSString *)oneTime anotherTime:(NSString *)anotherTime format:(NSString *)format compare:(void(^)(NSComparisonResult comparisionResult,NSArray *resultArray))compare
 {
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:dateFormat];
-    NSDate *oneDate =[format dateFromString:oneTime];
-    NSDate *anotherDate = [format dateFromString:anotherTime];
-    NSComparisonResult result = [oneDate compare:anotherDate];
-    switch (result) {
-        case NSOrderedAscending:{
-            // oneDate 小于 anotherDate
-            return -1;
+    if (oneTime.length == 0 || anotherTime.length == 0) {
+        return;
+    }
+    if (format != nil && format.length > 0) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:format];
+        NSDate *oneDate = [formatter dateFromString:oneTime];
+        NSDate *anotherDate = [formatter dateFromString:anotherTime];
+        NSComparisonResult result = [oneDate compare:anotherDate];
+        NSArray *array = nil;
+        switch (result) {
+            case NSOrderedAscending:
+            case NSOrderedSame:
+            {
+                // 升序 oneTime 小于 anotherTime
+                array = @[oneTime,anotherTime];
+            }
+                break;
+            case NSOrderedDescending:{
+                // 降序 oneTime 大于 oneTime
+                array = @[anotherTime,oneTime];
+            }
+                break;
+                
+            default:
+                break;
         }
-            break;
-        case NSOrderedSame:{
-            // oneDate 等于 anotherDate
-            return 0;
+        compare(result,array);
+    } else {
+        NSTimeInterval oneTimeInterval = [oneTime doubleValue];
+        NSTimeInterval anotherTimeInterval = [anotherTime doubleValue];
+        if (oneTimeInterval > 140000000000) {
+            oneTimeInterval = oneTimeInterval / 1000;
         }
-            break;
-        case NSOrderedDescending:{
-            // oneDate 大于 anotherDate
-            return 1;
+        if (anotherTimeInterval > 140000000000) {
+            anotherTimeInterval = anotherTimeInterval / 1000;
         }
-            break;
-            
-        default:
-            break;
+        NSArray *array = nil;
+        NSComparisonResult comparisionResult = NSOrderedDescending;
+        if (oneTimeInterval > anotherTimeInterval) {
+            array = @[anotherTime,oneTime];
+        } else if (oneTimeInterval == anotherTimeInterval) {
+            comparisionResult = NSOrderedSame;
+            array = @[oneTime,anotherTime];
+        } else {
+            comparisionResult = NSOrderedAscending;
+            array = @[oneTime,anotherTime];
+        }
+        compare(comparisionResult,array);
     }
 }
 

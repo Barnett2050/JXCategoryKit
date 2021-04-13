@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 从zlib压缩的数据中解压缩数据。
 - (nullable NSData *)jx_unzlibbedData;
 
+/// NSData转化成string(返回nil的解决方案)
+-(NSString *)jx_convertedToUtf8String;
 /// 从main bundle获取文件数据
 /// @param name 文件名称（在main bundle）
 + (nullable NSData *)jx_mainBundleDataNamed:(NSString *)name type:(NSString *)type;

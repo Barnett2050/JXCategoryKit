@@ -80,6 +80,12 @@
 		617A339D2427B4F30098EF1A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A339C2427B4F30098EF1A /* main.m */; };
 		61878E7325F71AD800C0E1CC /* NSStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61878E7225F71AD800C0E1CC /* NSStringTests.m */; };
 		61878E7925F7630E00C0E1CC /* NSArrayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61878E7825F7630E00C0E1CC /* NSArrayTests.m */; };
+		619361842615A9A2006F3410 /* NSObject+General.m in Sources */ = {isa = PBXBuildFile; fileRef = 619361832615A9A2006F3410 /* NSObject+General.m */; };
+		6193618E2615B4E3006F3410 /* NSArrayList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6193618D2615B4E3006F3410 /* NSArrayList.plist */; };
+		619361912615B557006F3410 /* NSArrayList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6193618D2615B4E3006F3410 /* NSArrayList.plist */; };
+		619361952615C0C5006F3410 /* DictionaryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 619361942615C0C5006F3410 /* DictionaryList.plist */; };
+		619361982615C158006F3410 /* DictionaryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 619361942615C0C5006F3410 /* DictionaryList.plist */; };
+		6193619D2615DCB9006F3410 /* NSDictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6193619C2615DCB9006F3410 /* NSDictionaryTests.m */; };
 		61DB82D82463AA14006308CB /* NSFileManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DB82D72463AA14006308CB /* NSFileManagerTests.m */; };
 		61DB82DA2463E98F006308CB /* NSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DB82D92463E98F006308CB /* NSDateTests.m */; };
 		61F0E3E824497D1D00683643 /* NSDictionary+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E3E724497D1D00683643 /* NSDictionary+JXGeneral.m */; };
@@ -239,6 +245,12 @@
 		617A339C2427B4F30098EF1A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		61878E7225F71AD800C0E1CC /* NSStringTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSStringTests.m; sourceTree = "<group>"; };
 		61878E7825F7630E00C0E1CC /* NSArrayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSArrayTests.m; sourceTree = "<group>"; };
+		619361822615A9A2006F3410 /* NSObject+General.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+General.h"; sourceTree = "<group>"; };
+		619361832615A9A2006F3410 /* NSObject+General.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+General.m"; sourceTree = "<group>"; };
+		619361872615B0E7006F3410 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		6193618D2615B4E3006F3410 /* NSArrayList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = NSArrayList.plist; sourceTree = "<group>"; };
+		619361942615C0C5006F3410 /* DictionaryList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DictionaryList.plist; sourceTree = "<group>"; };
+		6193619C2615DCB9006F3410 /* NSDictionaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryTests.m; sourceTree = "<group>"; };
 		61DB82D72463AA14006308CB /* NSFileManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSFileManagerTests.m; sourceTree = "<group>"; };
 		61DB82D92463E98F006308CB /* NSDateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDateTests.m; sourceTree = "<group>"; };
 		61F0E3E624497D1D00683643 /* NSDictionary+JXGeneral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JXGeneral.h"; sourceTree = "<group>"; };
@@ -301,6 +313,7 @@
 		613FCBA82428E56F004ACC9D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				619361872615B0E7006F3410 /* libiconv.tbd */,
 				613FCBE724290CBF004ACC9D /* Accelerate.framework */,
 				613FCBAB2428E57D004ACC9D /* CoreLocation.framework */,
 				613FCBA92428E56F004ACC9D /* UIKit.framework */,
@@ -353,10 +366,10 @@
 			children = (
 				613FCC1A24291679004ACC9D /* UINavigationController+JXGeneral.h */,
 				613FCC1B24291679004ACC9D /* UINavigationController+JXGeneral.m */,
-				613FCC1C24291679004ACC9D /* UITabBarController+JXGeneral.h */,
-				613FCC1824291679004ACC9D /* UITabBarController+JXGeneral.m */,
 				613FCBBB2428F3AD004ACC9D /* UITabBarController+JXAnimation.h */,
 				613FCBBA2428F3AD004ACC9D /* UITabBarController+JXAnimation.m */,
+				613FCC1C24291679004ACC9D /* UITabBarController+JXGeneral.h */,
+				613FCC1824291679004ACC9D /* UITabBarController+JXGeneral.m */,
 			);
 			path = UITabBarController;
 			sourceTree = "<group>";
@@ -486,14 +499,14 @@
 		613FCC28242A1EFC004ACC9D /* NSArray */ = {
 			isa = PBXGroup;
 			children = (
-				616367E1242F2276009BC274 /* NSArray+JXSafe.h */,
-				616367E0242F2276009BC274 /* NSArray+JXSafe.m */,
-				616367DF242F2276009BC274 /* NSMutableArray+JXSafe.h */,
-				616367E2242F2276009BC274 /* NSMutableArray+JXSafe.m */,
 				61510ED824445D8A00E55EB7 /* NSArray+JXGeneral.h */,
 				61510ED924445D8A00E55EB7 /* NSArray+JXGeneral.m */,
+				616367E1242F2276009BC274 /* NSArray+JXSafe.h */,
+				616367E0242F2276009BC274 /* NSArray+JXSafe.m */,
 				61510EDB244467E300E55EB7 /* NSMutableArray+JXGeneral.h */,
 				61510EDC244467E300E55EB7 /* NSMutableArray+JXGeneral.m */,
+				616367DF242F2276009BC274 /* NSMutableArray+JXSafe.h */,
+				616367E2242F2276009BC274 /* NSMutableArray+JXSafe.m */,
 			);
 			path = NSArray;
 			sourceTree = "<group>";
@@ -521,14 +534,14 @@
 		613FCC3A242A2D8C004ACC9D /* NSDictionary */ = {
 			isa = PBXGroup;
 			children = (
-				616367E5242F2298009BC274 /* NSMutableDictionary+JXSafe.h */,
-				616367E6242F2298009BC274 /* NSMutableDictionary+JXSafe.m */,
-				613FCC3B242A2D9F004ACC9D /* NSDictionary+JXSafe.h */,
-				613FCC3C242A2D9F004ACC9D /* NSDictionary+JXSafe.m */,
 				61F0E3E624497D1D00683643 /* NSDictionary+JXGeneral.h */,
 				61F0E3E724497D1D00683643 /* NSDictionary+JXGeneral.m */,
+				613FCC3B242A2D9F004ACC9D /* NSDictionary+JXSafe.h */,
+				613FCC3C242A2D9F004ACC9D /* NSDictionary+JXSafe.m */,
 				61F0E3E924498BA600683643 /* NSMutableDictionary+JXGeneral.h */,
 				61F0E3EA24498BA600683643 /* NSMutableDictionary+JXGeneral.m */,
+				616367E5242F2298009BC274 /* NSMutableDictionary+JXSafe.h */,
+				616367E6242F2298009BC274 /* NSMutableDictionary+JXSafe.m */,
 			);
 			path = NSDictionary;
 			sourceTree = "<group>";
@@ -538,20 +551,20 @@
 			children = (
 				616367E9242F22BA009BC274 /* NSMutableString+JXSafe.h */,
 				616367E8242F22BA009BC274 /* NSMutableString+JXSafe.m */,
-				616367EA242F22BA009BC274 /* NSString+JXSafe.h */,
-				616367EB242F22BA009BC274 /* NSString+JXSafe.m */,
+				613FCC52242A4ADE004ACC9D /* NSString+Encrypt.h */,
+				613FCC51242A4ADE004ACC9D /* NSString+Encrypt.m */,
 				613FCC3F242A4A76004ACC9D /* NSString+JXAttribute.h */,
 				613FCC40242A4A76004ACC9D /* NSString+JXAttribute.m */,
-				613FCC43242A4A86004ACC9D /* NSString+JXVerification.h */,
-				613FCC42242A4A86004ACC9D /* NSString+JXVerification.m */,
-				613FCC45242A4A8F004ACC9D /* NSString+JXSize.h */,
-				613FCC46242A4A8F004ACC9D /* NSString+JXSize.m */,
 				613FCC49242A4A9D004ACC9D /* NSString+JXFormat.h */,
 				613FCC48242A4A9D004ACC9D /* NSString+JXFormat.m */,
 				613FCC4B242A4AB8004ACC9D /* NSString+JXGeneral.h */,
 				613FCC4C242A4AB8004ACC9D /* NSString+JXGeneral.m */,
-				613FCC52242A4ADE004ACC9D /* NSString+Encrypt.h */,
-				613FCC51242A4ADE004ACC9D /* NSString+Encrypt.m */,
+				616367EA242F22BA009BC274 /* NSString+JXSafe.h */,
+				616367EB242F22BA009BC274 /* NSString+JXSafe.m */,
+				613FCC45242A4A8F004ACC9D /* NSString+JXSize.h */,
+				613FCC46242A4A8F004ACC9D /* NSString+JXSize.m */,
+				613FCC43242A4A86004ACC9D /* NSString+JXVerification.h */,
+				613FCC42242A4A86004ACC9D /* NSString+JXVerification.m */,
 			);
 			path = NSString;
 			sourceTree = "<group>";
@@ -568,10 +581,12 @@
 		613FCC62242A4B24004ACC9D /* NSObject */ = {
 			isa = PBXGroup;
 			children = (
-				613FCC63242A4B2D004ACC9D /* NSObject+JXRuntime.h */,
-				613FCC64242A4B2D004ACC9D /* NSObject+JXRuntime.m */,
+				619361822615A9A2006F3410 /* NSObject+General.h */,
+				619361832615A9A2006F3410 /* NSObject+General.m */,
 				61F0E3F024499D6000683643 /* NSObject+JXKVO.h */,
 				61F0E3F124499D6000683643 /* NSObject+JXKVO.m */,
+				613FCC63242A4B2D004ACC9D /* NSObject+JXRuntime.h */,
+				613FCC64242A4B2D004ACC9D /* NSObject+JXRuntime.m */,
 			);
 			path = NSObject;
 			sourceTree = "<group>";
@@ -620,15 +635,16 @@
 		615530EB25E8F63B00EF945F /* FoundationTests */ = {
 			isa = PBXGroup;
 			children = (
-				61F0E42624594B6700683643 /* NSNotificationCenterTests.m */,
-				61F0E42824594DD700683643 /* NSDataTests.m */,
-				61DB82D72463AA14006308CB /* NSFileManagerTests.m */,
-				61DB82D92463E98F006308CB /* NSDateTests.m */,
-				6155320B25F61C3A00EF945F /* NSTimerTests.m */,
-				6155321125F6261300EF945F /* NSObjectTests.m */,
-				6155321525F63A5200EF945F /* NSNullTests.m */,
-				61878E7225F71AD800C0E1CC /* NSStringTests.m */,
 				61878E7825F7630E00C0E1CC /* NSArrayTests.m */,
+				61F0E42824594DD700683643 /* NSDataTests.m */,
+				61DB82D92463E98F006308CB /* NSDateTests.m */,
+				6193619C2615DCB9006F3410 /* NSDictionaryTests.m */,
+				61DB82D72463AA14006308CB /* NSFileManagerTests.m */,
+				61F0E42624594B6700683643 /* NSNotificationCenterTests.m */,
+				6155321525F63A5200EF945F /* NSNullTests.m */,
+				6155321125F6261300EF945F /* NSObjectTests.m */,
+				61878E7225F71AD800C0E1CC /* NSStringTests.m */,
+				6155320B25F61C3A00EF945F /* NSTimerTests.m */,
 			);
 			path = FoundationTests;
 			sourceTree = "<group>";
@@ -637,6 +653,8 @@
 			isa = PBXGroup;
 			children = (
 				6155320125F0C58A00EF945F /* test.jpg */,
+				6193618D2615B4E3006F3410 /* NSArrayList.plist */,
+				619361942615C0C5006F3410 /* DictionaryList.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -798,7 +816,7 @@
 		617A337F2427B4F20098EF1A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = Barnett;
 				TargetAttributes = {
 					617A33862427B4F20098EF1A = {
@@ -834,11 +852,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				619361982615C158006F3410 /* DictionaryList.plist in Resources */,
 				6155320525F0C59A00EF945F /* test.jpg in Resources */,
 				617A339A2427B4F30098EF1A /* LaunchScreen.storyboard in Resources */,
 				613FCBA62428DE57004ACC9D /* JXCategoryKit.podspec in Resources */,
 				613FCC6B242A54E7004ACC9D /* README.md in Resources */,
 				617A33972427B4F30098EF1A /* Assets.xcassets in Resources */,
+				619361912615B557006F3410 /* NSArrayList.plist in Resources */,
 				617A33952427B4F20098EF1A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -848,6 +868,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6155320225F0C58A00EF945F /* test.jpg in Resources */,
+				6193618E2615B4E3006F3410 /* NSArrayList.plist in Resources */,
+				619361952615C0C5006F3410 /* DictionaryList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,6 +882,7 @@
 			files = (
 				613FCBFC24291325004ACC9D /* UITextField+JXGeneral.m in Sources */,
 				613FCBE624290C56004ACC9D /* UIImage+JXEffect.m in Sources */,
+				619361842615A9A2006F3410 /* NSObject+General.m in Sources */,
 				617A33922427B4F20098EF1A /* ViewController.m in Sources */,
 				61510EDA24445D8A00E55EB7 /* NSArray+JXGeneral.m in Sources */,
 				613FCC202429167A004ACC9D /* UIViewController+JXGeneral.m in Sources */,
@@ -936,6 +959,7 @@
 				61878E7325F71AD800C0E1CC /* NSStringTests.m in Sources */,
 				61DB82D82463AA14006308CB /* NSFileManagerTests.m in Sources */,
 				61DB82DA2463E98F006308CB /* NSDateTests.m in Sources */,
+				6193619D2615DCB9006F3410 /* NSDictionaryTests.m in Sources */,
 				61F0E42924594DD700683643 /* NSDataTests.m in Sources */,
 				6155320C25F61C3A00EF945F /* NSTimerTests.m in Sources */,
 				61878E7925F7630E00C0E1CC /* NSArrayTests.m in Sources */,
@@ -1094,7 +1118,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E8RV92MFCF;
 				INFOPLIST_FILE = JXCategoryKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1112,7 +1136,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9ACE2C9PJG;
 				INFOPLIST_FILE = JXCategoryKit/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

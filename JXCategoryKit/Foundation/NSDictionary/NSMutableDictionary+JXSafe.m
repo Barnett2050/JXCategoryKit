@@ -18,7 +18,7 @@ static const char *NSDictionaryM = "__NSDictionaryM";
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
+
         [objc_getClass(NSDictionaryM) jx_swizzleClassInstanceMethodWithOriginSel:@selector(setObject:forKey:) swizzleSel:@selector(dictionaryM_setObject:forKey:)];
     });
 }

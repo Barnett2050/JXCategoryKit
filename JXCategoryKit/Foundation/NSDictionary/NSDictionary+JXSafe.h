@@ -39,28 +39,21 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param key 键
 - (long long)jx_longLongForKey:(NSString *)key;
 
-/**转成可变型数据，包括里面的字典、数组*/
+/// 转成可变型数据，包括里面的字典、数组
 - (NSMutableDictionary *)jx_Mutable;
 
-/**
- 替换字典中的NSNull为空字符串
- */
+/// 替换字典中的NSNull为空字符串
 - (NSDictionary *)jx_dictionaryByReplacingNullsWithBlanks;
 
-/**
- 合并两个字典
- 
- @param dict 被合并的字典
- */
+/// 合并两个字典
+/// @param dict 被合并的字典
 - (NSDictionary *)jx_mergingWithDictionary:(NSDictionary *)dict;
 
-/**
- 合并两个字典
- 
- @param dict       被合并的字典
- @param ignoredKeyArr 忽略的Key
- */
+/// 合并两个字典
+/// @param dict 被合并的字典
+/// @param ignoredKeyArr 忽略的Key
 - (NSDictionary *)jx_mergingWithDictionary:(NSDictionary *)dict ignoredKeyArr:(NSArray *)ignoredKeyArr;
+
 @end
 
 NS_ASSUME_NONNULL_END

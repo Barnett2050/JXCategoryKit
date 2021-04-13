@@ -25,10 +25,7 @@ static const char *NSArrayI = "__NSArrayI";
 #pragma mark - public
 - (NSArray *)jx_removeTheSameElement
 {
-    NSMutableSet *set = [NSMutableSet set];
-    for (NSObject *obj in self) {
-        [set addObject:obj];
-    }
+    NSMutableSet *set = [[NSMutableSet alloc] initWithArray:self];
     return [set allObjects];
 }
 

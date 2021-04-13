@@ -167,19 +167,13 @@
  */
 - (NSDictionary *)jx_mergingWithDictionary:(NSDictionary *)dict
 {
-    if (self.count == 0) {
-        if (dict.count == 0) {
-            return nil;
-        }else
-        {
-            return dict;
-        }
-    }else
-    {
-        if (dict.count == 0) {
-            return self;
-        }
+    if (dict.count == 0) {
+        return self;
     }
+    if (self.count == 0) {
+        return dict;
+    }
+    
     NSMutableDictionary *mutableDic = [NSMutableDictionary dictionaryWithDictionary:self];
     for (id key in [dict allKeys]) {
         id obj = [self jx_mutableDictionaryCopyIfNeeded:[dict objectForKey:key]];
@@ -203,18 +197,11 @@
  */
 - (NSDictionary *)jx_mergingWithDictionary:(NSDictionary *)dict ignoredKeyArr:(NSArray *)ignoredKeyArr
 {
+    if (dict.count == 0) {
+        return self;
+    }
     if (self.count == 0) {
-        if (dict.count == 0) {
-            return nil;
-        }else
-        {
-            return dict;
-        }
-    }else
-    {
-        if (dict.count == 0) {
-            return self;
-        }
+        return dict;
     }
     NSMutableDictionary *mutableDic = [NSMutableDictionary dictionaryWithDictionary:self];
     for (id key in [dict allKeys]) {

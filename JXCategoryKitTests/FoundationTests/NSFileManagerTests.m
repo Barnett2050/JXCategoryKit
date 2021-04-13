@@ -109,10 +109,11 @@
 
     NSString *filePath10 = [NSFileManager jx_filePathAt:JXTempPathType fileName:@"test10.text" isCreat:true];
     XCTAssertFalse([NSFileManager jx_isDirectory:filePath10]);
+    
     NSString *filePath11 = [NSFileManager jx_filePathAt:JXDocumentPathType fileName:@"test11.text" isCreat:NO];
     XCTAssertTrue([NSFileManager jx_moveItemAtPath:filePath10 toPath:filePath11],@"移动文件");
     
-    NSString *filePath12 = [NSFileManager jx_filePathAt:JXDocumentPathType fileName:@"test12.text" isCreat:NO];
+    NSString *filePath12 = [NSFileManager jx_filePathAt:JXDocumentPathType fileName:@"test12.text" isCreat:YES];
     XCTAssertTrue([NSFileManager jx_resetFinderWithPath:filePath12],@"文件删除重置");
 }
 

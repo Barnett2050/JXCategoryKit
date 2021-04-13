@@ -10,29 +10,6 @@
 
 @implementation NSDictionary (JXGeneral)
 
-+ (NSDictionary *)jx_dictionaryWithPlistData:(NSData *)plist {
-    if (!plist) return nil;
-    NSDictionary *dictionary = [NSPropertyListSerialization propertyListWithData:plist options:NSPropertyListImmutable format:NULL error:NULL];
-    if ([dictionary isKindOfClass:[NSDictionary class]]) return dictionary;
-    return nil;
-}
-
-+ (NSDictionary *)jx_dictionaryWithPlistString:(NSString *)plist {
-    if (!plist) return nil;
-    NSData* data = [plist dataUsingEncoding:NSUTF8StringEncoding];
-    return [self jx_dictionaryWithPlistData:data];
-}
-
-- (NSData *)jx_plistData {
-    return [NSPropertyListSerialization dataWithPropertyList:self format:NSPropertyListBinaryFormat_v1_0 options:kNilOptions error:NULL];
-}
-
-- (NSString *)jx_plistString {
-    NSData *xmlData = [NSPropertyListSerialization dataWithPropertyList:self format:NSPropertyListXMLFormat_v1_0 options:kNilOptions error:NULL];
-    if (xmlData) return [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
-    return nil;
-}
-
 - (NSArray *)jx_allKeysSorted {
     return [[self allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
 }
@@ -45,7 +22,7 @@
     return arr;
 }
 
-- (NSDictionary *)jx_entriesForKeys:(NSArray *)keys {
+- (NSDictionary *)jx_dictionaryForKeys:(NSArray *)keys {
     NSMutableDictionary *dic = [NSMutableDictionary new];
     for (id key in keys) {
         id value = self[key];

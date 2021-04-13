@@ -10,6 +10,8 @@
 
 #import "NSObject+JXRuntime.h"
 #import "NSObject+JXKVO.h"
+#import "NSObject+General.h"
+#import "NSData+JXGeneral.h"
 
 @interface NSObjectTests : XCTestCase
 
@@ -58,5 +60,28 @@
         self.count = 20;
     });
     [self waitForExpectationsWithTimeout:10 handler:NULL];
+}
+
+- (void)test_General {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"general"];
+    
+    NSDictionary *dictionary = @{@"string1":@"字符串",
+                                  @"integer1":@(999),
+                                  @"float1":@(33.897),
+                                  @"Bool1":@(YES),
+                                  @"array1":@[@"1",@"2",@"3"],
+                                  @"dictionary1":@{@"1":@"1"},
+                                  @"long1":@999999999999999};
+    NSArray *array = @[@"2020",@"2021",@"2022",@"2023",@"2024",@"2025",@"2026",@"2025",@"2024",@"2023"];
+    
+    NSLog(@"jx_jsonStringEncoded : %@",[dictionary jx_jsonStringEncoded]);
+    NSLog(@"jx_jsonStringEncoded : %@",[array jx_jsonStringEncoded]);
+    
+    NSData *arrayData = [NSData jx_mainBundleDataNamed:@"NSArrayList" type:@"plist"];
+    [NSObject jx_convertWithPlistData:arrayData resultBlock:^(NSDictionary * _Nonnull plistDictionary, NSArray * _Nonnull plistArray) {
+        XCTAssertTrue(plistArray.jx_plistData.length);
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:1 handler:NULL];
 }
 @end
