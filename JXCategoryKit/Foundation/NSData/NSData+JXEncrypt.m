@@ -239,13 +239,13 @@
     return (uint32_t)result;
 }
 
-- (NSData *)jx_encryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv
+- (NSData *)jx_encryptWithType:(JXDataCryptType)type key:(NSString *)key iv:(nullable NSString *)iv
 {
     if (self.length == 0 || key.length == 0) { return nil; }
     return [self jx_cryptWith:kCCEncrypt type:type key:key iv:iv];
 }
 
-- (NSData *)jx_decryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv
+- (NSData *)jx_decryptWithType:(JXDataCryptType)type key:(NSString *)key iv:(nullable NSString *)iv
 {
     if (self.length == 0 || key.length == 0) { return nil; }
     return [self jx_cryptWith:kCCDecrypt type:type key:key iv:iv];
@@ -356,7 +356,7 @@
     return [NSData dataWithBytes:result length:size];
 }
 
-- (NSData *)jx_cryptWith:(CCOperation)operation type:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv
+- (NSData *)jx_cryptWith:(CCOperation)operation type:(JXDataCryptType)type key:(NSString *)key iv:(nullable NSString *)iv
 {
     NSData *data = self;
     size_t cryptLength = [self cryptLengthWith:type];
@@ -387,19 +387,19 @@
     return resultData;
 }
 
-- (CCAlgorithm)algorithmWith:(JXCryptType)type
+- (CCAlgorithm)algorithmWith:(JXDataCryptType)type
 {
     CCAlgorithm algorithm;
     switch (type) {
-        case JXCryptTypeDES:
+        case JXDataCryptTypeDES:
             algorithm = kCCAlgorithmDES;
             break;
-        case JXCryptType3DES:
+        case JXDataCryptType3DES:
             algorithm = kCCAlgorithm3DES;
             break;
-        case JXCryptTypeAES128:
-        case JXCryptTypeAES192:
-        case JXCryptTypeAES256:
+        case JXDataCryptTypeAES128:
+        case JXDataCryptTypeAES192:
+        case JXDataCryptTypeAES256:
             algorithm = kCCAlgorithmAES;
             break;
         default:
@@ -408,23 +408,23 @@
     return algorithm;
 }
 
-- (size_t)keyLengthWith:(JXCryptType)type
+- (size_t)keyLengthWith:(JXDataCryptType)type
 {
     size_t keyLength;
     switch (type) {
-        case JXCryptTypeDES:
+        case JXDataCryptTypeDES:
             keyLength = kCCBlockSizeDES;
             break;
-        case JXCryptType3DES:
+        case JXDataCryptType3DES:
             keyLength = kCCKeySize3DES;
             break;
-        case JXCryptTypeAES128:
+        case JXDataCryptTypeAES128:
             keyLength = kCCKeySizeAES128;
             break;
-        case JXCryptTypeAES192:
+        case JXDataCryptTypeAES192:
             keyLength = kCCKeySizeAES192;
             break;
-        case JXCryptTypeAES256:
+        case JXDataCryptTypeAES256:
             keyLength = kCCKeySizeAES256;
             break;
         default:
@@ -432,23 +432,23 @@
     }
     return keyLength;
 }
-- (size_t)cryptLengthWith:(JXCryptType)type
+- (size_t)cryptLengthWith:(JXDataCryptType)type
 {
     size_t cryptLength;
     switch (type) {
-        case JXCryptTypeDES:
+        case JXDataCryptTypeDES:
             cryptLength = kCCBlockSizeDES;
             break;
-        case JXCryptType3DES:
+        case JXDataCryptType3DES:
             cryptLength = kCCBlockSize3DES;
             break;
-        case JXCryptTypeAES128:
+        case JXDataCryptTypeAES128:
             cryptLength = kCCKeySizeAES128;
             break;
-        case JXCryptTypeAES192:
+        case JXDataCryptTypeAES192:
             cryptLength = kCCKeySizeAES192;
             break;
-        case JXCryptTypeAES256:
+        case JXDataCryptTypeAES256:
             cryptLength = kCCKeySizeAES256;
             break;
         default:

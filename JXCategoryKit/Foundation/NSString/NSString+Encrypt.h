@@ -6,13 +6,15 @@
 //  Copyright © 2019 Barnett. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-#import "NSData+JXEncrypt.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, JXNSStringEncryptAESType) {
-    JXNSStringEncryptAESType128 = 0,
-    JXNSStringEncryptAESType192,
-    JXNSStringEncryptAESType256
+typedef NS_ENUM(NSUInteger, JXStringCryptType) {
+    JXStringCryptTypeDES = 0,
+    JXStringCryptType3DES,
+    JXStringCryptTypeAES128,
+    JXStringCryptTypeAES192,
+    JXStringCryptTypeAES256
 };
 
 @interface NSString (Encrypt)
@@ -87,13 +89,13 @@ typedef NS_ENUM(NSUInteger, JXNSStringEncryptAESType) {
 /// @param type 加密类型
 /// @param key 秘钥
 /// @param iv 初始化向量
-- (NSString *)jx_encryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv base64Handle:(BOOL)base64Handle;
+- (NSString *)jx_encryptWithType:(JXStringCryptType)type key:(NSString *)key iv:(nullable NSString *)iv base64Handle:(BOOL)base64Handle;
 
 /// 解密
 /// @param type 加密类型
 /// @param key 秘钥
 /// @param iv 初始化向量
-- (NSString *)jx_decryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv base64Handle:(BOOL)base64Handle;
+- (NSString *)jx_decryptWithType:(JXStringCryptType)type key:(NSString *)key iv:(nullable NSString *)iv base64Handle:(BOOL)base64Handle;
 
 @end
 

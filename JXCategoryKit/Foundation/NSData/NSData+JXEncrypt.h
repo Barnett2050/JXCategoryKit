@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-typedef NS_ENUM(NSUInteger, JXCryptType) {
-    JXCryptTypeDES = 0,
-    JXCryptType3DES,
-    JXCryptTypeAES128,
-    JXCryptTypeAES192,
-    JXCryptTypeAES256
+ 
+typedef NS_ENUM(NSUInteger, JXDataCryptType) {
+    JXDataCryptTypeDES = 0,
+    JXDataCryptType3DES,
+    JXDataCryptTypeAES128,
+    JXDataCryptTypeAES192,
+    JXDataCryptTypeAES256
 };
 
 @interface NSData (JXEncrypt)
@@ -102,13 +102,13 @@ typedef NS_ENUM(NSUInteger, JXCryptType) {
 /// @param type 加密类型
 /// @param key 秘钥
 /// @param iv 初始化向量
-- (NSData *)jx_encryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv;
+- (NSData *)jx_encryptWithType:(JXDataCryptType)type key:(NSString *)key iv:(nullable NSString *)iv;
 
 /// 解密
 /// @param type 加密类型
 /// @param key 秘钥
 /// @param iv 初始化向量
-- (NSData *)jx_decryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv;
+- (NSData *)jx_decryptWithType:(JXDataCryptType)type key:(NSString *)key iv:(nullable NSString *)iv;
 
 #pragma mark - Encode and decode
 

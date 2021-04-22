@@ -9,7 +9,7 @@
 #import "NSString+Encrypt.h"
 #import <CommonCrypto/CommonCrypto.h>
 #import <CommonCrypto/CommonDigest.h>
-
+#import "NSData+JXEncrypt.h"
 @implementation NSString (Encrypt)
 
 - (NSString *)jx_md2String {
@@ -117,11 +117,11 @@
     return decodedStr;
 }
 
-- (NSString *)jx_encryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv base64Handle:(BOOL)base64Handle
+- (NSString *)jx_encryptWithType:(JXStringCryptType)type key:(NSString *)key iv:(nullable NSString *)iv base64Handle:(BOOL)base64Handle
 {
     if (self.length == 0 || key.length == 0) { return nil; }
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    NSData *resultData = [data jx_encryptWithType:type key:key iv:iv];
+    NSData *resultData = [data jx_encryptWithType:(JXDataCryptType)type key:key iv:iv];
     if (resultData == nil || resultData.length == 0) { return nil; }
     NSString *outputStr = nil;
     // base64加密
@@ -134,7 +134,7 @@
     return outputStr;
 }
 
-- (NSString *)jx_decryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv base64Handle:(BOOL)base64Handle
+- (NSString *)jx_decryptWithType:(JXStringCryptType)type key:(NSString *)key iv:(nullable NSString *)iv base64Handle:(BOOL)base64Handle
 {
     if (self.length == 0 || key.length == 0) { return nil; }
     NSData *data;
@@ -143,7 +143,7 @@
     } else {
         data = [NSString parseHexToByteArray:self];
     }
-    NSData *resultData = [data jx_decryptWithType:type key:key iv:iv];
+    NSData *resultData = [data jx_decryptWithType:(JXDataCryptType)type key:key iv:iv];
     if (resultData == nil || resultData.length == 0) { return nil; }
     
     NSString *resultString = [[NSString alloc]initWithData:resultData encoding:NSUTF8StringEncoding];
