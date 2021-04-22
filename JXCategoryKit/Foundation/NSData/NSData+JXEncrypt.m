@@ -239,74 +239,16 @@
     return (uint32_t)result;
 }
 
-- (NSData *)jx_aes256EncryptWithKey:(NSData *)key iv:(NSData *)iv
+- (NSData *)jx_encryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv
 {
-    if (key.length != 16 && key.length != 24 && key.length != 32) {
-        return nil;
-    }
-    if (iv.length != 16 && iv.length != 0) {
-        return nil;
-    }
-    
-    NSData *result = nil;
-    size_t bufferSize = self.length + kCCBlockSizeAES128;
-    void *buffer = malloc(bufferSize);
-    if (!buffer) return nil;
-    size_t encryptedSize = 0;
-    CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,
-                                          kCCAlgorithmAES128,
-                                          kCCOptionPKCS7Padding,
-                                          key.bytes,
-                                          key.length,
-                                          iv.bytes,
-                                          self.bytes,
-                                          self.length,
-                                          buffer,
-                                          bufferSize,
-                                          &encryptedSize);
-    if (cryptStatus == kCCSuccess) {
-        result = [[NSData alloc]initWithBytes:buffer length:encryptedSize];
-        free(buffer);
-        return result;
-    } else {
-        free(buffer);
-        return nil;
-    }
+    if (self.length == 0 || key.length == 0) { return nil; }
+    return [self jx_cryptWith:kCCEncrypt type:type key:key iv:iv];
 }
 
-- (NSData *)jx_aes256DecryptWithkey:(NSData *)key iv:(NSData *)iv
+- (NSData *)jx_decryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv
 {
-    if (key.length != 16 && key.length != 24 && key.length != 32) {
-        return nil;
-    }
-    if (iv.length != 16 && iv.length != 0) {
-        return nil;
-    }
-    
-    NSData *result = nil;
-    size_t bufferSize = self.length + kCCBlockSizeAES128;
-    void *buffer = malloc(bufferSize);
-    if (!buffer) return nil;
-    size_t encryptedSize = 0;
-    CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,
-                                          kCCAlgorithmAES128,
-                                          kCCOptionPKCS7Padding,
-                                          key.bytes,
-                                          key.length,
-                                          iv.bytes,
-                                          self.bytes,
-                                          self.length,
-                                          buffer,
-                                          bufferSize,
-                                          &encryptedSize);
-    if (cryptStatus == kCCSuccess) {
-        result = [[NSData alloc]initWithBytes:buffer length:encryptedSize];
-        free(buffer);
-        return result;
-    } else {
-        free(buffer);
-        return nil;
-    }
+    if (self.length == 0 || key.length == 0) { return nil; }
+    return [self jx_cryptWith:kCCDecrypt type:type key:key iv:iv];
 }
 
 - (NSString *)jx_utf8String
@@ -374,6 +316,7 @@
     return value;
 }
 
+#pragma mark - private
 - (NSString *)jx_hmacStringUsingAlg:(CCHmacAlgorithm)alg withKey:(NSString *)key
 {
     size_t size;
@@ -412,4 +355,110 @@
     CCHmac(alg, [key bytes], key.length, self.bytes, self.length, result);
     return [NSData dataWithBytes:result length:size];
 }
+
+- (NSData *)jx_cryptWith:(CCOperation)operation type:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv
+{
+    NSData *data = self;
+    size_t cryptLength = [self cryptLengthWith:type];
+    size_t bufferSize = data.length + cryptLength;
+    void *buffer = malloc(bufferSize);
+    memset((void *)buffer, 0x0, bufferSize);
+    size_t numBytesCrypted = 0;
+    
+    CCCryptorStatus cryptStatus = CCCrypt(operation, // kCCEncrypt  加密/kCCDecrypt 解密
+                                          [self algorithmWith:type],
+                                          /* 加密选项 ECB/CBC
+                                           kCCOptionPKCS7Padding                        CBC 的加密方式
+                                           kCCOptionPKCS7Padding | kCCOptionECBMode     ECB 的加密方式
+                                           */
+                                          [self optionsWithIv:iv],
+                                          [key UTF8String], // 加密密钥
+                                          [self keyLengthWith:type], // 密钥长度
+                                          iv.length > 0 ? [iv UTF8String] : NULL,// iv 初始化向量,ECB 不需要指定(秘钥偏移量)
+                                          [data bytes], // 加密的数据
+                                          [data length], // 加密的数据的长度
+                                          buffer, // 密文的内存地址
+                                          bufferSize, // 密文缓冲区的大小
+                                          &numBytesCrypted); // 加密结果大小
+    NSData *resultData = nil;
+    if (cryptStatus == kCCSuccess) {
+        resultData = [NSData dataWithBytesNoCopy:buffer length:numBytesCrypted];
+    }
+    return resultData;
+}
+
+- (CCAlgorithm)algorithmWith:(JXCryptType)type
+{
+    CCAlgorithm algorithm;
+    switch (type) {
+        case JXCryptTypeDES:
+            algorithm = kCCAlgorithmDES;
+            break;
+        case JXCryptType3DES:
+            algorithm = kCCAlgorithm3DES;
+            break;
+        case JXCryptTypeAES128:
+        case JXCryptTypeAES192:
+        case JXCryptTypeAES256:
+            algorithm = kCCAlgorithmAES;
+            break;
+        default:
+            break;
+    }
+    return algorithm;
+}
+
+- (size_t)keyLengthWith:(JXCryptType)type
+{
+    size_t keyLength;
+    switch (type) {
+        case JXCryptTypeDES:
+            keyLength = kCCBlockSizeDES;
+            break;
+        case JXCryptType3DES:
+            keyLength = kCCKeySize3DES;
+            break;
+        case JXCryptTypeAES128:
+            keyLength = kCCKeySizeAES128;
+            break;
+        case JXCryptTypeAES192:
+            keyLength = kCCKeySizeAES192;
+            break;
+        case JXCryptTypeAES256:
+            keyLength = kCCKeySizeAES256;
+            break;
+        default:
+            break;
+    }
+    return keyLength;
+}
+- (size_t)cryptLengthWith:(JXCryptType)type
+{
+    size_t cryptLength;
+    switch (type) {
+        case JXCryptTypeDES:
+            cryptLength = kCCBlockSizeDES;
+            break;
+        case JXCryptType3DES:
+            cryptLength = kCCBlockSize3DES;
+            break;
+        case JXCryptTypeAES128:
+            cryptLength = kCCKeySizeAES128;
+            break;
+        case JXCryptTypeAES192:
+            cryptLength = kCCKeySizeAES192;
+            break;
+        case JXCryptTypeAES256:
+            cryptLength = kCCKeySizeAES256;
+            break;
+        default:
+            break;
+    }
+    return cryptLength;
+}
+- (CCOptions)optionsWithIv:(NSString *)iv
+{
+    return iv.length > 0 ? kCCOptionPKCS7Padding : (kCCOptionPKCS7Padding | kCCOptionECBMode);
+}
+
 @end

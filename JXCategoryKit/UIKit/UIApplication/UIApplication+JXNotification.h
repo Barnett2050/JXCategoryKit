@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 注册通知
 /// @param centerDelegate 协议对象
 + (void)jx_registerRemoteNotificationWith:(id)centerDelegate;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -117,7 +117,13 @@
                                           @"iPhone12,1":@"iPhone 11",
                                           @"iPhone12,3":@"iPhone 11 Pro",
                                           @"iPhone12,5":@"iPhone 11 Pro Max",
-                                          @"iPhone12,8":@"iPhone SE (2nd generation)"};
+                                          @"iPhone12,8":@"iPhone SE (2nd generation)",
+                                          @"iPhone13,1":@"iPhone 12 mini",
+                                          @"iPhone13,2":@"iPhone 12",
+                                          @"iPhone13,3":@"iPhone 12 Pro",
+                                          @"iPhone13,4":@"iPhone 12 Pro Max",
+                                          
+    };
     if ([platform containsString:@"iPhone"]) {
         return [phoneTypeDictionary objectForKey:platform];
     }
@@ -190,6 +196,10 @@
                                         @"iPad11,2":@"iPad mini 5",
                                         @"iPad11,3":@"iPad Air 3",
                                         @"iPad11,4":@"iPad Air 3",
+                                        @"iPad11,6":@"iPad 8",
+                                        @"iPad11,7":@"iPad 8",
+                                        @"iPad13,1":@"iPad Air 4",
+                                        @"iPad13,2":@"iPad Air 4"
     };
     if ([platform containsString:@"iPad"]) {
         return [padTypeDictionary objectForKey:platform];

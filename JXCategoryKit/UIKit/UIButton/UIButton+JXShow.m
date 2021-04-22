@@ -75,6 +75,7 @@
         default:
             break;
     }
+    [self setNeedsLayout];
     [self layoutIfNeeded];
 }
 

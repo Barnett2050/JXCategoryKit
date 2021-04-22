@@ -37,7 +37,7 @@
 {
     NSString *newStr = self;
     while ([newStr hasPrefix:@"\n"]) {
-        newStr = [newStr substringFromIndex:2];
+        newStr = [newStr substringFromIndex:1];
     }
     while ([newStr hasSuffix:@"\n"]) {
         newStr = [newStr substringToIndex:newStr.length-1];
@@ -94,77 +94,9 @@
     return hexStr;
 }
 
-- (NSString *)jx_replaceUnicode
+- (NSString *)jx_hexStringToNormal
 {
-    NSString *tempStr1 = [self stringByReplacingOccurrencesOfString:@"\\u" withString:@"\\U"];
-    NSString *tempStr2 = [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-    NSString *tempStr3 = [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
-    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
-    NSString* returnStr = [NSPropertyListSerialization propertyListWithData:tempData options:NSPropertyListImmutable format:NULL error:NULL];
-    return [returnStr stringByReplacingOccurrencesOfString:@"\\r\\n" withString:@"\n"];
-}
-- (id)jx_jsonStringToJson
-{
-    if (self == nil || self.length == 0) {
-        return nil;
-    }
-    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *err;
-    id json = [NSJSONSerialization JSONObjectWithData:jsonData
-                                              options:NSJSONReadingMutableContainers
-                                                error:&err];
-    if(err){
-        NSLog(@"json解析失败：%@",err);
-        return nil;
-    }
-    return json;
-}
-
-#pragma mark - HEX 转换
-- (NSString *)jx_hexStringFromStringWithLower:(BOOL)isOutputLower
-{
-    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    static const char HexEncodeCharsLower[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-    static const char HexEncodeChars[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-    char *resultData;
-    // malloc result data
-    resultData = malloc([data length] * 2 +1);
-    // convert imgData(NSData) to char[]
-    unsigned char *sourceData = ((unsigned char *)[data bytes]);
-    uint length = (uint)[data length];
-    
-    if (isOutputLower)
-    {
-        for (uint index = 0; index < length; index++) {
-            // set result data
-            resultData[index * 2] = HexEncodeCharsLower[(sourceData[index] >> 4)];
-            resultData[index * 2 + 1] = HexEncodeCharsLower[(sourceData[index] % 0x10)];
-        }
-    }
-    else {
-        for (uint index = 0; index < length; index++) {
-            // set result data
-            resultData[index * 2] = HexEncodeChars[(sourceData[index] >> 4)];
-            resultData[index * 2 + 1] = HexEncodeChars[(sourceData[index] % 0x10)];
-        }
-    }
-    resultData[[data length] * 2] = 0;
-    
-    // convert result(char[]) to NSString
-    NSString *result = [NSString stringWithCString:resultData encoding:NSASCIIStringEncoding];
-    sourceData = nil;
-    free(resultData);
-    
-    return result;
-}
-
-/**
- 十六进制转换为普通字符串的
- */
-- (NSString *)jx_stringFromHexString
-{
-    static const unsigned char HexDecodeChars[] =
-    {
+    static const unsigned char HexDecodeChars[] = {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -195,5 +127,14 @@
     return  [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];;
 }
 
+- (NSString *)jx_replaceUnicode
+{
+    NSString *tempStr1 = [self stringByReplacingOccurrencesOfString:@"\\u" withString:@"\\U"];
+    NSString *tempStr2 = [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 = [[@"\"" stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:NSUTF8StringEncoding];
+    NSString* returnStr = [NSPropertyListSerialization propertyListWithData:tempData options:NSPropertyListImmutable format:NULL error:NULL];
+    return [returnStr stringByReplacingOccurrencesOfString:@"\\r\\n" withString:@"\n"];
+}
 
 @end

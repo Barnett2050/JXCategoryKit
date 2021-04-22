@@ -7,7 +7,6 @@
 //
 
 #import "UIImage+JXGenerate.h"
-
 #import <CoreText/CoreText.h>
 
 @implementation UIImage (JXGenerate)

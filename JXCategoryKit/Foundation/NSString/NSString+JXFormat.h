@@ -41,28 +41,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)hexString;
 
 /**
+ 十六进制字符串转换为正常字符串
+ */
+- (NSString *)jx_hexStringToNormal;
+
+/**
  出现类似这样格式的字段"\\U6df1\\U5733\\U56fd\\U5f00\\U884c01\\U673a\\U623",通常为Unicode码，将Unicode码转换
  */
 - (NSString *)jx_replaceUnicode;
-
-/**
- json转换
- */
-- (id)jx_jsonStringToJson;
-
-#pragma mark - HEX 转换
-
-/**
- 转为16进制字符串
- 
- @param isOutputLower 是否小写 true 小写 false 大写
- */
-- (NSString *)jx_hexStringFromStringWithLower:(BOOL)isOutputLower;
-
-/**
- 十六进制转换为普通字符串
- */
-- (NSString *)jx_stringFromHexString;
 
 @end
 

@@ -74,22 +74,16 @@
         NSInteger nMin = interval / 60;
         NSInteger nSec = interval;
         
-        
-        
         if (nDay > 0) {
             self.dateFormat = @"yyyy-MM-dd HH:mm:ss";
             strBefore = [self stringFromDate:date];
-        }
-        else if (nHour > 0) {
+        }else if (nHour > 0) {
             strBefore = [NSString stringWithFormat:@"%li小时前",(long)nHour];
-        }
-        else if (nMin > 0) {
+        }else if (nMin > 0) {
             strBefore = [NSString stringWithFormat:@"%li分钟前",(long)nMin];
-        }
-        else if (nSec > 0) {
+        }else if (nSec > 0) {
             strBefore = [NSString stringWithFormat:@"%li秒前",(long)nSec];
-        }
-        else
+        }else
             strBefore = @"刚刚";
     }
     return strBefore;

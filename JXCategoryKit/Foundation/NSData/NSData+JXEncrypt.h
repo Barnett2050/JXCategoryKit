@@ -10,6 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, JXCryptType) {
+    JXCryptTypeDES = 0,
+    JXCryptType3DES,
+    JXCryptTypeAES128,
+    JXCryptTypeAES192,
+    JXCryptTypeAES256
+};
+
 @interface NSData (JXEncrypt)
 
 #pragma mark - Hash
@@ -89,17 +97,18 @@ NS_ASSUME_NONNULL_BEGIN
 /// crc32哈希值
 - (uint32_t)jx_crc32;
 
-#pragma mark - Encrypt and Decrypt
+#pragma mark - 加密解密
+/// 加密 DES数据块长度为64位，所以IV长度需要为8个字符（ECB模式不用IV），密钥长度也为8个字符，IV与密钥超过长度则截取，不足则在末尾填充'\0'补足 AES数据块长度为128位，所以IV长度需要为16个字符（ECB模式不用IV），密钥根据指定密钥位数分别为16、24、32个字符，IV与密钥超过长度则截取，不足则在末尾填充'\0'补足 3DES数据块长度为64位，所以IV长度需要为8个字符（ECB模式不用IV），密钥长度为16或24个字符（8个字符以内则结果与DES相同），IV与密钥超过长度则截取，不足则在末尾填充'\0'补足
+/// @param type 加密类型
+/// @param key 秘钥
+/// @param iv 初始化向量
+- (NSData *)jx_encryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv;
 
-/// 使用AES返回加密的NSData。
-/// @param key 密钥长度为16、24或32（128、192或256位）。
-/// @param iv 初始化向量长度为16（128位）。如果不想使用iv，则传递nil。
-- (nullable NSData *)jx_aes256EncryptWithKey:(NSData *)key iv:(nullable NSData *)iv;
-
-/// 使用AES返回解密的NSData。
-/// @param key 密钥长度为16、24或32（128、192或256位）。
-/// @param iv 初始化向量长度为16（128位）。如果不想使用iv，则传递nil。
-- (nullable NSData *)jx_aes256DecryptWithkey:(NSData *)key iv:(nullable NSData *)iv;
+/// 解密
+/// @param type 加密类型
+/// @param key 秘钥
+/// @param iv 初始化向量
+- (NSData *)jx_decryptWithType:(JXCryptType)type key:(NSString *)key iv:(nullable NSString *)iv;
 
 #pragma mark - Encode and decode
 

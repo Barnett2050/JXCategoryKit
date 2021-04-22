@@ -22,6 +22,16 @@
                ReferencedContainer = "container:JXCategoryKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "61403D152626C9640026FF5E"
+               BuildableName = "JXCategoryKitUITests.xctest"
+               BlueprintName = "JXCategoryKitUITests"
+               ReferencedContainer = "container:JXCategoryKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

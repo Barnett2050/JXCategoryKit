@@ -10,6 +10,7 @@
 
 #import "NSData+JXEncrypt.h"
 #import "NSData+JXGeneral.h"
+#import "NSData+JXCompress.h"
 
 static NSString *const testString = @"1234567890";
 static NSString *const encryptKey = @"20200429";
@@ -66,7 +67,7 @@ static NSString *const testIv = @"0123456789111213";
     NSLog(@"%@",jsonData.jx_jsonValueDecoded);
 }
 
-- (void)test_JXGeneral
+- (void)test_JXCompress
 {
     NSData *data = [NSData jx_mainBundleDataNamed:@"test" type:@"jpg"];
     NSData *gzipData = [data jx_gzippedDefault];
