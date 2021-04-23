@@ -98,94 +98,94 @@
     testString = @"1234567890";
     encryptKey = @"20200429";
     desIv = @"zhangjianxun";
-    NSString *desIvString = [testString jx_encryptWithType:JXCryptTypeDES key:encryptKey iv:desIv base64Handle:NO];
-    NSString *desIvBase64String = [testString jx_encryptWithType:JXCryptTypeDES key:encryptKey iv:desIv base64Handle:YES];
-    NSString *desString = [testString jx_encryptWithType:JXCryptTypeDES key:encryptKey iv:nil base64Handle:NO];
-    NSString *desBase64String = [testString jx_encryptWithType:JXCryptTypeDES key:encryptKey iv:nil base64Handle:YES];
+    NSString *desIvString = [testString jx_encryptWithType:JXStringCryptTypeDES key:encryptKey iv:desIv base64Handle:NO];
+    NSString *desIvBase64String = [testString jx_encryptWithType:JXStringCryptTypeDES key:encryptKey iv:desIv base64Handle:YES];
+    NSString *desString = [testString jx_encryptWithType:JXStringCryptTypeDES key:encryptKey iv:nil base64Handle:NO];
+    NSString *desBase64String = [testString jx_encryptWithType:JXStringCryptTypeDES key:encryptKey iv:nil base64Handle:YES];
     
     XCTAssertTrue([desIvString isEqualToString:@"02B7BD3B2BF95B21A4B8182CF11527CC"]);
     XCTAssertTrue([desIvBase64String isEqualToString:@"Are9Oyv5WyGkuBgs8RUnzA=="]);
     XCTAssertTrue([desString isEqualToString:@"12E3C1C2A5B7B7D0431DE7E40F0128E3"]);
     XCTAssertTrue([desBase64String isEqualToString:@"EuPBwqW3t9BDHefkDwEo4w=="]);
-    XCTAssertTrue([[desIvString jx_decryptWithType:JXCryptTypeDES key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[desIvBase64String jx_decryptWithType:JXCryptTypeDES key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
-    XCTAssertTrue([[desString jx_decryptWithType:JXCryptTypeDES key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[desBase64String jx_decryptWithType:JXCryptTypeDES key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[desIvString jx_decryptWithType:JXStringCryptTypeDES key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[desIvBase64String jx_decryptWithType:JXStringCryptTypeDES key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[desString jx_decryptWithType:JXStringCryptTypeDES key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[desBase64String jx_decryptWithType:JXStringCryptTypeDES key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
     
     // 3des
     testString = @"1234567890";
     encryptKey = @"20210415165416abcdefghij";
     desIv = @"zhangjianxun";
-    NSString *des3IvString = [testString jx_encryptWithType:JXCryptType3DES key:encryptKey iv:desIv base64Handle:NO];
-    NSString *de3IvBase64String = [testString jx_encryptWithType:JXCryptType3DES key:encryptKey iv:desIv base64Handle:YES];
-    NSString *des3String = [testString jx_encryptWithType:JXCryptType3DES key:encryptKey iv:nil base64Handle:NO];
-    NSString *des3Base64String = [testString jx_encryptWithType:JXCryptType3DES key:encryptKey iv:nil base64Handle:YES];
+    NSString *des3IvString = [testString jx_encryptWithType:JXStringCryptType3DES key:encryptKey iv:desIv base64Handle:NO];
+    NSString *de3IvBase64String = [testString jx_encryptWithType:JXStringCryptType3DES key:encryptKey iv:desIv base64Handle:YES];
+    NSString *des3String = [testString jx_encryptWithType:JXStringCryptType3DES key:encryptKey iv:nil base64Handle:NO];
+    NSString *des3Base64String = [testString jx_encryptWithType:JXStringCryptType3DES key:encryptKey iv:nil base64Handle:YES];
     
     XCTAssertTrue([des3IvString isEqualToString:@"7AD3F47D5FD317E5F056873400B161A7"]);
     XCTAssertTrue([de3IvBase64String isEqualToString:@"etP0fV/TF+XwVoc0ALFhpw=="]);
     XCTAssertTrue([des3String isEqualToString:@"522EF95587C498EDCAFC6C1E6FB1B549"]);
     XCTAssertTrue([des3Base64String isEqualToString:@"Ui75VYfEmO3K/Gweb7G1SQ=="]);
-    XCTAssertTrue([[des3IvString jx_decryptWithType:JXCryptType3DES key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[de3IvBase64String jx_decryptWithType:JXCryptType3DES key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
-    XCTAssertTrue([[des3String jx_decryptWithType:JXCryptType3DES key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[des3Base64String jx_decryptWithType:JXCryptType3DES key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[des3IvString jx_decryptWithType:JXStringCryptType3DES key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[de3IvBase64String jx_decryptWithType:JXStringCryptType3DES key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[des3String jx_decryptWithType:JXStringCryptType3DES key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[des3Base64String jx_decryptWithType:JXStringCryptType3DES key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
     
     // aes128
     testString = @"1234567890";
     encryptKey = @"20210415165416gg";
     desIv = @"zhangjianxunhaha";
     
-    NSString *aesiv128String = [testString jx_encryptWithType:JXCryptTypeAES128 key:encryptKey iv:desIv base64Handle:NO];
-    NSString *aesiv128Base64String = [testString jx_encryptWithType:JXCryptTypeAES128 key:encryptKey iv:desIv base64Handle:YES];
-    NSString *aes128String = [testString jx_encryptWithType:JXCryptTypeAES128 key:encryptKey iv:nil base64Handle:NO];
-    NSString *aes128Base64String = [testString jx_encryptWithType:JXCryptTypeAES128 key:encryptKey iv:nil base64Handle:YES];
+    NSString *aesiv128String = [testString jx_encryptWithType:JXStringCryptTypeAES128 key:encryptKey iv:desIv base64Handle:NO];
+    NSString *aesiv128Base64String = [testString jx_encryptWithType:JXStringCryptTypeAES128 key:encryptKey iv:desIv base64Handle:YES];
+    NSString *aes128String = [testString jx_encryptWithType:JXStringCryptTypeAES128 key:encryptKey iv:nil base64Handle:NO];
+    NSString *aes128Base64String = [testString jx_encryptWithType:JXStringCryptTypeAES128 key:encryptKey iv:nil base64Handle:YES];
     
     XCTAssertTrue([aesiv128String isEqualToString:@"9720E6F3D3ED5AD076078D67705DF296"]);
     XCTAssertTrue([aesiv128Base64String isEqualToString:@"lyDm89PtWtB2B41ncF3ylg=="]);
     XCTAssertTrue([aes128String isEqualToString:@"1B709E872A07897F1AA2BB37D76DED02"]);
     XCTAssertTrue([aes128Base64String isEqualToString:@"G3CehyoHiX8aors3123tAg=="]);
-    XCTAssertTrue([[aesiv128String jx_decryptWithType:JXCryptTypeAES128 key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[aesiv128Base64String jx_decryptWithType:JXCryptTypeAES128 key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
-    XCTAssertTrue([[aes128String jx_decryptWithType:JXCryptTypeAES128 key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[aes128Base64String jx_decryptWithType:JXCryptTypeAES128 key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[aesiv128String jx_decryptWithType:JXStringCryptTypeAES128 key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[aesiv128Base64String jx_decryptWithType:JXStringCryptTypeAES128 key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[aes128String jx_decryptWithType:JXStringCryptTypeAES128 key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[aes128Base64String jx_decryptWithType:JXStringCryptTypeAES128 key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
     
     // aes192
     testString = @"1234567890";
     encryptKey = @"20210415165416zhangjianx";
     desIv = @"zhangjianxunhaha";
     
-    NSString *aesiv192String = [testString jx_encryptWithType:JXCryptTypeAES192 key:encryptKey iv:desIv base64Handle:NO];
-    NSString *aesiv192Base64String = [testString jx_encryptWithType:JXCryptTypeAES192 key:encryptKey iv:desIv base64Handle:YES];
-    NSString *aes192String = [testString jx_encryptWithType:JXCryptTypeAES192 key:encryptKey iv:nil base64Handle:NO];
-    NSString *aes192Base64String = [testString jx_encryptWithType:JXCryptTypeAES192 key:encryptKey iv:nil base64Handle:YES];
+    NSString *aesiv192String = [testString jx_encryptWithType:JXStringCryptTypeAES192 key:encryptKey iv:desIv base64Handle:NO];
+    NSString *aesiv192Base64String = [testString jx_encryptWithType:JXStringCryptTypeAES192 key:encryptKey iv:desIv base64Handle:YES];
+    NSString *aes192String = [testString jx_encryptWithType:JXStringCryptTypeAES192 key:encryptKey iv:nil base64Handle:NO];
+    NSString *aes192Base64String = [testString jx_encryptWithType:JXStringCryptTypeAES192 key:encryptKey iv:nil base64Handle:YES];
 
     XCTAssertTrue([aesiv192String isEqualToString:@"1516F3148FF6385C2F5A515A4FA8A7D8"]);
     XCTAssertTrue([aesiv192Base64String isEqualToString:@"FRbzFI/2OFwvWlFaT6in2A=="]);
     XCTAssertTrue([aes192String isEqualToString:@"6988D5E8A033042223FB02FB199DB1A4"]);
     XCTAssertTrue([aes192Base64String isEqualToString:@"aYjV6KAzBCIj+wL7GZ2xpA=="]);
-    XCTAssertTrue([[aesiv192String jx_decryptWithType:JXCryptTypeAES192 key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[aesiv192Base64String jx_decryptWithType:JXCryptTypeAES192 key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
-    XCTAssertTrue([[aes192String jx_decryptWithType:JXCryptTypeAES192 key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[aes192Base64String jx_decryptWithType:JXCryptTypeAES192 key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[aesiv192String jx_decryptWithType:JXStringCryptTypeAES192 key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[aesiv192Base64String jx_decryptWithType:JXStringCryptTypeAES192 key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[aes192String jx_decryptWithType:JXStringCryptTypeAES192 key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[aes192Base64String jx_decryptWithType:JXStringCryptTypeAES192 key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
     
     // aes256
     testString = @"1234567890";
     encryptKey = @"20210415165416zhangjianxunqazwsx";
     desIv = @"zhangjianxunhaha";
     
-    NSString *aesiv256String = [testString jx_encryptWithType:JXCryptTypeAES256 key:encryptKey iv:desIv base64Handle:NO];
-    NSString *aesiv256Base64String = [testString jx_encryptWithType:JXCryptTypeAES256 key:encryptKey iv:desIv base64Handle:YES];
-    NSString *aes256String = [testString jx_encryptWithType:JXCryptTypeAES256 key:encryptKey iv:nil base64Handle:NO];
-    NSString *aes256Base64String = [testString jx_encryptWithType:JXCryptTypeAES256 key:encryptKey iv:nil base64Handle:YES];
+    NSString *aesiv256String = [testString jx_encryptWithType:JXStringCryptTypeAES256 key:encryptKey iv:desIv base64Handle:NO];
+    NSString *aesiv256Base64String = [testString jx_encryptWithType:JXStringCryptTypeAES256 key:encryptKey iv:desIv base64Handle:YES];
+    NSString *aes256String = [testString jx_encryptWithType:JXStringCryptTypeAES256 key:encryptKey iv:nil base64Handle:NO];
+    NSString *aes256Base64String = [testString jx_encryptWithType:JXStringCryptTypeAES256 key:encryptKey iv:nil base64Handle:YES];
     
     XCTAssertTrue([aesiv256String isEqualToString:@"9AAE7A5F99B79F78E8BD1C359B34FE75"]);
     XCTAssertTrue([aesiv256Base64String isEqualToString:@"mq56X5m3n3jovRw1mzT+dQ=="]);
     XCTAssertTrue([aes256String isEqualToString:@"E0E4DECBCD6F7E59850A90346A23F3A3"]);
     XCTAssertTrue([aes256Base64String isEqualToString:@"4OTey81vflmFCpA0aiPzow=="]);
-    XCTAssertTrue([[aesiv256String jx_decryptWithType:JXCryptTypeAES256 key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[aesiv256Base64String jx_decryptWithType:JXCryptTypeAES256 key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
-    XCTAssertTrue([[aes256String jx_decryptWithType:JXCryptTypeAES256 key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
-    XCTAssertTrue([[aes256Base64String jx_decryptWithType:JXCryptTypeAES256 key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[aesiv256String jx_decryptWithType:JXStringCryptTypeAES256 key:encryptKey iv:desIv base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[aesiv256Base64String jx_decryptWithType:JXStringCryptTypeAES256 key:encryptKey iv:desIv base64Handle:YES] isEqualToString:testString]);
+    XCTAssertTrue([[aes256String jx_decryptWithType:JXStringCryptTypeAES256 key:encryptKey iv:nil base64Handle:NO] isEqualToString:testString]);
+    XCTAssertTrue([[aes256Base64String jx_decryptWithType:JXStringCryptTypeAES256 key:encryptKey iv:nil base64Handle:YES] isEqualToString:testString]);
 }
 
 - (void)test_Attribute {
