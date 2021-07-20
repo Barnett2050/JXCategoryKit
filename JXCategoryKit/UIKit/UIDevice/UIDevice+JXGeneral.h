@@ -31,9 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取手机本地语言 zh-Hans-CN/en
 + (NSString *)jx_getCurrentLocalLanguage;
 
-/// 获取 WiFi 信号强度，只有在WiFi显示时才能获取到
-+ (NSInteger)jx_getSignalStrength;
-
 /// 获取设备名称，例：iPhone 11 Pro Max
 + (NSString *)jx_deviceName;
 #pragma mark - 设备标识
@@ -57,7 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (double)jx_getDiskSpaceUsed;
 
 #pragma mark - 内存信息
-
 /// 获取当前设备全部系统内存(单位：MB）
 + (double)jx_memoryTotal;
 /// 获取当前设备使用系统内存(单位：MB）

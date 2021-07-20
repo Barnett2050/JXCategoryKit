@@ -58,23 +58,6 @@
     return currentLanguage;
 }
 
-+ (NSInteger)jx_getSignalStrength{
-    UIApplication *app = [UIApplication sharedApplication];
-    NSArray *subviews = [[[app valueForKey:@"statusBar"] valueForKey:@"foregroundView"] subviews];
-    UIView *dataNetworkItemView = nil;
-    
-    for (id subview in subviews) {
-        if([subview isKindOfClass:[NSClassFromString(@"UIStatusBarDataNetworkItemView") class]]) {
-            dataNetworkItemView = subview;
-            break;
-        }
-    }
-    
-    NSInteger signalStrength = [[dataNetworkItemView valueForKey:@"_wifiStrengthBars"] integerValue];
-    
-    return signalStrength;
-}
-
 + (NSString *)jx_deviceName
 {
     struct utsname systemInfo;
@@ -210,7 +193,6 @@
         [platform isEqualToString:@"x86_64"]) {
         return @"iPhone Simulator";
     }
-    
     return nil;
 }
 

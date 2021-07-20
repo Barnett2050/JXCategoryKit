@@ -10,20 +10,19 @@
 #import <objc/runtime.h>
 
 @interface UIButton ()
-/** 菊花view */
-@property (nonatomic, weak) UIActivityIndicatorView *loadIndicatorView;
-/** 按钮名称 */
-@property (nonatomic, copy) NSString *btnTitle;
+
+@property (nonatomic, assign, readwrite) JXButtonShowStyle buttonShowStyle;
 
 @end
 
 @implementation UIButton (JXShow)
 
-- (void)jx_setImagePosition:(JXImagePosition)postion spacing:(CGFloat)spacing
+- (void)jx_setButtonStyle:(JXButtonShowStyle)style spacing:(CGFloat)spacing
 {
+    self.buttonShowStyle = style;
+    
     [self setTitle:self.currentTitle forState:UIControlStateNormal];
     [self setImage:self.currentImage forState:UIControlStateNormal];
-    
     
     CGFloat imageWidth = self.imageView.image.size.width;
     CGFloat imageHeight = self.imageView.image.size.height;
@@ -41,32 +40,32 @@
     CGFloat tempHeight = MAX(labelHeight, imageHeight);
     CGFloat changedHeight = labelHeight + imageHeight + spacing - tempHeight;
     
-    switch (postion) {
-        case JXImageTextPositionNone:
+    switch (style) {
+        case JXButtonShowStyleNormal:
             self.imageEdgeInsets = UIEdgeInsetsZero;
             self.titleEdgeInsets = UIEdgeInsetsZero;
             self.contentEdgeInsets = UIEdgeInsetsZero;
             break;
             
-        case JXImageLeftTextRightPosition:
+        case JXButtonShowStyleImageLeftTextRight:
             self.imageEdgeInsets = UIEdgeInsetsMake(0, -spacing/2, 0, spacing/2);
             self.titleEdgeInsets = UIEdgeInsetsMake(0, spacing/2, 0, -spacing/2);
             self.contentEdgeInsets = UIEdgeInsetsMake(0, spacing/2, 0, spacing/2);
             break;
             
-        case JXImageRightTextLeftPosition:
+        case JXButtonShowStyleImageRightTextLeft:
             self.imageEdgeInsets = UIEdgeInsetsMake(0, labelWidth + spacing/2, 0, -(labelWidth + spacing/2));
             self.titleEdgeInsets = UIEdgeInsetsMake(0, -(imageWidth + spacing/2), 0, imageWidth + spacing/2);
             self.contentEdgeInsets = UIEdgeInsetsMake(0, spacing/2, 0, spacing/2);
             break;
             
-        case JXImageTopTextBottomPosition:
+        case JXButtonShowStyleImageTopTextBottom:
             self.imageEdgeInsets = UIEdgeInsetsMake(-imageOffsetY, imageOffsetX, imageOffsetY, -imageOffsetX);
             self.titleEdgeInsets = UIEdgeInsetsMake(labelOffsetY, -labelOffsetX, -labelOffsetY, labelOffsetX);
             self.contentEdgeInsets = UIEdgeInsetsMake(imageOffsetY, -changedWidth/2, changedHeight-imageOffsetY, -changedWidth/2);
             break;
             
-        case JXImageBottomTextTopPosition:
+        case JXButtonShowStyleImageBottomTextTop:
             self.imageEdgeInsets = UIEdgeInsetsMake(imageOffsetY, imageOffsetX, -imageOffsetY, -imageOffsetX);
             self.titleEdgeInsets = UIEdgeInsetsMake(-labelOffsetY, -labelOffsetX, labelOffsetY, labelOffsetX);
             self.contentEdgeInsets = UIEdgeInsetsMake(changedHeight-imageOffsetY, -changedWidth/2, imageOffsetY, -changedWidth/2);
@@ -79,57 +78,19 @@
     [self layoutIfNeeded];
 }
 
-- (void)jx_startAnimationWithTransform:(CGFloat)transform color:(UIColor *)color isHideTitle:(BOOL)isHideTitle
-{
-    self.userInteractionEnabled = NO;
-    UIActivityIndicatorView *loadIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    loadIndicatorView.transform = CGAffineTransformMakeScale(transform, transform);
-    loadIndicatorView.color = color;
-    self.btnTitle = self.titleLabel.text;
-    if (isHideTitle) {
-        [self setTitle:nil forState:UIControlStateNormal];
-        loadIndicatorView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
-    }
-    [self addSubview:loadIndicatorView];
-    [loadIndicatorView startAnimating];
-    
-    self.loadIndicatorView = loadIndicatorView;
-}
 
-- (void)jx_stopAnimationAndShowTitle:(BOOL)isShowTitle {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.userInteractionEnabled = YES;
-    });
-    
-    if (isShowTitle) {
-        [self setTitle:self.btnTitle forState:UIControlStateNormal];
-    }
-    [self.loadIndicatorView stopAnimating];
-}
 #pragma mark - private
-- (void)setLoadIndicatorView:(UIActivityIndicatorView *)loadIndicatorView {
-    [self willChangeValueForKey:@"FKLoadIndicatorView"];
-    objc_setAssociatedObject(self, @selector(setLoadIndicatorView:),
-                             loadIndicatorView,
+- (void)setButtonShowStyle:(JXButtonShowStyle)buttonShowStyle
+{
+    NSNumber *number = [NSNumber numberWithInteger:buttonShowStyle];
+    objc_setAssociatedObject(self, @selector(setButtonShowStyle:),
+                             number,
                              OBJC_ASSOCIATION_ASSIGN);
-    [self didChangeValueForKey:@"FKLoadIndicatorView"];
 }
-
-- (UIActivityIndicatorView *)loadIndicatorView {
-    return objc_getAssociatedObject(self, @selector(loadIndicatorView));
-}
-
-- (void)setBtnTitle:(NSString *)btnTitle
+- (JXButtonShowStyle)buttonShowStyle
 {
-    [self willChangeValueForKey:@"btnTitle"];
-    objc_setAssociatedObject(self, @selector(setBtnTitle:),
-                             btnTitle,
-                             OBJC_ASSOCIATION_COPY_NONATOMIC);
-    [self didChangeValueForKey:@"btnTitle"];
+    NSNumber *number = objc_getAssociatedObject(self, @selector(buttonShowStyle));
+    return [number integerValue];
 }
 
-- (NSString *)btnTitle
-{
-    return objc_getAssociatedObject(self, @selector(btnTitle));
-}
 @end

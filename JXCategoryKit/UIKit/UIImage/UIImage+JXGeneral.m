@@ -33,9 +33,7 @@
         // 如果方向已经正确，则不进行操作
         if (self.imageOrientation == UIImageOrientationUp){
             return self;
-        }
-        else{
-            
+        } else {
             // 我们需要计算出正确的变换，使图像直立。
             CGAffineTransform transform = CGAffineTransformIdentity;
             UIImageOrientation orientation=self.imageOrientation;

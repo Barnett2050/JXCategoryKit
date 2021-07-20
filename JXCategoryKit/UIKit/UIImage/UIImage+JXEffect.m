@@ -36,10 +36,7 @@
 
 - (UIImage *)jx_blurImageWithAccelerateBlurValue:(CGFloat)blurValue
 {
-    if (self == nil)
-    {
-        return nil;
-    }
+    if (self == nil) { return nil; }
     //模糊度,
     if (blurValue < 0.0f) {
         blurValue = 0.1f;

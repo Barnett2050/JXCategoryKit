@@ -42,13 +42,6 @@ static const int block_key;
 
 @implementation UIControl (JXEvents)
 
-- (void)jx_removeAllTargets {
-    [[self allTargets] enumerateObjectsUsingBlock: ^(id object, BOOL *stop) {
-        [self removeTarget:object action:NULL forControlEvents:UIControlEventAllEvents];
-    }];
-    [[self p_allUIControlBlockTargets] removeAllObjects];
-}
-
 - (void)jx_setTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
     if (!target || !action || !controlEvents) return;
     NSSet *targets = [self allTargets];
@@ -60,16 +53,6 @@ static const int block_key;
         }
     }
     [self addTarget:target action:action forControlEvents:controlEvents];
-}
-
-- (void)jx_addBlockForControlEvents:(UIControlEvents)controlEvents
-                           block:(void (^)(id sender))block {
-    if (!controlEvents) return;
-    JXUIControlBlockTarget *target = [[JXUIControlBlockTarget alloc]
-                                       initWithBlock:block events:controlEvents];
-    [self addTarget:target action:@selector(invoke:) forControlEvents:controlEvents];
-    NSMutableArray *targets = [self p_allUIControlBlockTargets];
-    [targets addObject:target];
 }
 
 - (void)jx_setBlockForControlEvents:(UIControlEvents)controlEvents
@@ -100,7 +83,24 @@ static const int block_key;
     [targets removeObjectsInArray:removes];
 }
 
+- (void)jx_removeAllTargets {
+    [[self allTargets] enumerateObjectsUsingBlock: ^(id object, BOOL *stop) {
+        [self removeTarget:object action:NULL forControlEvents:UIControlEventAllEvents];
+    }];
+    [[self p_allUIControlBlockTargets] removeAllObjects];
+}
+
 #pragma mark - private
+- (void)jx_addBlockForControlEvents:(UIControlEvents)controlEvents
+                           block:(void (^)(id sender))block {
+    if (!controlEvents) return;
+    JXUIControlBlockTarget *target = [[JXUIControlBlockTarget alloc]
+                                       initWithBlock:block events:controlEvents];
+    [self addTarget:target action:@selector(invoke:) forControlEvents:controlEvents];
+    NSMutableArray *targets = [self p_allUIControlBlockTargets];
+    [targets addObject:target];
+}
+
 - (NSMutableArray *)p_allUIControlBlockTargets
 {
     NSMutableArray *targets = objc_getAssociatedObject(self, &block_key);

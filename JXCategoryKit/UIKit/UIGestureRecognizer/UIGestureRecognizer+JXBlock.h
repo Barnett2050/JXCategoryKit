@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// block初始化手势
 - (instancetype)initWithActionBlock:(void (^)(id sender))block;
 
-/// block添加到手势识别器
+/// block添加手势回调
 - (void)addActionBlock:(void (^)(id sender))block;
 
 /// 移除所有的手势block

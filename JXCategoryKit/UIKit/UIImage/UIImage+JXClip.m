@@ -86,8 +86,7 @@
 {
     if (self.size.width == self.size.height) {
         return [self jx_imageByRoundCornerRadius:self.size.width/2 borderWidth:borderWidth borderColor:borderColor];
-    }else
-    {
+    } else {
         CGFloat min = MIN(self.size.width, self.size.height);
         CGFloat pointX = (self.size.width - min) / 2;
         CGFloat pointY = (self.size.height - min) / 2;
@@ -130,9 +129,7 @@
         if(verticalRadio>1 && horizontalRadio>1)
         {
             radio = verticalRadio > horizontalRadio ? horizontalRadio : verticalRadio;
-        }
-        else
-        {
+        } else {
             radio = verticalRadio < horizontalRadio ? verticalRadio : horizontalRadio;
         }
         
@@ -154,8 +151,7 @@
         
         // 使当前的context出堆栈
         UIGraphicsEndImageContext();
-    }else
-    {
+    } else {
         UIGraphicsBeginImageContext(newSize);//根据当前大小创建一个基于位图图形的环境
         [self drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];//根据新的尺寸画出传过来的图片
         newImage = UIGraphicsGetImageFromCurrentImageContext();//从当前环境当中得到重绘的图片

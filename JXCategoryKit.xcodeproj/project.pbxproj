@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		612DEA4C26A69B1D00659B34 /* GestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612DEA4A26A69B1D00659B34 /* GestureViewController.m */; };
+		612DEA4D26A69B1D00659B34 /* GestureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612DEA4B26A69B1D00659B34 /* GestureViewController.xib */; };
+		612DEA5626A6A8BD00659B34 /* ImageClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612DEA5426A6A8BD00659B34 /* ImageClipViewController.m */; };
+		612DEA5726A6A8BD00659B34 /* ImageClipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612DEA5526A6A8BD00659B34 /* ImageClipViewController.xib */; };
 		613FCBA32428DDCB004ACC9D /* CLLocation+JXCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCB9F2428DDCB004ACC9D /* CLLocation+JXCalculation.m */; };
 		613FCBA42428DDCB004ACC9D /* CLLocation+JXConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 613FCBA12428DDCB004ACC9D /* CLLocation+JXConverter.m */; };
 		613FCBA62428DE57004ACC9D /* JXCategoryKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 613FCBA52428DE57004ACC9D /* JXCategoryKit.podspec */; };
@@ -52,6 +56,8 @@
 		613FCC6B242A54E7004ACC9D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 613FCC6A242A54E7004ACC9D /* README.md */; };
 		61403D192626C9640026FF5E /* JXCategoryKitUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61403D182626C9640026FF5E /* JXCategoryKitUITests.m */; };
 		61403DD9262D93E70026FF5E /* NSData+JXCompress.m in Sources */ = {isa = PBXBuildFile; fileRef = 61403DD8262D93E60026FF5E /* NSData+JXCompress.m */; };
+		61403E7626354AF90026FF5E /* ButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61403E7526354AF90026FF5E /* ButtonViewController.m */; };
+		61403EB22635790C0026FF5E /* UIColorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61403EB12635790C0026FF5E /* UIColorTests.m */; };
 		61510EBE2440455100E55EB7 /* NSDateFormatter+JXConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 61510EBD2440455100E55EB7 /* NSDateFormatter+JXConversion.m */; };
 		61510EC6244045EB00E55EB7 /* NSFileManager+JXVerification.m in Sources */ = {isa = PBXBuildFile; fileRef = 61510EC0244045EB00E55EB7 /* NSFileManager+JXVerification.m */; };
 		61510EC7244045EB00E55EB7 /* NSFileManager+JXData.m in Sources */ = {isa = PBXBuildFile; fileRef = 61510EC1244045EB00E55EB7 /* NSFileManager+JXData.m */; };
@@ -80,6 +86,7 @@
 		617A33972427B4F30098EF1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 617A33962427B4F30098EF1A /* Assets.xcassets */; };
 		617A339A2427B4F30098EF1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 617A33982427B4F30098EF1A /* LaunchScreen.storyboard */; };
 		617A339D2427B4F30098EF1A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 617A339C2427B4F30098EF1A /* main.m */; };
+		6180C139263A8EFA00086497 /* UIDeviceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6180C138263A8EFA00086497 /* UIDeviceTests.m */; };
 		61878E7325F71AD800C0E1CC /* NSStringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61878E7225F71AD800C0E1CC /* NSStringTests.m */; };
 		61878E7925F7630E00C0E1CC /* NSArrayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61878E7825F7630E00C0E1CC /* NSArrayTests.m */; };
 		619361842615A9A2006F3410 /* NSObject+General.m in Sources */ = {isa = PBXBuildFile; fileRef = 619361832615A9A2006F3410 /* NSObject+General.m */; };
@@ -88,8 +95,11 @@
 		619361952615C0C5006F3410 /* DictionaryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 619361942615C0C5006F3410 /* DictionaryList.plist */; };
 		619361982615C158006F3410 /* DictionaryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 619361942615C0C5006F3410 /* DictionaryList.plist */; };
 		6193619D2615DCB9006F3410 /* NSDictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6193619C2615DCB9006F3410 /* NSDictionaryTests.m */; };
+		619647A5269ED78B001C3154 /* ControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 619647A3269ED78B001C3154 /* ControlViewController.m */; };
 		61DB82D82463AA14006308CB /* NSFileManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DB82D72463AA14006308CB /* NSFileManagerTests.m */; };
 		61DB82DA2463E98F006308CB /* NSDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61DB82D92463E98F006308CB /* NSDateTests.m */; };
+		61DD66F22643D77A00D2528E /* arrow_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DD66F12643D77A00D2528E /* arrow_gray.png */; };
+		61DD66F32643D77F00D2528E /* arrow_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 61DD66F12643D77A00D2528E /* arrow_gray.png */; };
 		61F0E3E824497D1D00683643 /* NSDictionary+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E3E724497D1D00683643 /* NSDictionary+JXGeneral.m */; };
 		61F0E3EB24498BA600683643 /* NSMutableDictionary+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E3EA24498BA600683643 /* NSMutableDictionary+JXGeneral.m */; };
 		61F0E3EF24498FA400683643 /* NSNotificationCenter+JXGeneral.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F0E3EE24498FA400683643 /* NSNotificationCenter+JXGeneral.m */; };
@@ -122,6 +132,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		612DEA4926A69B1D00659B34 /* GestureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GestureViewController.h; sourceTree = "<group>"; };
+		612DEA4A26A69B1D00659B34 /* GestureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureViewController.m; sourceTree = "<group>"; };
+		612DEA4B26A69B1D00659B34 /* GestureViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GestureViewController.xib; sourceTree = "<group>"; };
+		612DEA5326A6A8BD00659B34 /* ImageClipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageClipViewController.h; sourceTree = "<group>"; };
+		612DEA5426A6A8BD00659B34 /* ImageClipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageClipViewController.m; sourceTree = "<group>"; };
+		612DEA5526A6A8BD00659B34 /* ImageClipViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageClipViewController.xib; sourceTree = "<group>"; };
 		613FCB9F2428DDCB004ACC9D /* CLLocation+JXCalculation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+JXCalculation.m"; sourceTree = "<group>"; };
 		613FCBA02428DDCB004ACC9D /* CLLocation+JXConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+JXConverter.h"; sourceTree = "<group>"; };
 		613FCBA12428DDCB004ACC9D /* CLLocation+JXConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+JXConverter.m"; sourceTree = "<group>"; };
@@ -209,6 +225,9 @@
 		61403D1A2626C9640026FF5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61403DD7262D93E60026FF5E /* NSData+JXCompress.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+JXCompress.h"; sourceTree = "<group>"; };
 		61403DD8262D93E60026FF5E /* NSData+JXCompress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+JXCompress.m"; sourceTree = "<group>"; };
+		61403E7426354AF90026FF5E /* ButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ButtonViewController.h; sourceTree = "<group>"; };
+		61403E7526354AF90026FF5E /* ButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonViewController.m; sourceTree = "<group>"; };
+		61403EB12635790C0026FF5E /* UIColorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIColorTests.m; sourceTree = "<group>"; };
 		61510EBC2440455100E55EB7 /* NSDateFormatter+JXConversion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+JXConversion.h"; sourceTree = "<group>"; };
 		61510EBD2440455100E55EB7 /* NSDateFormatter+JXConversion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+JXConversion.m"; sourceTree = "<group>"; };
 		61510EC0244045EB00E55EB7 /* NSFileManager+JXVerification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+JXVerification.m"; sourceTree = "<group>"; };
@@ -257,6 +276,7 @@
 		617A33992427B4F30098EF1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		617A339B2427B4F30098EF1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		617A339C2427B4F30098EF1A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6180C138263A8EFA00086497 /* UIDeviceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIDeviceTests.m; sourceTree = "<group>"; };
 		61878E7225F71AD800C0E1CC /* NSStringTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSStringTests.m; sourceTree = "<group>"; };
 		61878E7825F7630E00C0E1CC /* NSArrayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSArrayTests.m; sourceTree = "<group>"; };
 		619361822615A9A2006F3410 /* NSObject+General.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+General.h"; sourceTree = "<group>"; };
@@ -265,8 +285,11 @@
 		6193618D2615B4E3006F3410 /* NSArrayList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = NSArrayList.plist; sourceTree = "<group>"; };
 		619361942615C0C5006F3410 /* DictionaryList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DictionaryList.plist; sourceTree = "<group>"; };
 		6193619C2615DCB9006F3410 /* NSDictionaryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryTests.m; sourceTree = "<group>"; };
+		619647A2269ED78B001C3154 /* ControlViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlViewController.h; sourceTree = "<group>"; };
+		619647A3269ED78B001C3154 /* ControlViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlViewController.m; sourceTree = "<group>"; };
 		61DB82D72463AA14006308CB /* NSFileManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSFileManagerTests.m; sourceTree = "<group>"; };
 		61DB82D92463E98F006308CB /* NSDateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSDateTests.m; sourceTree = "<group>"; };
+		61DD66F12643D77A00D2528E /* arrow_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_gray.png; sourceTree = "<group>"; };
 		61F0E3E624497D1D00683643 /* NSDictionary+JXGeneral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JXGeneral.h"; sourceTree = "<group>"; };
 		61F0E3E724497D1D00683643 /* NSDictionary+JXGeneral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JXGeneral.m"; sourceTree = "<group>"; };
 		61F0E3E924498BA600683643 /* NSMutableDictionary+JXGeneral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+JXGeneral.h"; sourceTree = "<group>"; };
@@ -624,6 +647,16 @@
 		61403D062626C4F20026FF5E /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				61403E7426354AF90026FF5E /* ButtonViewController.h */,
+				61403E7526354AF90026FF5E /* ButtonViewController.m */,
+				619647A2269ED78B001C3154 /* ControlViewController.h */,
+				619647A3269ED78B001C3154 /* ControlViewController.m */,
+				612DEA4926A69B1D00659B34 /* GestureViewController.h */,
+				612DEA4A26A69B1D00659B34 /* GestureViewController.m */,
+				612DEA4B26A69B1D00659B34 /* GestureViewController.xib */,
+				612DEA5326A6A8BD00659B34 /* ImageClipViewController.h */,
+				612DEA5426A6A8BD00659B34 /* ImageClipViewController.m */,
+				612DEA5526A6A8BD00659B34 /* ImageClipViewController.xib */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -635,6 +668,15 @@
 				61403D1A2626C9640026FF5E /* Info.plist */,
 			);
 			path = JXCategoryKitUITests;
+			sourceTree = "<group>";
+		};
+		61403EB0263576F80026FF5E /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				61403EB12635790C0026FF5E /* UIColorTests.m */,
+				6180C138263A8EFA00086497 /* UIDeviceTests.m */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		61510EBF244045DD00E55EB7 /* NSFileManager */ = {
@@ -691,6 +733,7 @@
 		6155320025F0C57E00EF945F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				61DD66F12643D77A00D2528E /* arrow_gray.png */,
 				6155320125F0C58A00EF945F /* test.jpg */,
 				6193618D2615B4E3006F3410 /* NSArrayList.plist */,
 				619361942615C0C5006F3410 /* DictionaryList.plist */,
@@ -806,6 +849,7 @@
 		61F0E4192458006500683643 /* JXCategoryKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				61403EB0263576F80026FF5E /* UIKit */,
 				6155320025F0C57E00EF945F /* Resource */,
 				615530DD25E7465A00EF945F /* CoreLocation */,
 				615530EB25E8F63B00EF945F /* FoundationTests */,
@@ -876,6 +920,9 @@
 		617A337F2427B4F20098EF1A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					99,
+				);
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = Barnett;
 				TargetAttributes = {
@@ -925,12 +972,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				619361982615C158006F3410 /* DictionaryList.plist in Resources */,
+				61DD66F32643D77F00D2528E /* arrow_gray.png in Resources */,
 				6155320525F0C59A00EF945F /* test.jpg in Resources */,
 				617A339A2427B4F30098EF1A /* LaunchScreen.storyboard in Resources */,
 				613FCBA62428DE57004ACC9D /* JXCategoryKit.podspec in Resources */,
 				613FCC6B242A54E7004ACC9D /* README.md in Resources */,
 				617A33972427B4F30098EF1A /* Assets.xcassets in Resources */,
 				619361912615B557006F3410 /* NSArrayList.plist in Resources */,
+				612DEA4D26A69B1D00659B34 /* GestureViewController.xib in Resources */,
+				612DEA5726A6A8BD00659B34 /* ImageClipViewController.xib in Resources */,
 				617A33952427B4F20098EF1A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -941,6 +991,7 @@
 			files = (
 				6155320225F0C58A00EF945F /* test.jpg in Resources */,
 				6193618E2615B4E3006F3410 /* NSArrayList.plist in Resources */,
+				61DD66F22643D77A00D2528E /* arrow_gray.png in Resources */,
 				619361952615C0C5006F3410 /* DictionaryList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -967,8 +1018,10 @@
 				61510EDA24445D8A00E55EB7 /* NSArray+JXGeneral.m in Sources */,
 				613FCC202429167A004ACC9D /* UIViewController+JXGeneral.m in Sources */,
 				613FCBBC2428F3AD004ACC9D /* UITabBarController+JXAnimation.m in Sources */,
+				612DEA5626A6A8BD00659B34 /* ImageClipViewController.m in Sources */,
 				613FCC65242A4B2D004ACC9D /* NSObject+JXRuntime.m in Sources */,
 				613FCC44242A4A86004ACC9D /* NSString+JXVerification.m in Sources */,
+				619647A5269ED78B001C3154 /* ControlViewController.m in Sources */,
 				61F0E401244EC0A700683643 /* UIColor+JXSpaceComponent.m in Sources */,
 				61510EDD244467E300E55EB7 /* NSMutableArray+JXGeneral.m in Sources */,
 				613FCBB32428F2BD004ACC9D /* CALayer+JXAnimation.m in Sources */,
@@ -1007,6 +1060,7 @@
 				61510EC6244045EB00E55EB7 /* NSFileManager+JXVerification.m in Sources */,
 				613FCC34242A2137004ACC9D /* NSBundle+JXGeneral.m in Sources */,
 				613FCC53242A4ADE004ACC9D /* NSString+Encrypt.m in Sources */,
+				612DEA4C26A69B1D00659B34 /* GestureViewController.m in Sources */,
 				613FCBE424290C56004ACC9D /* UIImage+JXGenerate.m in Sources */,
 				61F0E3E824497D1D00683643 /* NSDictionary+JXGeneral.m in Sources */,
 				6163677A242C7A8F009BC274 /* NSDate+JXConversion.m in Sources */,
@@ -1018,6 +1072,7 @@
 				613FCBF824291311004ACC9D /* UITableViewCell+JXGeneral.m in Sources */,
 				61510EE124446C4F00E55EB7 /* NSData+JXEncrypt.m in Sources */,
 				61510EC7244045EB00E55EB7 /* NSFileManager+JXData.m in Sources */,
+				61403E7626354AF90026FF5E /* ButtonViewController.m in Sources */,
 				613FCC39242A29A5004ACC9D /* NSError+JXGeneral.m in Sources */,
 				613FCBC42428F4AD004ACC9D /* UIColor+JXGeneral.m in Sources */,
 				613FCC4D242A4AB8004ACC9D /* NSString+JXGeneral.m in Sources */,
@@ -1036,7 +1091,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6180C139263A8EFA00086497 /* UIDeviceTests.m in Sources */,
 				61F0E42724594B6700683643 /* NSNotificationCenterTests.m in Sources */,
+				61403EB22635790C0026FF5E /* UIColorTests.m in Sources */,
 				61878E7325F71AD800C0E1CC /* NSStringTests.m in Sources */,
 				61DB82D82463AA14006308CB /* NSFileManagerTests.m in Sources */,
 				61DB82DA2463E98F006308CB /* NSDateTests.m in Sources */,

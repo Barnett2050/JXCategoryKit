@@ -41,7 +41,6 @@ static const int TABBAR_HEIGHT = 49;
                                            TABBAR_HEIGHT);
         }
     } else {
-        
         if(animated) {
             [UIView animateWithDuration:0.2
                              animations:^{

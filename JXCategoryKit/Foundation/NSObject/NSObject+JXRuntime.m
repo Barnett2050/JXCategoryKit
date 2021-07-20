@@ -16,6 +16,8 @@
     Method originClassMethod = class_getClassMethod(cls, oriSel);
     Method swizzleClassMethod = class_getClassMethod(cls, swiSel);
     
+    if (!originClassMethod || !swizzleClassMethod) { return; }
+    
     [self p_swizzleMethodWithOriginSel:oriSel oriMethod:originClassMethod swizzledSel:swiSel swizzledMethod:swizzleClassMethod class:cls];
 }
 
@@ -23,6 +25,8 @@
 {
     Method originClassMethod = class_getInstanceMethod(self, oriSel);
     Method swizzleClassMethod = class_getInstanceMethod(self, swiSel);
+    
+    if (!originClassMethod || !swizzleClassMethod) { return; }
     
     [self p_swizzleMethodWithOriginSel:oriSel oriMethod:originClassMethod swizzledSel:swiSel swizzledMethod:swizzleClassMethod class:self];
 }

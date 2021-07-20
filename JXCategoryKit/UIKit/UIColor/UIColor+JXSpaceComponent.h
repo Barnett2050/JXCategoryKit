@@ -19,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) CGFloat brightness;
 @property (nonatomic, readonly) CGColorSpaceModel colorSpaceModel; // 颜色空间模型。
 @property (nullable, nonatomic, readonly) NSString *colorSpaceString; // 可读的色彩空间字符串。
-
+/*
+ Hue 是色盘上的度数(从 0 到 360) - 0 (或 360) 是红色,120 是绿色,240 是蓝色。Saturation 是百分比值;0% 意味着灰色,而 100% 是全彩。Lightness 同样是百分比值;0% 是黑色,100% 是白色
+ */
 /// 根据 HSL 创建返回
 /// @param hue 色相分量 0 - 1.0
 /// @param saturation 饱和度分量 0 - 1.0
@@ -43,6 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 获取组成CMYK颜色空间中颜色的成分。
 - (BOOL)jx_getCyan:(CGFloat *)cyan magenta:(CGFloat *)magenta yellow:(CGFloat *)yellow black:(CGFloat *)black alpha:(CGFloat *)alpha;
+
 @end
 
 NS_ASSUME_NONNULL_END

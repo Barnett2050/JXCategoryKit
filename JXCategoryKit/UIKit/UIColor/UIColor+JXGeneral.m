@@ -104,16 +104,6 @@
     return [UIColor jx_colorFromHexString:hexStr alpha:1];
 }
 
-- (uint32_t)jx_rgbValue
-{
-    CGFloat r = 0, g = 0, b = 0, a = 0;
-    [self getRed:&r green:&g blue:&b alpha:&a];
-    int8_t red = r * 255;
-    uint8_t green = g * 255;
-    uint8_t blue = b * 255;
-    return (red << 16) + (green << 8) + blue;
-}
-
 - (uint32_t)jx_rgbaValue
 {
     CGFloat r = 0, g = 0, b = 0, a = 0;

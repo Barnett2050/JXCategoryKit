@@ -48,15 +48,13 @@
         // title根据类型赋值
         if ([strClassArr containsObject:NSStringFromClass([title class])]) {
             alertController.title = title;
-        }else if ([atrStrClassArr containsObject:NSStringFromClass([title class])])
-        {
+        } else if ([atrStrClassArr containsObject:NSStringFromClass([title class])]) {
             [alertController setValue:title forKey:@"attributedTitle"];
         }
         // message根据类型赋值
         if ([strClassArr containsObject:NSStringFromClass([message class])]) {
             alertController.message = message;
-        }else if ([atrStrClassArr containsObject:NSStringFromClass([message class])])
-        {
+        } else if ([atrStrClassArr containsObject:NSStringFromClass([message class])]) {
             [alertController setValue:message forKey:@"attributedMessage"];
         }
         
@@ -65,12 +63,10 @@
         if (btnColorArr.count == 0 || btnColorArr.count != btnTitleArr.count) {
             if (btnColorArr.count == 1) {
                 colors = btnColorArr;
-            }else
-            {
+            } else {
                 colors = nil;
             }
-        }else
-        {
+        } else {
             colors = btnColorArr;
         }
         
@@ -85,8 +81,7 @@
             if (colors.count != 0) {
                 if (colors.count == 1) {
                     [action setValue:[colors firstObject] forKey:@"_titleTextColor"];
-                }else
-                {
+                } else {
                     [action setValue:colors[i] forKey:@"_titleTextColor"];
                 }
             }
@@ -122,12 +117,10 @@
         if (btnColorArr.count == 0 || btnColorArr.count != btnTitleArr.count) {
             if (btnColorArr.count == 1) {
                 colors = btnColorArr;
-            }else
-            {
+            } else {
                 colors = nil;
             }
-        }else
-        {
+        } else {
             colors = btnColorArr;
         }
         
@@ -142,8 +135,7 @@
             if (colors.count != 0) {
                 if (colors.count == 1) {
                     [action setValue:[colors firstObject] forKey:@"_titleTextColor"];
-                }else
-                {
+                } else {
                     [action setValue:colors[i] forKey:@"_titleTextColor"];
                 }
             }

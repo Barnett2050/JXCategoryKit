@@ -182,9 +182,7 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
             ptr[3] = red*255; //0~255
             ptr[2] = green*255;
             ptr[1] = blue*255;
-        }
-        else
-        {
+        } else {
             uint8_t* ptr = (uint8_t*)pCurPtr;
             ptr[0] = 0;
         }

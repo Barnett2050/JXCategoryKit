@@ -22,7 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataArr = @[@"Test - 1"];
+    self.dataArr = @[@"ButtonViewController",
+                     @"ControlViewController",
+                     @"GestureViewController"];
     [self.view addSubview:self.tableView];
 }
 
@@ -41,9 +43,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController *vc = [[UIViewController alloc] init];
+    NSString *name = self.dataArr[indexPath.row];
+    UIViewController *vc = [[NSClassFromString(name) alloc] init];
     vc.view.backgroundColor = [UIColor whiteColor];
-    vc.navigationItem.title = self.dataArr[indexPath.row];
+    vc.navigationItem.title = name;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

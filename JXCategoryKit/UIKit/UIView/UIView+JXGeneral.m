@@ -31,8 +31,7 @@
         UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return img;
-    }else
-    {
+    } else {
         /*
          * 参数一: 指定将来创建出来的bitmap的大小
          * 参数二: 设置透明YES代表透明，NO代表不透明

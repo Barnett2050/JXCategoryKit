@@ -10,9 +10,12 @@
 #import <objc/runtime.h>
 
 @interface UIButton ()
-
+/// 为按钮添加点击间隔 单位：秒
+@property (nonatomic, assign) NSTimeInterval eventTimeInterval;
 /// bool true 忽略点击事件   false 允许点击事件
 @property (nonatomic, assign) BOOL ignoreEventTimeInterval;
+/// sendAction 回调
+@property (nonatomic, copy) void (^sendActionBlock)(SEL action,id target, UIEvent *event);
 
 @end
 
@@ -39,32 +42,48 @@
 
 - (void)setHitEdgeInsets:(UIEdgeInsets)hitEdgeInsets
 {
-    objc_setAssociatedObject(self, @selector(hitEdgeInsets), @(hitEdgeInsets), OBJC_ASSOCIATION_ASSIGN);
+    NSValue *hitvalue = [NSValue valueWithUIEdgeInsets:hitEdgeInsets];
+    objc_setAssociatedObject(self, @selector(hitEdgeInsets), hitvalue, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 - (UIEdgeInsets)hitEdgeInsets
 {
-    NSNumber *number = objc_getAssociatedObject(self, @selector(hitEdgeInsets));
-    return number.UIEdgeInsetsValue;
+    NSValue *value = objc_getAssociatedObject(self, @selector(hitEdgeInsets));
+    return value.UIEdgeInsetsValue;
+}
+- (void)setSendActionBlock:(void (^)(SEL, id, UIEvent *))sendActionBlock
+{
+    objc_setAssociatedObject(self, @selector(sendActionBlock), sendActionBlock, OBJC_ASSOCIATION_COPY);
+}
+- (void (^)(SEL, id, UIEvent *))sendActionBlock
+{
+    return objc_getAssociatedObject(self, @selector(sendActionBlock));
 }
 
 + (void)initialize
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Class cls = object_getClass(self);
+        
         SEL oriSel = @selector(sendAction:to:forEvent:);
         SEL swiSel = @selector(wxd_sendAction:to:forEvent:);
-        Method originClassMethod = class_getClassMethod(cls, oriSel);
-        Method swizzleClassMethod = class_getClassMethod(cls, swiSel);
-        BOOL didAddMethod = class_addMethod(cls, oriSel, method_getImplementation(swizzleClassMethod), method_getTypeEncoding(swizzleClassMethod));
+        Method originInstanceMethod = class_getInstanceMethod(self, oriSel);
+        Method swizzleInstanceMethod = class_getInstanceMethod(self, swiSel);
+        if (!originInstanceMethod || !swizzleInstanceMethod) { return; }
+        
+        BOOL didAddMethod = class_addMethod(self, oriSel, method_getImplementation(swizzleInstanceMethod), method_getTypeEncoding(swizzleInstanceMethod));
 
         if (didAddMethod) {
-            class_replaceMethod(cls, oriSel, method_getImplementation(originClassMethod), method_getTypeEncoding(originClassMethod));
+            class_replaceMethod(self, swiSel, method_getImplementation(originInstanceMethod), method_getTypeEncoding(originInstanceMethod));
         } else {
-            method_exchangeImplementations(originClassMethod, swizzleClassMethod);
+            method_exchangeImplementations(originInstanceMethod, swizzleInstanceMethod);
         }
     });
+}
 
+- (void)setEventTimeIntervalWith:(NSTimeInterval)interval sendActionBlock:(void (^)(SEL _Nonnull, id _Nonnull, UIEvent * _Nonnull))sendActionBlock
+{
+    self.eventTimeInterval = interval;
+    self.sendActionBlock = sendActionBlock;
 }
 
 - (void)wxd_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event
@@ -80,16 +99,12 @@
             });
         }
         self.ignoreEventTimeInterval = true;
-        // 实现自定义方法
-        [self jx_sendAction:action to:target forEvent:event];
+        if (self.sendActionBlock) {
+            self.sendActionBlock(action, target, event);
+        }
         // 这里看上去会陷入递归调用死循环，但在运行期此方法是和sendAction:to:forEvent:互换的，相当于执行sendAction:to:forEvent:方法，所以并不会陷入死循环。
         [self wxd_sendAction:action to:target forEvent:event];
     }
-}
-
-- (void)jx_sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event
-{
-    
 }
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent*)event

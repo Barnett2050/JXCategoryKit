@@ -17,8 +17,7 @@
     for(NSInteger i = windows.count - 1; i >= 0; i --)
     {
         tmpWin = windows[i];
-        if (tmpWin.windowLevel == UIWindowLevelNormal && tmpWin.rootViewController)
-        {
+        if (tmpWin.windowLevel == UIWindowLevelNormal && tmpWin.rootViewController) {
             return tmpWin;
         }
     }
