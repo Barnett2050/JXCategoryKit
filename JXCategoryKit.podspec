@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JXCategoryKit'
-  s.version          = '0.2.6'
+  s.version          = '0.2.7'
   s.summary          = '基础类扩展'
   s.homepage         = 'https://github.com/Barnett2050/JXCategoryKit'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
