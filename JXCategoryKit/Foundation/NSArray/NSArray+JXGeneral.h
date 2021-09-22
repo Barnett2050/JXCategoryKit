@@ -12,9 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSArray (JXGeneral)
 
-/**
- 排序对象是NSIndex的数组
- */
+/// NSIndex的数组重新排序
 - (NSArray *)jx_sortNSIndexArray;
 
 /// 返回数组任意位置对象

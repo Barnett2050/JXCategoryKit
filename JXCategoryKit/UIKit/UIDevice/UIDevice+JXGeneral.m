@@ -245,7 +245,6 @@
 + (double)jx_memoryTotal
 {
     int64_t mem = [[NSProcessInfo processInfo] physicalMemory];
-    if (mem < -1) mem = -1;
     return mem/1024/1024;
 }
 
