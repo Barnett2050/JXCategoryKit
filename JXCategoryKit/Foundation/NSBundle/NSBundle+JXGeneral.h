@@ -32,6 +32,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)jx_currentAppVersionIsUpdateWith:(NSString *)newVersion;
 
+/**
+ 获取当前工程下自己创建的所有类
+
+ @return 数组
+ */
++ (NSArray <Class> *)jx_bundleOwnClassesInfo;
+
+/**
+ 获取当前工程下所有类（含系统类、cocoPods类）
+ 
+ @return 数组
+ */
++ (NSArray <NSString *> *)jx_bundleAllClassesInfo;
+
 @end
 
 NS_ASSUME_NONNULL_END
